@@ -13,7 +13,7 @@
     <string name="password">Mật khẩu</string>
     <string name="signinwith">hoặc đăng nhập với:</string>
     <string name="accountnotsupport">Tài khoản không hỗ trợ</string>
-    <string name="authenticationfailed">Lỗi đăng nhập</string>
+    <string name="signinfailed">Lỗi đăng nhập</string>
     <string name="signinsuccess">Đăng nhập thành công!</string>
     <!-- Button -->
     <string name="button_qr">Quét QR</string>

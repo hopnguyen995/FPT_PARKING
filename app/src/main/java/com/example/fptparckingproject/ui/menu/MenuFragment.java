@@ -96,7 +96,7 @@ public class MenuFragment extends Fragment {
     }
 
     public void circleTransformAvatar(final ImageView img, Uri uri, int width, int height) {
-        Picasso.with(getContext()).load(uri).resize(width, height).placeholder(R.drawable.ic_user_avatar).into(img, new Callback() {
+        Picasso.with(getContext()).load(uri).resize(width, height).placeholder(R.drawable.ic_baseline_account_circle_24).into(img, new Callback() {
             @Override
             public void onSuccess() {
                 Bitmap imageBitmap = ((BitmapDrawable) img.getDrawable()).getBitmap();
@@ -108,7 +108,7 @@ public class MenuFragment extends Fragment {
 
             @Override
             public void onError() {
-                img.setImageResource(R.drawable.ic_user_avatar);
+                img.setImageResource(R.drawable.ic_baseline_account_circle_24);
             }
 
         });

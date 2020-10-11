@@ -105,7 +105,9 @@ public class SignInWithGoogle extends AppCompatActivity {
         buttonSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signIn(email.getText().toString(), password.getText().toString());
+                if (!email.getText().toString().trim().isEmpty() && !password.getText().toString().trim().isEmpty()) {
+                    signIn(email.getText().toString(), password.getText().toString());
+                }
             }
         });
     }
@@ -122,7 +124,7 @@ public class SignInWithGoogle extends AppCompatActivity {
             startActivity(new Intent(this, MainActivity.class));
         }
     }
-
+// sign in with button sign in
     public void signIn(String email, String password) {
         progressBar.setVisibility(View.VISIBLE);
         mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
@@ -132,8 +134,11 @@ public class SignInWithGoogle extends AppCompatActivity {
                 FirebaseUser user = mAuth.getCurrentUser();
                 Toast.makeText(SignInWithGoogle.this, R.string.signinsuccess,
                         Toast.LENGTH_SHORT).show();
+                return;
             }
         });
+        Toast.makeText(SignInWithGoogle.this, R.string.signinfailed,
+                Toast.LENGTH_SHORT).show();
         progressBar.setVisibility(View.INVISIBLE);
     }
 
@@ -153,12 +158,12 @@ public class SignInWithGoogle extends AppCompatActivity {
                 //authenticating with firebase
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
-                //Toast.makeText(SignInWithGoogle.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
             progressBar.setVisibility(View.INVISIBLE);
         }
     }
-//function authentication with google
+
+    //function authentication with google
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
         //getting the auth credential
@@ -195,7 +200,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                                             //create new user
                                             setResult(200, new Intent());
                                             finish();
-                                            User newUser = new User(uAuth.getUid(),uAuth.getDisplayName(), uAuth.getEmail());
+                                            User newUser = new User(uAuth.getUid(), uAuth.getDisplayName(), uAuth.getEmail());
                                             SharedPreferences prefRemember = getApplicationContext().getSharedPreferences("account", Context.MODE_PRIVATE);
                                             SharedPreferences.Editor editor = prefRemember.edit();
                                             editor.putString("name", newUser.getUsername());
@@ -232,7 +237,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(SignInWithGoogle.this, R.string.authenticationfailed,
+                            Toast.makeText(SignInWithGoogle.this, R.string.signinfailed,
                                     Toast.LENGTH_SHORT).show();
                         }
                     }

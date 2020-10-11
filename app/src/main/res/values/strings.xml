@@ -13,7 +13,7 @@
     <string name="password">Password</string>
     <string name="signinwith">or sign in with:</string>
     <string name="accountnotsupport">Account not support</string>
-    <string name="authenticationfailed">Authentication failed</string>
+    <string name="signinfailed">Sign in failed</string>
     <string name="signinsuccess">Sign in success!</string>
     <!-- Button -->
     <string name="button_qr">QR Scan</string>

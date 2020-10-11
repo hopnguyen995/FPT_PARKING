@@ -9,118 +9,152 @@
     android:background="#ffffff"
     tools:context=".ui.home.HomeFragment">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="@string/hello_blank"
-            android:textColor="#000000"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayoutCompat"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></TextView>
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/user"
-            android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorAccent"
+                android:scaleType="centerCrop"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="59dp"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="88dp"
+                android:text="@string/hello_blank"
+                android:textColor="#ffffff"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></TextView>
+
+            <TextView
+                android:id="@+id/user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="40dp"
+                android:textSize="18sp"
+                android:textColor="#ffffff"
+                android:textStyle="normal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="@id/textView"
+                app:layout_constraintTop_toTopOf="@id/textView"></TextView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearLayoutCompat"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:textSize="18sp"
-            android:textStyle="normal"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="@id/textView"
-            app:layout_constraintTop_toTopOf="@id/textView"></TextView>
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            android:layout_marginBottom="40dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayoutCompat2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        >
-        <Button
-            android:id="@+id/buttonQR"
-            android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/buttonQR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableTop="@drawable/ic_qr"
+                android:paddingLeft="@dimen/cardview_default_radius"
+                android:paddingTop="@dimen/cardview_default_radius"
+                android:paddingRight="@dimen/cardview_default_radius"
+                android:paddingBottom="@dimen/cardview_default_radius"
+                android:text="@string/button_qr"
+                android:textColor="#000000"
+                android:textSize="12dp" />
+
+            <Button
+                android:id="@+id/buttonFeedback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableTop="@drawable/ic_chat"
+                android:paddingLeft="@dimen/cardview_default_radius"
+                android:paddingTop="@dimen/cardview_default_radius"
+                android:paddingRight="@dimen/cardview_default_radius"
+                android:paddingBottom="@dimen/cardview_default_radius"
+                android:text="@string/button_feedback"
+                android:textColor="#000000"
+                android:textSize="12dp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearLayoutCompat2"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?android:attr/selectableItemBackground"
-            android:drawableTop="@drawable/ic_qr"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="20dp"
-            android:paddingLeft="@dimen/cardview_default_radius"
-            android:paddingTop="@dimen/cardview_default_radius"
-            android:paddingRight="@dimen/cardview_default_radius"
-            android:paddingBottom="@dimen/cardview_default_radius"
-            android:text="@string/button_qr"
-            android:textSize="12dp"
-            android:textColor="#000000" />
+            android:layout_marginBottom="188dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat">
 
-        <Button
-            android:id="@+id/buttonFeedback"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="?android:attr/selectableItemBackground"
-            android:drawableTop="@drawable/ic_chat"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="20dp"
-            android:paddingLeft="@dimen/cardview_default_radius"
-            android:paddingTop="@dimen/cardview_default_radius"
-            android:paddingRight="@dimen/cardview_default_radius"
-            android:paddingBottom="@dimen/cardview_default_radius"
-            android:text="@string/button_feedback"
-            android:textSize="12dp"
-            android:textColor="#000000" />
+            <Button
+                android:id="@+id/buttonShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableTop="@drawable/ic_share"
+                android:paddingLeft="@dimen/cardview_default_radius"
+                android:paddingTop="@dimen/cardview_default_radius"
+                android:paddingRight="@dimen/cardview_default_radius"
+                android:paddingBottom="@dimen/cardview_default_radius"
+                android:text="@string/button_share"
+                android:textColor="#000000"
+                android:textSize="12dp" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-        <Button
-            android:id="@+id/buttonShare"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_weight="1"
-            android:background="?android:attr/selectableItemBackground"
-            android:drawableTop="@drawable/ic_share"
-            android:paddingLeft="@dimen/cardview_default_radius"
-            android:paddingTop="@dimen/cardview_default_radius"
-            android:paddingRight="@dimen/cardview_default_radius"
-            android:paddingBottom="@dimen/cardview_default_radius"
-            android:text="@string/button_share"
-            android:textColor="#000000"
-            android:textSize="12dp" />
-
-        <Button
-            android:id="@+id/buttonHistory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:background="?android:attr/selectableItemBackground"
-            android:drawableTop="@drawable/ic_history"
-            android:paddingLeft="@dimen/cardview_default_radius"
-            android:paddingTop="@dimen/cardview_default_radius"
-            android:paddingRight="@dimen/cardview_default_radius"
-            android:paddingBottom="@dimen/cardview_default_radius"
-            android:text="@string/button_history"
-            android:textColor="#000000"
-            android:textSize="12dp" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
+            <Button
+                android:id="@+id/buttonHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableTop="@drawable/ic_history"
+                android:paddingLeft="@dimen/cardview_default_radius"
+                android:paddingTop="@dimen/cardview_default_radius"
+                android:paddingRight="@dimen/cardview_default_radius"
+                android:paddingBottom="@dimen/cardview_default_radius"
+                android:text="@string/button_history"
+                android:textColor="#000000"
+                android:textSize="12dp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
