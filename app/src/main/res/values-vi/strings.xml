@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Nhà xe FPT</string>
+    <string name="title_home">Trang chủ</string>
+    <string name="title_dashboard">Bảng tin</string>
+    <string name="title_notifications">Thông báo</string>
+    <string name="title_menu">Menu</string>
+    <string name="title_toolbar">Mượn xe</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank">Xin chào!</string>
+    <string name="share_info">Quét mã QR ở trên để mượn xe</string>
+    <string name="email">Email</string>
+    <string name="password">Mật khẩu</string>
+    <string name="signinwith">hoặc đăng nhập với:</string>
+    <string name="accountnotsupport">Tài khoản không hỗ trợ</string>
+    <string name="authenticationfailed">Lỗi đăng nhập</string>
+    <string name="signinsuccess">Đăng nhập thành công!</string>
+    <!-- Button -->
+    <string name="button_qr">Quét QR</string>
+    <string name="button_feedback">Góp ý</string>
+    <string name="button_share">Mượn xe</string>
+    <string name="button_history">Nhật ký</string>
+    <string name="signin">Đăng nhập</string>
+    <string name="signout">Đăng xuất</string>
+    <string name="button_signin_google">FPT.EDU.VN</string>
+    <!--TextView-->
+    <string name="txtProfile">Thông tin tài khoản</string>
+    <string name="txtHistory">Nhật ký hoạt động</string>
+    <!--QRCode-->
+    <string name="not_support">Mã QR không hỗ trợ</string>
+    <!--Title-->
+    <string name="error">Lỗi</string>
+    <string name="information">Thông tin</string>
+    <!--Message-->
+    <string name="failConnect">Lỗi kết nối mạng</string>
+    <string name="parkingin">Gửi xe thành công!</string>
+    <string name="parkingout">Lấy xe thành công!</string>
+    <string name="shareSuccess">Mượn xe</string>
+</resources>

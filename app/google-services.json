@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "571763797181",
+    "firebase_url": "https://fptparckingproject.firebaseio.com",
+    "project_id": "fptparckingproject",
+    "storage_bucket": "fptparckingproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571763797181:android:28881cafa83b4fdd405bd4",
+        "android_client_info": {
+          "package_name": "com.example.fptparckingproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "571763797181-ito4i0od4l2uj82vvsq8fob3l0a4jquu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fptparckingproject",
+            "certificate_hash": "f65ab10ee0d769a000cf399fc3f7589bc38f396c"
+          }
+        },
+        {
+          "client_id": "571763797181-9k8h007rd0ebkge358oc68eltbksivv8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCe5Qf0kzU016LfALKCgtqMQyOaio4LyQ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "571763797181-9k8h007rd0ebkge358oc68eltbksivv8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

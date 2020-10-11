@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">FPTU Parking</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_menu">Menu</string>
+    <string name="title_toolbar">Share</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank">Hello!</string>
+    <string name="share_info">Scan the QR code above to get the shared vehicle</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="signinwith">or sign in with:</string>
+    <string name="accountnotsupport">Account not support</string>
+    <string name="authenticationfailed">Authentication failed</string>
+    <string name="signinsuccess">Sign in success!</string>
+    <!-- Button -->
+    <string name="button_qr">QR Scan</string>
+    <string name="button_feedback">Feedback</string>
+    <string name="button_share">Share</string>
+    <string name="button_history">History</string>
+    <string name="signin">Sign in</string>
+    <string name="signout">Sign out</string>
+    <string name="button_signin_google">FPT.EDU.VN</string>
+    <!--TextView-->
+    <string name="txtProfile">Profile</string>
+    <string name="txtHistory">History</string>
+    <!--QRCode-->
+    <string name="not_support">The QR Code is not support</string>
+    <!--Title-->
+    <string name="error">Error</string>
+    <string name="information">Information</string>
+    <!--Message-->
+    <string name="failConnect">Failed to connect to network</string>
+    <string name="parkingin">Parking in success!</string>
+    <string name="parkingout">Parking out success!</string>
+    <string name="shareSuccess">Share vehicle!</string>
+</resources>
