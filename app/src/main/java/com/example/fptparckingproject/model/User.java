@@ -6,14 +6,24 @@ public class User implements Serializable {
     private String userid;
     private String username;
     private String email;
+    private String token;
 
-    public User() {
-    }
-
-    public User(String userid, String username, String email) {
+    public User(String userid, String username, String email, String token) {
         this.userid = userid;
         this.username = username;
         this.email = email;
+        this.token = token;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public User() {
     }
 
     public String getUserid() {

@@ -1,7 +1,6 @@
 package com.example.fptparckingproject.signin;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -124,7 +123,8 @@ public class SignInWithGoogle extends AppCompatActivity {
             startActivity(new Intent(this, MainActivity.class));
         }
     }
-// sign in with button sign in
+
+    // sign in with button sign in
     public void signIn(String email, String password) {
         progressBar.setVisibility(View.VISIBLE);
         mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
@@ -169,28 +169,26 @@ public class SignInWithGoogle extends AppCompatActivity {
         //getting the auth credential
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         //Now using firebase we are signing in the user here
+        final User newUser = new User();
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            FirebaseMessaging.getInstance().getToken()
-                                    .addOnCompleteListener(new OnCompleteListener<String>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<String> task) {
-                                            if (!task.isSuccessful()) {
-                                                return;
-                                            }
-                                            String token = task.getResult();
-                                            SharedPreferences prefRemember = getApplicationContext().getSharedPreferences("account", Context.MODE_PRIVATE);
-                                            SharedPreferences.Editor editor = prefRemember.edit();
-                                            editor.putString("token", token);
-                                            editor.commit();
-                                        }
-                                    });
                             Log.d(TAG, "signInWithCredential:success");
                             final FirebaseUser uAuth = mAuth.getCurrentUser();
                             if (uAuth.getEmail().contains(new Constant().Mail)) {
+                                FirebaseMessaging.getInstance().getToken()
+                                        .addOnCompleteListener(new OnCompleteListener<String>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<String> task) {
+                                                if (!task.isSuccessful()) {
+                                                    return;
+                                                }
+                                                String token = task.getResult();
+                                                newUser.setToken(token);
+                                            }
+                                        });
                                 final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
                                 ref.child("Users").child(uAuth.getUid()).addValueEventListener(new ValueEventListener() {
                                     @Override
@@ -198,28 +196,22 @@ public class SignInWithGoogle extends AppCompatActivity {
                                         User fuser = dataSnapshot.getValue(User.class);
                                         if (fuser == null) {
                                             //create new user
-                                            setResult(200, new Intent());
-                                            finish();
-                                            User newUser = new User(uAuth.getUid(), uAuth.getDisplayName(), uAuth.getEmail());
-                                            SharedPreferences prefRemember = getApplicationContext().getSharedPreferences("account", Context.MODE_PRIVATE);
-                                            SharedPreferences.Editor editor = prefRemember.edit();
-                                            editor.putString("name", newUser.getUsername());
-                                            editor.putString("email", newUser.getEmail());
-                                            editor.putString("id", newUser.getUserid());
-                                            editor.commit();
+                                            newUser.setUserid(uAuth.getUid());
+                                            newUser.setEmail( uAuth.getEmail());
+                                            newUser.setUsername(uAuth.getDisplayName());
+                                            sharedReference(newUser);
                                             ref.child("Users").child(uAuth.getUid()).setValue(newUser);
-                                            return;
                                         }
                                         //get user exist
+                                        if(fuser.getToken().equals(newUser.getToken())){
+                                            sharedReference(fuser);
+                                        }else{
+                                            fuser.setToken(newUser.getToken());
+                                            sharedReference(fuser);
+                                            ref.child("Users").child(uAuth.getUid()).child("token").setValue(fuser.getToken());
+                                        }
                                         setResult(200, new Intent());
                                         finish();
-                                        SharedPreferences prefRemember = getApplicationContext().getSharedPreferences("account", Context.MODE_PRIVATE);
-                                        SharedPreferences.Editor editor = prefRemember.edit();
-                                        editor.putString("name", fuser.getUsername());
-                                        editor.putString("email", fuser.getEmail());
-                                        editor.putString("id", fuser.getUserid());
-                                        editor.commit();
-                                        return;
                                     }
 
                                     @Override
@@ -243,6 +235,17 @@ public class SignInWithGoogle extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    //write user information
+    private void sharedReference(User user) {
+        SharedPreferences prefRemember = getApplicationContext().getSharedPreferences("account", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefRemember.edit();
+        editor.putString("name", user.getUsername());
+        editor.putString("email", user.getEmail());
+        editor.putString("id", user.getUserid());
+        editor.putString("token", user.getToken());
+        editor.commit();
     }
 
     //this method is called on click

@@ -57,7 +57,7 @@ public class FirebaseService extends FirebaseMessagingService {
 
     private void sendRegistrationToServer(String token) {
         // TODO: Implement this method to send token to your app server.
-        //FirebaseDatabase.getInstance().getReference("Tokens").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(token);
+        FirebaseDatabase.getInstance().getReference("Tokens").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(token);
     }
 
     private void sendNotification(String messageBody,String messageTitle,Uri imageUri,RemoteMessage remoteMessage) {
