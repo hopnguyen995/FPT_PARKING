@@ -35,6 +35,8 @@ import com.example.fptparckingproject.signin.SignInWithGoogle;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -45,6 +47,7 @@ public class MenuFragment extends Fragment {
     private FirebaseAuth mAuth;
     private ImageView imgAvatar;
     private TextView txtUsername;
+    private String userID;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -62,10 +65,13 @@ public class MenuFragment extends Fragment {
                         .requestEmail()
                         .build();
                 GoogleSignIn.getClient(getActivity(), gso).signOut();
-                startActivityForResult(new Intent(getContext(), SignInWithGoogle.class),100);
                 SharedPreferences prefRemember = getActivity().getSharedPreferences("account", Context.MODE_PRIVATE);
                 prefRemember.edit().clear().commit();
                 Toast.makeText(getContext(), "Signed out", Toast.LENGTH_SHORT).show();
+                //remove token in db
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                ref.child("Users").child(userID).child("token").setValue("");
+                startActivityForResult(new Intent(getContext(), SignInWithGoogle.class),100);
             }
         });
         imgAvatar = root.findViewById(R.id.imgAvatar);
@@ -81,6 +87,7 @@ public class MenuFragment extends Fragment {
         } else {
             sharedPreferences = getActivity().getSharedPreferences("account", Context.MODE_PRIVATE);
             txtUsername.setText(sharedPreferences.getString("name",""));
+            userID = sharedPreferences.getString("id","");
             circleTransformAvatar(imgAvatar, mAuth.getCurrentUser().getPhotoUrl(), 50, 50);
         }
     }

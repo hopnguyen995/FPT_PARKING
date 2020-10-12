@@ -49,8 +49,6 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import java.util.Date;
 
 public class SignInWithGoogle extends AppCompatActivity {
-
-
     private static final int RC_SIGN_IN = 234;
     //Tag for the logs optional
     private static final String TAG = "simplifiedcoding";
@@ -65,7 +63,6 @@ public class SignInWithGoogle extends AppCompatActivity {
     private Button buttonSignin;
     private EditText email;
     private EditText password;
-    private Boolean flag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,29 +193,32 @@ public class SignInWithGoogle extends AppCompatActivity {
                                             ref.child("Users").child(uAuth.getUid()).setValue(newUser);
                                         }
                                         //get user exist
-                                        if (fuser.getToken().equals(newUser.getToken())) {
-                                            sharedReference(fuser);
-                                            setResult(200, new Intent());
-                                            finish();
-                                            if (timerStarted) {
-                                                Timer.cancel();
-                                                timerStarted = false;
-                                            }
-                                            Toast.makeText(SignInWithGoogle.this, R.string.signinsuccess,
-                                                    Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            SendNotif sendNotif = new SendNotif();
-                                            sendNotif.sendMessage(new Constant().PRESIGNOUT, "Tài khoản của bạn đã đăng nhập trên thiết bị khác vào lúc " + new Until().dateTimeToString(new Date()) + ".", fuser.getToken(), newUser.getToken());
-                                            Timer = new CountDownTimer(10000, 1000) {
-                                                public void onTick(long millisUntilFinished) {
-                                                    timerStarted = true;
-                                                }
-
-                                                public void onFinish() {
-                                                    ref.child("Users").child(mAuth.getUid()).child("token").setValue(newUser.getToken());
+                                        if(mAuth.getCurrentUser() != null){
+                                            if(fuser.getToken().equals("")){
+                                                ref.child("Users").child(mAuth.getUid()).child("token").setValue(newUser.getToken());
+                                            }else if (fuser.getToken().equals(newUser.getToken())) {
+                                                sharedReference(fuser);
+                                                setResult(200, new Intent());
+                                                finish();
+                                                if (timerStarted) {
                                                     Timer.cancel();
+                                                    timerStarted = false;
                                                 }
-                                            }.start();
+                                                Toast.makeText(SignInWithGoogle.this, R.string.signinsuccess,
+                                                        Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                SendNotif sendNotif = new SendNotif();
+                                                sendNotif.sendMessage(new Constant().PRESIGNOUT, "Tài khoản của bạn đã đăng nhập trên thiết bị khác vào lúc " + new Until().dateTimeToString(new Date()) + ".", fuser.getToken(), newUser.getToken());
+                                                Timer = new CountDownTimer(10000, 1000) {
+                                                    public void onTick(long millisUntilFinished) {
+                                                        timerStarted = true;
+                                                    }
+                                                    public void onFinish() {
+                                                        ref.child("Users").child(mAuth.getUid()).child("token").setValue(newUser.getToken());
+                                                        Timer.cancel();
+                                                    }
+                                                }.start();
+                                            }
                                         }
                                     }
 
