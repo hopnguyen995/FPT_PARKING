@@ -8,4 +8,6 @@ public class Constant {
     public final String PARKING_OUT = "QaBG2FFzLq0s0szkncQWMSfP5sa98LicB!SalJANH!qHuR@ILKEgZIUGpdDszKAFL^UDVEIKn!Ko9iHLMFvcFaXJyvOOeS4BYbF3";
     public final String SHARE_VEHICLE = "share_vehicle";
     public final String TOKEN = "token";
+    public final String PRESIGNOUT = "Đăng nhập trên thiết bị khác";
+    public final String SIGNOUTSUCCESS = "Đăng nhập thành công";
 }

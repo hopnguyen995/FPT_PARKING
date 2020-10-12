@@ -44,6 +44,12 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+        mAuth = FirebaseAuth.getInstance();
+        sharedPreferences = getApplicationContext().getSharedPreferences("account", Context.MODE_PRIVATE);
+        username = sharedPreferences.getString("name","");
+        if(username.equals("")){
+            mAuth.signOut();
+        }
         if (!isInternetConnection()) {
             Toast.makeText(this, R.string.failConnect, Toast.LENGTH_LONG).show();
         }

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -21,6 +22,8 @@ import com.example.fptparckingproject.MainActivity;
 import com.example.fptparckingproject.R;
 import com.example.fptparckingproject.constant.Constant;
 import com.example.fptparckingproject.model.User;
+import com.example.fptparckingproject.notification.SendNotif;
+import com.example.fptparckingproject.untils.Until;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -43,6 +46,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.util.Date;
+
 public class SignInWithGoogle extends AppCompatActivity {
 
 
@@ -55,10 +60,12 @@ public class SignInWithGoogle extends AppCompatActivity {
     private ProgressBar progressBar;
     //And also a Firebase Auth object
     FirebaseAuth mAuth;
-
+    private CountDownTimer Timer;
+    private boolean timerStarted = false;
     private Button buttonSignin;
     private EditText email;
     private EditText password;
+    private Boolean flag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +99,6 @@ public class SignInWithGoogle extends AppCompatActivity {
         //Now we will attach a click listener to the sign_in_button
         //and inside onClick() method we are calling the signIn() method that will open
         //google sign in intent
-
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,7 +106,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                 signInGoogle();
             }
         });
-
+        //sign in button
         buttonSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,19 +115,6 @@ public class SignInWithGoogle extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        //if the user is already signed in
-        //we will close this activity
-        //and take the user to profile activity
-        if (mAuth.getCurrentUser() != null) {
-            finish();
-            startActivity(new Intent(this, MainActivity.class));
-        }
     }
 
     // sign in with button sign in
@@ -174,9 +167,9 @@ public class SignInWithGoogle extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        final FirebaseUser uAuth = mAuth.getCurrentUser();
                         if (task.isSuccessful()) {
                             Log.d(TAG, "signInWithCredential:success");
-                            final FirebaseUser uAuth = mAuth.getCurrentUser();
                             if (uAuth.getEmail().contains(new Constant().Mail)) {
                                 FirebaseMessaging.getInstance().getToken()
                                         .addOnCompleteListener(new OnCompleteListener<String>() {
@@ -197,30 +190,43 @@ public class SignInWithGoogle extends AppCompatActivity {
                                         if (fuser == null) {
                                             //create new user
                                             newUser.setUserid(uAuth.getUid());
-                                            newUser.setEmail( uAuth.getEmail());
+                                            newUser.setEmail(uAuth.getEmail());
                                             newUser.setUsername(uAuth.getDisplayName());
                                             sharedReference(newUser);
                                             ref.child("Users").child(uAuth.getUid()).setValue(newUser);
                                         }
                                         //get user exist
-                                        if(fuser.getToken().equals(newUser.getToken())){
+                                        if (fuser.getToken().equals(newUser.getToken())) {
                                             sharedReference(fuser);
-                                        }else{
-                                            fuser.setToken(newUser.getToken());
-                                            sharedReference(fuser);
-                                            ref.child("Users").child(uAuth.getUid()).child("token").setValue(fuser.getToken());
+                                            setResult(200, new Intent());
+                                            finish();
+                                            if (timerStarted) {
+                                                Timer.cancel();
+                                                timerStarted = false;
+                                            }
+                                            Toast.makeText(SignInWithGoogle.this, R.string.signinsuccess,
+                                                    Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            SendNotif sendNotif = new SendNotif();
+                                            sendNotif.sendMessage(new Constant().PRESIGNOUT, "Tài khoản của bạn đã đăng nhập trên thiết bị khác vào lúc " + new Until().dateTimeToString(new Date()) + ".", fuser.getToken(), newUser.getToken());
+                                            Timer = new CountDownTimer(10000, 1000) {
+                                                public void onTick(long millisUntilFinished) {
+                                                    timerStarted = true;
+                                                }
+
+                                                public void onFinish() {
+                                                    ref.child("Users").child(mAuth.getUid()).child("token").setValue(newUser.getToken());
+                                                    Timer.cancel();
+                                                }
+                                            }.start();
                                         }
-                                        setResult(200, new Intent());
-                                        finish();
                                     }
 
                                     @Override
                                     public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                                        mAuth.signOut();
                                     }
                                 });
-                                Toast.makeText(SignInWithGoogle.this, R.string.signinsuccess,
-                                        Toast.LENGTH_SHORT).show();
                             } else {
                                 mAuth.signOut();
                                 mGoogleSignInClient.signOut();
@@ -231,10 +237,10 @@ public class SignInWithGoogle extends AppCompatActivity {
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Toast.makeText(SignInWithGoogle.this, R.string.signinfailed,
                                     Toast.LENGTH_SHORT).show();
+                            mAuth.signOut();
                         }
                     }
                 });
-
     }
 
     //write user information

@@ -16,18 +16,18 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class SendNotif {
-    public void sendMessage(final String title, final String body, final String token) {
+    private int success;
+
+    public int sendMessage(final String title, final String body, final String token, final String tagToken) {
         new AsyncTask<String, String, String>() {
             @Override
             protected String doInBackground(String... params) {
                 try {
-                    JSONObject root = new JSONObject();
-                    JSONObject notification = new JSONObject();
-                    notification.put("body", body);
-                    notification.put("title", title);
-
                     JSONObject data = new JSONObject();
-                    root.put("notification", notification);
+                    data.put("body", body);
+                    data.put("title", title);
+                    data.put("tag", tagToken);
+                    JSONObject root = new JSONObject();
                     root.put("data", data);
                     root.put("to", token);
 
@@ -43,14 +43,13 @@ public class SendNotif {
             protected void onPostExecute(String result) {
                 try {
                     JSONObject resultJson = new JSONObject(result);
-                    int success, failure;
                     success = resultJson.getInt("success");
-                    failure = resultJson.getInt("failure");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         }.execute();
+        return success;
     }
 
     private String postToFCM(String bodyString) throws IOException {

@@ -62,7 +62,7 @@ public class MenuFragment extends Fragment {
                         .requestEmail()
                         .build();
                 GoogleSignIn.getClient(getActivity(), gso).signOut();
-                startActivity(new Intent(getContext(), SignInWithGoogle.class));
+                startActivityForResult(new Intent(getContext(), SignInWithGoogle.class),100);
                 SharedPreferences prefRemember = getActivity().getSharedPreferences("account", Context.MODE_PRIVATE);
                 prefRemember.edit().clear().commit();
                 Toast.makeText(getContext(), "Signed out", Toast.LENGTH_SHORT).show();

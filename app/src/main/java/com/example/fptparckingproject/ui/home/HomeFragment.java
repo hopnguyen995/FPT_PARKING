@@ -98,7 +98,7 @@ public class HomeFragment extends Fragment {
 
 
                     //notification
-                    new SendNotif().sendMessage("Thông báo",username + " đã mượn xe của bạn. \uD83D\uDEF5",token);
+                    new SendNotif().sendMessage("Thông báo",username + " đã mượn xe của bạn. \uD83D\uDEF5",token,token);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
