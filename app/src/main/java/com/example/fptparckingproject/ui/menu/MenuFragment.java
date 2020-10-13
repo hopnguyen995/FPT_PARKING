@@ -32,6 +32,7 @@ import android.widget.Toast;
 import com.example.fptparckingproject.R;
 import com.example.fptparckingproject.model.User;
 import com.example.fptparckingproject.signin.SignInWithGoogle;
+import com.example.fptparckingproject.untils.Until;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,6 +59,8 @@ public class MenuFragment extends Fragment {
         buttonSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //remove token in db
+                new Until().connectDatabase().child("Users").child(userID).child("token").setValue("");
                 mAuth.signOut();
                 FirebaseAuth.getInstance().signOut();
                 GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -68,9 +71,6 @@ public class MenuFragment extends Fragment {
                 SharedPreferences prefRemember = getActivity().getSharedPreferences("account", Context.MODE_PRIVATE);
                 prefRemember.edit().clear().commit();
                 Toast.makeText(getContext(), "Signed out", Toast.LENGTH_SHORT).show();
-                //remove token in db
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                ref.child("Users").child(userID).child("token").setValue("");
                 startActivityForResult(new Intent(getContext(), SignInWithGoogle.class),100);
             }
         });

@@ -4,6 +4,8 @@ import android.app.ActivityManager;
 import android.content.Context;
 
 import com.example.fptparckingproject.constant.Constant;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,5 +33,9 @@ public class Until {
     public String dateTimeToString(Date date){
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
         return formatter.format(date);
+    }
+
+    public DatabaseReference connectDatabase(){
+        return FirebaseDatabase.getInstance().getReference();
     }
 }

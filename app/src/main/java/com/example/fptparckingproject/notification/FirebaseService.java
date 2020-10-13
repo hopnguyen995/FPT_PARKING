@@ -46,7 +46,6 @@ import java.util.Map;
 import java.util.Random;
 
 public class FirebaseService extends FirebaseMessagingService {
-    private static final String TAG = "simplifiedcoding";
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     public FirebaseService() {
@@ -55,13 +54,13 @@ public class FirebaseService extends FirebaseMessagingService {
     @Override
     public void onCreate() {
         super.onCreate();
+        new Until().connectDatabase().push();
     }
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         // handle a notification payload.
         if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
             RemoteMessage.Notification notification = remoteMessage.getNotification();
             sendNotification(notification.getBody(), notification.getTitle(), notification.getImageUrl(), notification.getTag());
         }else if(remoteMessage.getData() != null){
@@ -71,8 +70,6 @@ public class FirebaseService extends FirebaseMessagingService {
 
     @Override
     public void onNewToken(String token) {
-        Log.d(TAG, "Refreshed token: " + token);
-
         sendRegistrationToServer(token);
     }
 
@@ -101,8 +98,7 @@ public class FirebaseService extends FirebaseMessagingService {
                 }
             }
         } else if (messageTitle.equals(new Constant().SIGNOUTSUCCESS)) {//update token account in new device
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-            ref.child("Users").child(mAuth.getUid()).child("token").setValue(tagToken);
+            new Until().connectDatabase().child("Users").child(mAuth.getUid()).child("token").setValue(tagToken);
         }
         // receive content notify
         Intent intent = new Intent(this, MainActivity.class);

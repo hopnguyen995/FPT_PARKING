@@ -50,8 +50,6 @@ import java.util.Date;
 
 public class SignInWithGoogle extends AppCompatActivity {
     private static final int RC_SIGN_IN = 234;
-    //Tag for the logs optional
-    private static final String TAG = "simplifiedcoding";
     SignInButton btnSignIn;
     //creating a GoogleSignInClient object
     GoogleSignInClient mGoogleSignInClient;
@@ -63,6 +61,7 @@ public class SignInWithGoogle extends AppCompatActivity {
     private Button buttonSignin;
     private EditText email;
     private EditText password;
+    private DatabaseReference ref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +119,6 @@ public class SignInWithGoogle extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                Log.d(TAG, "signInWithEmail:success");
                 FirebaseUser user = mAuth.getCurrentUser();
                 Toast.makeText(SignInWithGoogle.this, R.string.signinsuccess,
                         Toast.LENGTH_SHORT).show();
@@ -155,7 +153,6 @@ public class SignInWithGoogle extends AppCompatActivity {
 
     //function authentication with google
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
         //getting the auth credential
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         //Now using firebase we are signing in the user here
@@ -166,7 +163,6 @@ public class SignInWithGoogle extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         final FirebaseUser uAuth = mAuth.getCurrentUser();
                         if (task.isSuccessful()) {
-                            Log.d(TAG, "signInWithCredential:success");
                             if (uAuth.getEmail().contains(new Constant().Mail)) {
                                 FirebaseMessaging.getInstance().getToken()
                                         .addOnCompleteListener(new OnCompleteListener<String>() {
@@ -179,7 +175,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                                                 newUser.setToken(token);
                                             }
                                         });
-                                final DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                                ref = new Until().connectDatabase();
                                 ref.child("Users").child(uAuth.getUid()).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -225,6 +221,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                                     @Override
                                     public void onCancelled(@NonNull DatabaseError databaseError) {
                                         mAuth.signOut();
+                                        mGoogleSignInClient.signOut();
                                     }
                                 });
                             } else {
@@ -234,7 +231,6 @@ public class SignInWithGoogle extends AppCompatActivity {
                             }
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Toast.makeText(SignInWithGoogle.this, R.string.signinfailed,
                                     Toast.LENGTH_SHORT).show();
                             mAuth.signOut();
