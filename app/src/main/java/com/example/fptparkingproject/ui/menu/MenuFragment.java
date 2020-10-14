@@ -24,6 +24,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fptparkingproject.R;
+import com.example.fptparkingproject.constant.Constant;
+import com.example.fptparkingproject.model.Share;
+import com.example.fptparkingproject.notification.SendNotif;
+import com.example.fptparkingproject.qrscan.QRScanActivity;
+import com.example.fptparkingproject.qrshare.ShareActivity;
 import com.example.fptparkingproject.signin.SignInWithGoogle;
 import com.example.fptparkingproject.untils.Until;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -32,12 +37,21 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import org.codehaus.jackson.map.ObjectMapper;
+
+import java.io.IOException;
+import java.util.Date;
+
 public class MenuFragment extends Fragment {
     SharedPreferences sharedPreferences;
     private FirebaseAuth mAuth;
     private ImageView imgAvatar;
     private TextView txtUsername;
     private String userID;
+    private String username;
+    private String token;
+    Constant constant = new Constant();
+    Until until = new Until();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -60,7 +74,21 @@ public class MenuFragment extends Fragment {
                 SharedPreferences prefRemember = getActivity().getSharedPreferences("account", Context.MODE_PRIVATE);
                 prefRemember.edit().clear().commit();
                 Toast.makeText(getContext(), "Signed out", Toast.LENGTH_SHORT).show();
-                startActivityForResult(new Intent(getContext(), SignInWithGoogle.class),100);
+                startActivityForResult(new Intent(getContext(), SignInWithGoogle.class), 100);
+            }
+        });
+        final Button buttonQRScan = root.findViewById(R.id.buttonMenuQrCode);
+        buttonQRScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent(getContext(), QRScanActivity.class), 300);
+            }
+        });
+        final Button buttonShare = root.findViewById(R.id.buttonMenuShare);
+        buttonShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), ShareActivity.class));
             }
         });
         imgAvatar = root.findViewById(R.id.imgAvatar);
@@ -72,22 +100,50 @@ public class MenuFragment extends Fragment {
     public void onStart() {
         super.onStart();
         if (mAuth.getCurrentUser() == null) {
-            startActivityForResult(new Intent(getContext(), SignInWithGoogle.class),100);
+            startActivityForResult(new Intent(getContext(), SignInWithGoogle.class), 100);
         } else {
             sharedPreferences = getActivity().getSharedPreferences("account", Context.MODE_PRIVATE);
-            txtUsername.setText(sharedPreferences.getString("name",""));
-            userID = sharedPreferences.getString("id","");
-            circleTransformAvatar(imgAvatar, mAuth.getCurrentUser().getPhotoUrl(), 50, 50);
+            username = sharedPreferences.getString("name", "");
+            token = sharedPreferences.getString("token", "");
+            txtUsername.setText(username);
+            userID = sharedPreferences.getString("id", "");
+            circleTransformAvatar(imgAvatar, mAuth.getCurrentUser().getPhotoUrl(), 124, 124);
         }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 100 && resultCode == 200){
-            circleTransformAvatar(imgAvatar, mAuth.getCurrentUser().getPhotoUrl(), 50, 50);
+        if (requestCode == 100 && resultCode == 200) {
+            circleTransformAvatar(imgAvatar, mAuth.getCurrentUser().getPhotoUrl(), 124, 124);
             sharedPreferences = getActivity().getSharedPreferences("account", Context.MODE_PRIVATE);
-            txtUsername.setText(sharedPreferences.getString("name",""));
+            token = sharedPreferences.getString("token", "");
+            txtUsername.setText(username);
+            userID = sharedPreferences.getString("id", "");
+        } else if (requestCode == 300 && resultCode == 400) {
+            //get result qr scan
+            String QRresult = data.getStringExtra("QRResult");
+            //process
+            if (constant.PARKING_IN.equals(QRresult)) {
+                until.showAlertDialog(R.string.information, R.string.parkingin, getContext());
+            } else if (constant.PARKING_OUT.equals(QRresult)) {
+                until.showAlertDialog(R.string.information, R.string.parkingout, getContext());
+            } else if (QRresult.contains(constant.SHARE_VEHICLE)) {
+                try {
+                    ObjectMapper mapper = new ObjectMapper();
+                    Share shareVehicle = mapper.readValue(QRresult, Share.class);
+                    String sToken = shareVehicle.getToken();
+                    //Update database
+
+                    //notification
+                    new SendNotif().sendMessage("", username, sToken, token, constant.KEY_CONFIRM_SHARE, until.dateTimeToString(new Date()));
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Toast.makeText(getContext(), R.string.not_support, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
