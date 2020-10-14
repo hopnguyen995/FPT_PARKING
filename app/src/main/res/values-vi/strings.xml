@@ -23,6 +23,8 @@
     <string name="signin">Đăng nhập</string>
     <string name="signout">Đăng xuất</string>
     <string name="button_signin_google">FPT.EDU.VN</string>
+    <string name="button_Yes">ĐỒNG Ý</string>
+    <string name="button_Cancel">HỦY BỎ</string>
     <!--TextView-->
     <string name="txtProfile">Thông tin tài khoản</string>
     <string name="txtHistory">Nhật ký hoạt động</string>
@@ -36,4 +38,16 @@
     <string name="parkingin">Gửi xe thành công!</string>
     <string name="parkingout">Lấy xe thành công!</string>
     <string name="shareSuccess">Mượn xe</string>
+    <!--Notification-->
+    <string name="title_confirm">Xác nhận</string>
+    <string name="title_notificaton">Thông báo ℹ️</string>
+    <string name="title_warning">Cảnh báo ⚠️</string>
+    <string name="message_borrow_vehicle">\u0020\u0020muốn mượn xe của bạn?</string>
+    <string name="message_borrow_vehicle_success">Bạn đã mượn xe thành công.️🎉️🎉️🎉</string>
+    <string name="message_was_borrow_vehicle_success">\u0020\u0020đã mượn xe của bạn. 🛵</string>
+    <string name="message_denied_borrow_vehicle">Bạn đã từ chối yêu cầu mượn xe của\u0020\u0020</string>
+    <string name="message_denied_require_borrow_vehicle">\u0020\u0020đã từ chối yêu cầu mượn xe.</string>
+    <string name="message_error_borrow_vehicle">Có lỗi xảy ra khi mượn xe vào lúc\u0020\u0020</string>
+    <string name="message_signin_success">Đăng nhập trên thiết bị mới thành công.</string>
+    <string name="message_signin_warning">Tài khoản của bạn đã đăng nhập trên thiết bị khác vào lúc\u0020\u0020</string>
 </resources>
