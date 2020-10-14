@@ -28,6 +28,7 @@
     <!--TextView-->
     <string name="txtProfile">Thông tin tài khoản</string>
     <string name="txtHistory">Nhật ký hoạt động</string>
+    <string name="txtHelp">Trợ giúp</string>
     <!--QRCode-->
     <string name="not_support">Mã QR không hỗ trợ</string>
     <!--Title-->
@@ -45,9 +46,9 @@
     <string name="message_borrow_vehicle">\u0020\u0020muốn mượn xe của bạn?</string>
     <string name="message_borrow_vehicle_success">Bạn đã mượn xe thành công.️🎉️🎉️🎉</string>
     <string name="message_was_borrow_vehicle_success">\u0020\u0020đã mượn xe của bạn. 🛵</string>
-    <string name="message_denied_borrow_vehicle">Bạn đã từ chối yêu cầu mượn xe của\u0020\u0020</string>
-    <string name="message_denied_require_borrow_vehicle">\u0020\u0020đã từ chối yêu cầu mượn xe.</string>
-    <string name="message_error_borrow_vehicle">Có lỗi xảy ra khi mượn xe vào lúc\u0020\u0020</string>
-    <string name="message_signin_success">Đăng nhập trên thiết bị mới thành công.</string>
-    <string name="message_signin_warning">Tài khoản của bạn đã đăng nhập trên thiết bị khác vào lúc\u0020\u0020</string>
+    <string name="message_denied_borrow_vehicle">🔊 Bạn đã từ chối yêu cầu mượn xe của\u0020\u0020</string>
+    <string name="message_denied_require_borrow_vehicle">\u0020\u0020đã từ chối yêu cầu mượn xe. 💢</string>
+    <string name="message_error_borrow_vehicle">🔊 Có lỗi xảy ra khi mượn xe vào lúc\u0020\u0020</string>
+    <string name="message_signin_success">🔊 Đăng nhập trên thiết bị mới thành công.</string>
+    <string name="message_signin_warning">⛔ Tài khoản của bạn đã đăng nhập trên thiết bị khác vào lúc\u0020\u0020</string>
 </resources>

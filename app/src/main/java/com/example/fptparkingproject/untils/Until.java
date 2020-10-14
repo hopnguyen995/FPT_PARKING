@@ -26,6 +26,11 @@ public class Until {
         return false;
     }
 
+    public String nomalizeDateTime(Date date){
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+        return formatter.format(date);
+    }
+
     public String dateTimeToString(Date date){
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS dd-MM-yyyy");
         return formatter.format(date);

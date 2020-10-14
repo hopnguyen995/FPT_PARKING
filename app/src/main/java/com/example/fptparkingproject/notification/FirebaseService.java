@@ -73,6 +73,7 @@ public class FirebaseService extends FirebaseMessagingService {
     private void sendNotification(String messageBody, String messageTitle, Uri imageUri, String sendToken, String token, String code, String time) {
         Date dateTimeReceive = until.stringToDateTime(time);
         long subtime = until.subDateTime(dateTimeReceive.toInstant(), Instant.now());
+        String nomalizeTime = until.nomalizeDateTime(dateTimeReceive);
         if (constant.KEY_SIGNOUT.equals(code)) {//sign out account in old device
             if (mAuth.getCurrentUser() != null) {
                 mAuth.signOut();
@@ -93,7 +94,7 @@ public class FirebaseService extends FirebaseMessagingService {
                     startActivity(dialogIntent);
                 }
                 messageTitle = getResources().getString(R.string.title_warning);
-                messageBody = getResources().getString(R.string.message_signin_warning) + time;
+                messageBody = getResources().getString(R.string.message_signin_warning) + nomalizeTime;
             }
         } else if (constant.KEY_SUCCESS.equals(code)) {//update token account in new device
             messageTitle = getResources().getString(R.string.title_notificaton);
@@ -134,8 +135,8 @@ public class FirebaseService extends FirebaseMessagingService {
         } else if (constant.KEY_SHARE_FAILED.equals(code)) {
             //show share failed
             messageTitle = getResources().getString(R.string.title_notificaton);
-            messageBody = getResources().getString(R.string.message_error_borrow_vehicle) + time;
-        }else if (constant.KEY_SHARE_ERROR.equals(code)){
+            messageBody = getResources().getString(R.string.message_error_borrow_vehicle) + nomalizeTime;
+        } else if (constant.KEY_SHARE_ERROR.equals(code)) {
             messageTitle = getResources().getString(R.string.title_notificaton);
             messageBody = getResources().getString(R.string.message_denied_borrow_vehicle) + messageBody;
         }
