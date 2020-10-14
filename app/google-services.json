@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "571763797181-hst2799r73fodgbvra1uollvv75ut5no.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fptparckingproject",
+            "certificate_hash": "369763089b83347044c7b187c69ae906db2a8332"
+          }
+        },
+        {
+          "client_id": "571763797181-ikvrqb87j7g31h3a374pg5u7rnf1to18.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fptparckingproject",
+            "certificate_hash": "96c0856758f6d341ac93ec1548e53af5a0b65044"
+          }
+        },
+        {
           "client_id": "571763797181-t1mk7iak3s1m5781a52mbnpqmqrpevj4.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
