@@ -7,21 +7,21 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.fptparckingproject.ui.home.HomeFragment"
+        android:name="com.example.fptparkingproject.ui.home.HomeFragment"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.fptparckingproject.ui.dashboard.DashboardFragment"
+        android:name="com.example.fptparkingproject.ui.dashboard.DashboardFragment"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.fptparckingproject.ui.notifications.NotificationsFragment"
+        android:name="com.example.fptparkingproject.ui.notifications.NotificationsFragment"
         tools:layout="@layout/fragment_notifications" />
 
     <fragment
         android:id="@+id/navigation_menu"
-        android:name="com.example.fptparckingproject.ui.menu.MenuFragment"
+        android:name="com.example.fptparkingproject.ui.menu.MenuFragment"
         tools:layout="@layout/fragment_menu" />
 </navigation>

@@ -23,6 +23,8 @@
     <string name="signin">Sign in</string>
     <string name="signout">Sign out</string>
     <string name="button_signin_google">FPT.EDU.VN</string>
+    <string name="button_Yes">YES</string>
+    <string name="button_Cancel">CANCEL</string>
     <!--TextView-->
     <string name="txtProfile">Profile</string>
     <string name="txtHistory">History</string>
@@ -36,4 +38,16 @@
     <string name="parkingin">Parking in success!</string>
     <string name="parkingout">Parking out success!</string>
     <string name="shareSuccess">Share vehicle!</string>
+    <!--Notification-->
+    <string name="title_confirm">Confirm</string>
+    <string name="title_notificaton">Notification</string>
+    <string name="title_warning">Warning ⚠️</string>
+    <string name="message_borrow_vehicle">\u0020\u0020want to borrow your vehicle?</string>
+    <string name="message_borrow_vehicle_success">You have successfully borrowed the vehicle.️🎉️🎉️🎉</string>
+    <string name="message_was_borrow_vehicle_success">\u0020\u0020borrowed your vehicle. 🛵</string>
+    <string name="message_denied_borrow_vehicle">You declined your request to borrow a vehicle of\u0020\u0020</string>
+    <string name="message_denied_require_borrow_vehicle">\u0020\u0020was deny the request to borrow the vehicle.</string>
+    <string name="message_error_borrow_vehicle">❌ An error occurred while borrowing a vehicle at\u0020\u0020</string>
+    <string name="message_signin_success">Sign in on the new device successfully.</string>
+    <string name="message_signin_warning">⛔ Your account is signed in on another device at\u0020\u0020</string>
 </resources>
