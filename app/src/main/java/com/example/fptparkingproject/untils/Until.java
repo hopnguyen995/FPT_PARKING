@@ -3,10 +3,19 @@ package com.example.fptparkingproject.untils;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.widget.ImageView;
+
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import com.example.fptparkingproject.constant.Constant;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,17 +35,17 @@ public class Until {
         return false;
     }
 
-    public String nomalizeDateTime(Date date){
+    public String nomalizeDateTime(Date date) {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         return formatter.format(date);
     }
 
-    public String dateTimeToString(Date date){
+    public String dateTimeToString(Date date) {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS dd-MM-yyyy");
         return formatter.format(date);
     }
 
-    public Date stringToDateTime(String input){
+    public Date stringToDateTime(String input) {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss.SSS dd-MM-yyyy");
         Date date = new Date();
         try {
@@ -47,11 +56,11 @@ public class Until {
         return date;
     }
 
-    public long subDateTime(Instant dateStart,Instant dateEnd){
+    public long subDateTime(Instant dateStart, Instant dateEnd) {
         return Duration.between(dateStart, dateEnd).toMillis();
     }
 
-    public DatabaseReference connectDatabase(){
+    public DatabaseReference connectDatabase() {
         return FirebaseDatabase.getInstance().getReference();
     }
 
@@ -61,5 +70,23 @@ public class Until {
         builder.setTitle(context.getResources().getText(title));
         builder.create();
         builder.show();
+    }
+
+    public void circleTransformAvatar(Context context, final ImageView img, String uri, final int defaultImage) {
+        Picasso.with(context).load(uri).placeholder(defaultImage).into(img, new Callback() {
+            @Override
+            public void onSuccess() {
+                Bitmap imageBitmap = ((BitmapDrawable) img.getDrawable()).getBitmap();
+                RoundedBitmapDrawable imageDrawable = RoundedBitmapDrawableFactory.create(Resources.getSystem(), imageBitmap);
+                imageDrawable.setCircular(true);
+                imageDrawable.setCornerRadius(Math.max(imageBitmap.getWidth(), imageBitmap.getHeight()) / 2.0f);
+                img.setImageDrawable(imageDrawable);
+            }
+
+            @Override
+            public void onError() {
+                img.setImageResource(defaultImage);
+            }
+        });
     }
 }

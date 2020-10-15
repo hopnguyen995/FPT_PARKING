@@ -4,7 +4,8 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_menu">Menu</string>
-    <string name="title_toolbar">Share</string>
+    <string name="title_toolbar_share">Share</string>
+    <string name="title_toolbar_notification">Notification</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_blank">Hello!</string>
@@ -39,6 +40,7 @@
     <string name="parkingin">Parking in success!</string>
     <string name="parkingout">Parking out success!</string>
     <string name="shareSuccess">Share vehicle!</string>
+    <string name="cannotshare">Can not share own vehicle!</string>
     <!--Notification-->
     <string name="title_confirm">Confirm</string>
     <string name="title_notificaton">Notice ℹ️</string>

@@ -18,10 +18,12 @@ import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.example.fptparkingproject.R;
+import com.example.fptparkingproject.constant.Constant;
 import com.google.zxing.Result;
 
 public class QRScanActivity extends AppCompatActivity {
     private CodeScanner mCodeScanner;
+    Constant constant = new Constant();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +51,7 @@ public class QRScanActivity extends AppCompatActivity {
                     public void run() {
                         Intent intent = new Intent();
                         intent.putExtra("QRResult",result.getText());
-                        setResult(400,intent);
+                        setResult(constant.QRSCAN_RESPONSE_CODE,intent);
                         finish();
                     }
                 });
@@ -66,7 +68,7 @@ public class QRScanActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 123) {
+        if (requestCode == constant.PERMISSION_GRANTED_REQUEST_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Camera permission granted", Toast.LENGTH_LONG).show();
                 startScanning();

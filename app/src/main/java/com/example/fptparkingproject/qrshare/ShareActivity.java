@@ -37,7 +37,7 @@ public class ShareActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(R.string.title_toolbar);
+        actionBar.setTitle(R.string.title_toolbar_share);
         Drawable drawable = getResources().getDrawable(R.drawable.ic_baseline_arrow_back_24);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorToolbar)));
@@ -68,7 +68,6 @@ public class ShareActivity extends AppCompatActivity {
             default:
                 break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

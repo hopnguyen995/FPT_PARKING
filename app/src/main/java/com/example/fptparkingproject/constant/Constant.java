@@ -1,6 +1,13 @@
 package com.example.fptparkingproject.constant;
 
 public class Constant {
+    //intent code
+    public final int SIGNIN_REQUEST_CODE = 100;
+    public final int SIGNIN_RESPONSE_CODE = 200;
+    public final int QRSCAN_REQUEST_CODE = 300;
+    public final int QRSCAN_RESPONSE_CODE = 400;
+    public final int PERMISSION_GRANTED_REQUEST_CODE = 500;
+    public final int RC_SIGN_IN = 600;
     //mail
     public final String Mail = "@fpt.edu.vn";
     //parking
@@ -21,6 +28,7 @@ public class Constant {
     //TIME OUT
     public final int TIMEOUT = 10000;
     public final int COUNTDOWN = 1000;
-
-    public static boolean isTessting = false;
+    //notification
+    public static final int TYPE_HEADER = 0;
+    public static final int TYPE_ITEM = 1;
 }

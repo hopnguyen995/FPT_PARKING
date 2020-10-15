@@ -4,7 +4,8 @@
     <string name="title_dashboard">Bảng tin</string>
     <string name="title_notifications">Thông báo</string>
     <string name="title_menu">Menu</string>
-    <string name="title_toolbar">Mượn xe</string>
+    <string name="title_toolbar_share">Mượn xe</string>
+    <string name="title_toolbar_notification">Thông báo</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_blank">Xin chào!</string>
@@ -39,6 +40,7 @@
     <string name="parkingin">Gửi xe thành công!</string>
     <string name="parkingout">Lấy xe thành công!</string>
     <string name="shareSuccess">Mượn xe</string>
+    <string name="cannotshare">Không thể chia sẻ xe của bạn!</string>
     <!--Notification-->
     <string name="title_confirm">Xác nhận</string>
     <string name="title_notificaton">Thông báo ℹ️</string>

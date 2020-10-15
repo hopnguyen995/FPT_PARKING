@@ -1,33 +1,26 @@
 package com.example.fptparkingproject.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Notification {
+public class Notification implements Serializable {
     private String notificationId;
     private String notificationTitle;
     private String notificationImage;
     private String notificationShortContent;
     private String notificationContent;
-    private Date notificationDateTime;
+    private String notificationDateTime;
 
     public Notification() {
     }
 
-    public Notification(String notificationId, String notificationTitle, String notificationImage, String notificationShortContent, String notificationContent, Date notificationDateTime) {
+    public Notification(String notificationId, String notificationTitle, String notificationImage, String notificationShortContent, String notificationContent, String notificationDateTime) {
         this.notificationId = notificationId;
         this.notificationTitle = notificationTitle;
         this.notificationImage = notificationImage;
         this.notificationShortContent = notificationShortContent;
         this.notificationContent = notificationContent;
         this.notificationDateTime = notificationDateTime;
-    }
-
-    public String getNotificationImage() {
-        return notificationImage;
-    }
-
-    public void setNotificationImage(String notificationImage) {
-        this.notificationImage = notificationImage;
     }
 
     public String getNotificationId() {
@@ -46,6 +39,14 @@ public class Notification {
         this.notificationTitle = notificationTitle;
     }
 
+    public String getNotificationImage() {
+        return notificationImage;
+    }
+
+    public void setNotificationImage(String notificationImage) {
+        this.notificationImage = notificationImage;
+    }
+
     public String getNotificationShortContent() {
         return notificationShortContent;
     }
@@ -62,12 +63,11 @@ public class Notification {
         this.notificationContent = notificationContent;
     }
 
-    public Date getNotificationDateTime() {
+    public String getNotificationDateTime() {
         return notificationDateTime;
     }
 
-    public void setNotificationDateTime(Date notificationDateTime) {
+    public void setNotificationDateTime(String notificationDateTime) {
         this.notificationDateTime = notificationDateTime;
     }
-
 }

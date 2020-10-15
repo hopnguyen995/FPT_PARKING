@@ -48,7 +48,7 @@ public class HomeFragment extends Fragment {
         buttonQRScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(getContext(), QRScanActivity.class), 300);
+                startActivityForResult(new Intent(getContext(), QRScanActivity.class), constant.QRSCAN_REQUEST_CODE);
             }
         });
         final Button buttonShare = root.findViewById(R.id.buttonShare);
@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
     public void onStart() {
         super.onStart();
         if (mAuth.getCurrentUser() == null) {
-            startActivityForResult(new Intent(getContext(), SignInWithGoogle.class), 100);
+            startActivityForResult(new Intent(getContext(), SignInWithGoogle.class), constant.SIGNIN_REQUEST_CODE);
         } else {
             sharedPreferences = getActivity().getSharedPreferences("account", Context.MODE_PRIVATE);
             username = sharedPreferences.getString("name", "");
@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 300 && resultCode == 400) {
+        if (requestCode == constant.QRSCAN_REQUEST_CODE && resultCode == constant.QRSCAN_RESPONSE_CODE) {
             //get result qr scan
             String QRresult = data.getStringExtra("QRResult");
             //process
@@ -102,15 +102,15 @@ public class HomeFragment extends Fragment {
                         //notification
                         new SendNotif().sendMessage("", username, sToken, token, constant.KEY_CONFIRM_SHARE,until.dateTimeToString(new Date()));
                     }else{
-                        Toast.makeText(getContext(), "Ngu VL", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.cannotshare, Toast.LENGTH_LONG).show();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else {
-                Toast.makeText(getContext(), R.string.not_support, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.not_support, Toast.LENGTH_LONG).show();
             }
-        } else if (requestCode == 100 && resultCode == 200) {
+        } else if (requestCode == constant.SIGNIN_REQUEST_CODE && resultCode == constant.SIGNIN_RESPONSE_CODE) {
             sharedPreferences = getActivity().getSharedPreferences("account", Context.MODE_PRIVATE);
             username = sharedPreferences.getString("name", "");
             token = sharedPreferences.getString("token", "");

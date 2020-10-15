@@ -77,14 +77,14 @@ public class MenuFragment extends Fragment {
                 SharedPreferences prefRemember = getActivity().getSharedPreferences("account", Context.MODE_PRIVATE);
                 prefRemember.edit().clear().commit();
                 Toast.makeText(getContext(), "Signed out", Toast.LENGTH_SHORT).show();
-                startActivityForResult(new Intent(getContext(), SignInWithGoogle.class), 100);
+                startActivityForResult(new Intent(getContext(), SignInWithGoogle.class), constant.SIGNIN_REQUEST_CODE);
             }
         });
         final Button buttonQRScan = root.findViewById(R.id.buttonMenuQrCode);
         buttonQRScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(getContext(), QRScanActivity.class), 300);
+                startActivityForResult(new Intent(getContext(), QRScanActivity.class), constant.QRSCAN_REQUEST_CODE);
             }
         });
         final Button buttonShare = root.findViewById(R.id.buttonMenuShare);
@@ -110,27 +110,27 @@ public class MenuFragment extends Fragment {
     public void onStart() {
         super.onStart();
         if (mAuth.getCurrentUser() == null) {
-            startActivityForResult(new Intent(getContext(), SignInWithGoogle.class), 100);
+            startActivityForResult(new Intent(getContext(), SignInWithGoogle.class), constant.SIGNIN_REQUEST_CODE);
         } else {
             sharedPreferences = getActivity().getSharedPreferences("account", Context.MODE_PRIVATE);
             username = sharedPreferences.getString("name", "");
             token = sharedPreferences.getString("token", "");
             txtUsername.setText(username);
             userID = sharedPreferences.getString("id", "");
-            circleTransformAvatar(imgAvatar, mAuth.getCurrentUser().getPhotoUrl(), 124, 124);
+            until.circleTransformAvatar(getContext(),imgAvatar, mAuth.getCurrentUser().getPhotoUrl().toString(),R.drawable.ic_baseline_account_circle_24);
         }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100 && resultCode == 200) {
-            circleTransformAvatar(imgAvatar, mAuth.getCurrentUser().getPhotoUrl(), 124, 124);
+        if (requestCode == constant.SIGNIN_REQUEST_CODE && resultCode == constant.SIGNIN_RESPONSE_CODE) {
+            until.circleTransformAvatar(getContext(),imgAvatar, mAuth.getCurrentUser().getPhotoUrl().toString(),R.drawable.ic_baseline_account_circle_24);
             sharedPreferences = getActivity().getSharedPreferences("account", Context.MODE_PRIVATE);
             token = sharedPreferences.getString("token", "");
             txtUsername.setText(username);
             userID = sharedPreferences.getString("id", "");
-        } else if (requestCode == 300 && resultCode == 400) {
+        } else if (requestCode == constant.QRSCAN_REQUEST_CODE && resultCode == constant.QRSCAN_RESPONSE_CODE) {
             //get result qr scan
             String QRresult = data.getStringExtra("QRResult");
             //process
@@ -155,25 +155,6 @@ public class MenuFragment extends Fragment {
                 Toast.makeText(getContext(), R.string.not_support, Toast.LENGTH_SHORT).show();
             }
         }
-    }
-
-    public void circleTransformAvatar(final ImageView img, Uri uri, int width, int height) {
-        Picasso.with(getContext()).load(uri).resize(width, height).placeholder(R.drawable.ic_baseline_account_circle_24).into(img, new Callback() {
-            @Override
-            public void onSuccess() {
-                Bitmap imageBitmap = ((BitmapDrawable) img.getDrawable()).getBitmap();
-                RoundedBitmapDrawable imageDrawable = RoundedBitmapDrawableFactory.create(getResources(), imageBitmap);
-                imageDrawable.setCircular(true);
-                imageDrawable.setCornerRadius(Math.max(imageBitmap.getWidth(), imageBitmap.getHeight()) / 2.0f);
-                img.setImageDrawable(imageDrawable);
-            }
-
-            @Override
-            public void onError() {
-                img.setImageResource(R.drawable.ic_baseline_account_circle_24);
-            }
-
-        });
     }
 
     private void dialNumber(String phoneNumber) {

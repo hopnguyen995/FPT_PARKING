@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fptparkingproject.R;
 
 public class HeaderViewHolder extends RecyclerView.ViewHolder {
-    TextView headerTitle;
+    public TextView headerTitle;
     public HeaderViewHolder(@NonNull View itemView) {
         super(itemView);
         headerTitle = itemView.findViewById(R.id.txtHeader);

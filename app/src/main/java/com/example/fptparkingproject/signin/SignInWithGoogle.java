@@ -45,7 +45,6 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import java.util.Date;
 
 public class SignInWithGoogle extends AppCompatActivity {
-    private static final int RC_SIGN_IN = 234;
     SignInButton btnSignIn;
     //creating a GoogleSignInClient object
     GoogleSignInClient mGoogleSignInClient;
@@ -132,10 +131,8 @@ public class SignInWithGoogle extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         //if the requestCode is the Google Sign In code that we defined at starting
-        if (requestCode == RC_SIGN_IN) {
-
+        if (requestCode == constant.RC_SIGN_IN) {
             //Getting the GoogleSignIn Task
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
@@ -173,7 +170,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                                                 newUser.setToken(token);
                                             }
                                         });
-                                ref = new Until().connectDatabase();
+                                ref = until.connectDatabase();
                                 ref.child("Users").child(uAuth.getUid()).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -192,7 +189,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                                                 ref.child("Users").child(mAuth.getUid()).child("token").setValue(newUser.getToken());
                                             }else if (fuser.getToken().equals(newUser.getToken())) {
                                                 sharedReference(fuser);
-                                                setResult(200, new Intent());
+                                                setResult(constant.SIGNIN_RESPONSE_CODE, new Intent());
                                                 finish();
                                                 if (timerStarted) {
                                                     Timer.cancel();
@@ -253,14 +250,13 @@ public class SignInWithGoogle extends AppCompatActivity {
         //getting the google signin intent
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         //starting the activity for result
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+        startActivityForResult(signInIntent, constant.RC_SIGN_IN);
     }
 
     protected void setGoogleButtonText(SignInButton signInButton, int buttonText) {
         // Find the TextView that is inside of the SignInButton and set its text
         for (int i = 0; i < signInButton.getChildCount(); i++) {
             View v = signInButton.getChildAt(i);
-
             if (v instanceof TextView) {
                 TextView tv = (TextView) v;
                 tv.setText(buttonText);

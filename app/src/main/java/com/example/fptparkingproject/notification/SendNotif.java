@@ -53,13 +53,13 @@ public class SendNotif {
     }
 
     private String postToFCM(String bodyString) throws IOException {
-        API_Service api_service = new API_Service();
+        Notif notif = new Notif();
         OkHttpClient mClient = new OkHttpClient();
-        RequestBody body = RequestBody.create(api_service.getJSON(), bodyString);
+        RequestBody body = RequestBody.create(notif.getJSON(), bodyString);
         Request request = new Request.Builder()
-                .url(api_service.getFCM_MESSAGE_URL())
+                .url(notif.getFCM_MESSAGE_URL())
                 .post(body)
-                .addHeader("Authorization", api_service.getSERVER_KEY())
+                .addHeader("Authorization", notif.getSERVER_KEY())
                 .build();
         Response response = mClient.newCall(request).execute();
         return response.body().string();
