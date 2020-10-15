@@ -1,11 +1,14 @@
 package com.example.fptparkingproject.ui.menu;
 
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -91,6 +94,13 @@ public class MenuFragment extends Fragment {
                 startActivity(new Intent(getContext(), ShareActivity.class));
             }
         });
+        final Button buttonHelp = root.findViewById(R.id.buttonMenuHelp);
+        buttonHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialNumber("02473081313");
+            }
+        });
         imgAvatar = root.findViewById(R.id.imgAvatar);
         txtUsername = root.findViewById(R.id.txtusername);
         return root;
@@ -164,5 +174,14 @@ public class MenuFragment extends Fragment {
             }
 
         });
+    }
+
+    private void dialNumber(String phoneNumber) {
+        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber));
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+            startActivity(intent);
+        } else {
+            requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, 1);
+        }
     }
 }
