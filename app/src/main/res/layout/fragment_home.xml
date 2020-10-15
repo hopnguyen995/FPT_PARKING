@@ -97,8 +97,8 @@
                     android:paddingRight="@dimen/cardview_default_radius"
                     android:paddingBottom="@dimen/cardview_default_radius"
                     android:text="@string/button_qr"
-                    android:textColor="#000000"
-                    android:textSize="12dp" />
+                    android:textColor="#676767"
+                    android:textSize="14dp" />
 
                 <Button
                     android:id="@+id/buttonFeedback"
@@ -114,8 +114,8 @@
                     android:paddingRight="@dimen/cardview_default_radius"
                     android:paddingBottom="@dimen/cardview_default_radius"
                     android:text="@string/button_feedback"
-                    android:textColor="#000000"
-                    android:textSize="12dp" />
+                    android:textColor="#676767"
+                    android:textSize="14dp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -141,8 +141,8 @@
                     android:paddingRight="@dimen/cardview_default_radius"
                     android:paddingBottom="@dimen/cardview_default_radius"
                     android:text="@string/button_share"
-                    android:textColor="#000000"
-                    android:textSize="12dp" />
+                    android:textColor="#676767"
+                    android:textSize="14dp" />
 
                 <Button
                     android:id="@+id/buttonHistory"
@@ -158,10 +158,9 @@
                     android:paddingRight="@dimen/cardview_default_radius"
                     android:paddingBottom="@dimen/cardview_default_radius"
                     android:text="@string/button_history"
-                    android:textColor="#000000"
-                    android:textSize="12dp" />
+                    android:textColor="#676767"
+                    android:textSize="14dp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
