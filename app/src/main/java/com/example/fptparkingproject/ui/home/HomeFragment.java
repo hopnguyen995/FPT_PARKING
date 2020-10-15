@@ -98,10 +98,12 @@ public class HomeFragment extends Fragment {
                     Share shareVehicle = mapper.readValue(QRresult, Share.class);
                     String sToken = shareVehicle.getToken();
                     //Update database
-
-                    //notification
-                    new SendNotif().sendMessage("", username, sToken, token, constant.KEY_CONFIRM_SHARE,until.dateTimeToString(new Date()));
-
+                    if(!shareVehicle.getShare_vehicle().equals(mAuth.getUid())){
+                        //notification
+                        new SendNotif().sendMessage("", username, sToken, token, constant.KEY_CONFIRM_SHARE,until.dateTimeToString(new Date()));
+                    }else{
+                        Toast.makeText(getContext(), "Ngu VL", Toast.LENGTH_SHORT).show();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
