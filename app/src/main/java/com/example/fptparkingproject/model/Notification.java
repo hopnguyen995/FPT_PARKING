@@ -2,6 +2,7 @@ package com.example.fptparkingproject.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 public class Notification implements Serializable {
     private String notificationId;
@@ -12,6 +13,10 @@ public class Notification implements Serializable {
     private String notificationDateTime;
 
     public Notification() {
+    }
+
+    public Notification(String notificationId) {
+        this.notificationId = notificationId;
     }
 
     public Notification(String notificationId, String notificationTitle, String notificationImage, String notificationShortContent, String notificationContent, String notificationDateTime) {
@@ -69,5 +74,18 @@ public class Notification implements Serializable {
 
     public void setNotificationDateTime(String notificationDateTime) {
         this.notificationDateTime = notificationDateTime;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Notification)) return false;
+        Notification that = (Notification) o;
+        return notificationId.equals(that.notificationId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(notificationId);
     }
 }

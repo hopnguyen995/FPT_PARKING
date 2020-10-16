@@ -72,12 +72,12 @@ public class Until {
         builder.show();
     }
 
-    public void circleTransformAvatar(Context context, final ImageView img, String uri, final int defaultImage) {
-        Picasso.with(context).load(uri).placeholder(defaultImage).into(img, new Callback() {
+    public void circleTransformAvatar(final Context context, final ImageView img, String uri, final int defaultImage) {
+        Picasso.with(context).load(uri).into(img, new Callback() {
             @Override
             public void onSuccess() {
                 Bitmap imageBitmap = ((BitmapDrawable) img.getDrawable()).getBitmap();
-                RoundedBitmapDrawable imageDrawable = RoundedBitmapDrawableFactory.create(Resources.getSystem(), imageBitmap);
+                RoundedBitmapDrawable imageDrawable = RoundedBitmapDrawableFactory.create(context.getResources(), imageBitmap);
                 imageDrawable.setCircular(true);
                 imageDrawable.setCornerRadius(Math.max(imageBitmap.getWidth(), imageBitmap.getHeight()) / 2.0f);
                 img.setImageDrawable(imageDrawable);

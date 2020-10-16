@@ -62,7 +62,6 @@
                 app:layout_constraintStart_toStartOf="@id/textView"
                 app:layout_constraintTop_toTopOf="@id/textView"></TextView>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/contraintLayout"
             android:layout_width="match_parent"

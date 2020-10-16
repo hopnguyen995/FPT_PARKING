@@ -37,20 +37,40 @@ public class NotificationsFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
         recyclerView = root.findViewById(R.id.recyclerView);
-        listNotification = new ArrayList<>();
-        listNotification.add(new Notification());
+        final ArrayList<Notification> listNotificationDb = new ArrayList<>();
+        listNotification = getListNotification();
+        if(listNotification == null){
+            listNotification = new ArrayList<>();
+            listNotification.add(new Notification("1"));
+        }
+        notificationAdapter = new NotificationAdapter(getContext(), listNotification);
+        recyclerView.setAdapter(notificationAdapter);
         ref = new Until().connectDatabase();
-        ref.child("Notifications").addValueEventListener(new ValueEventListener() {
+        ref.child("Notifications").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         Notification notification = ds.getValue(Notification.class);
-                        listNotification.add(notification);
+                        listNotificationDb.add(notification);
+                    }
+                    for (Notification notifDb : listNotificationDb
+                    ) {
+                        boolean isExist = false;
+                        for (Notification notif : listNotification
+                        ) {
+                            if (notif.equals(notifDb)) {
+                                isExist = true;
+                            }
+                        }
+                        if (!isExist) {
+                            listNotification.add(notifDb);
+                        }
                     }
                 }
                 notificationAdapter = new NotificationAdapter(getContext(), listNotification);
                 recyclerView.setAdapter(notificationAdapter);
+                saveListNotification(listNotification);
             }
 
             @Override
@@ -61,5 +81,24 @@ public class NotificationsFragment extends Fragment {
         notificationAdapter = new NotificationAdapter(getContext(), listNotification);
         recyclerView.setAdapter(notificationAdapter);
         return root;
+    }
+
+    public void saveListNotification(ArrayList<Notification> listArray) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        SharedPreferences.Editor editor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(listArray);
+        editor.putString("notifications", json);
+        editor.commit();
+    }
+
+    public ArrayList<Notification> getListNotification() {
+        SharedPreferences prefs =
+                PreferenceManager.getDefaultSharedPreferences(getContext());
+        Gson gson = new Gson();
+        String json = prefs.getString("notifications", null);
+        Type listType = new TypeToken<ArrayList<Notification>>() {
+        }.getType();
+        return gson.fromJson(json, listType);
     }
 }
