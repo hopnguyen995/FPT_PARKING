@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -59,6 +60,7 @@ public class SignInWithGoogle extends AppCompatActivity {
     private DatabaseReference ref;
     Constant constant = new Constant();
     Until until = new Until();
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +70,7 @@ public class SignInWithGoogle extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN); //enable full screen
         setContentView(R.layout.activity_sign_in_with_google);
-
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
         buttonSignin = findViewById(R.id.sign_in_button);
@@ -158,7 +160,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         final FirebaseUser uAuth = mAuth.getCurrentUser();
                         if (task.isSuccessful()) {
-                            if (uAuth.getEmail().contains(new Constant().Mail)) {
+                            if (uAuth.getEmail().contains(new Constant().MAIL)) {
                                 FirebaseMessaging.getInstance().getToken()
                                         .addOnCompleteListener(new OnCompleteListener<String>() {
                                             @Override
@@ -180,7 +182,6 @@ public class SignInWithGoogle extends AppCompatActivity {
                                             newUser.setUserid(uAuth.getUid());
                                             newUser.setEmail(uAuth.getEmail());
                                             newUser.setUsername(uAuth.getDisplayName());
-                                            sharedReference(newUser);
                                             ref.child("Users").child(uAuth.getUid()).setValue(newUser);
                                         }
                                         //get user exist
@@ -188,7 +189,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                                             if(fuser.getToken().equals("")){
                                                 ref.child("Users").child(mAuth.getUid()).child("token").setValue(newUser.getToken());
                                             }else if (fuser.getToken().equals(newUser.getToken())) {
-                                                sharedReference(fuser);
+                                                fuser.saveUser(prefs,fuser);
                                                 setResult(constant.SIGNIN_RESPONSE_CODE, new Intent());
                                                 finish();
                                                 if (timerStarted) {
@@ -232,17 +233,6 @@ public class SignInWithGoogle extends AppCompatActivity {
                         }
                     }
                 });
-    }
-
-    //write user information
-    private void sharedReference(User user) {
-        SharedPreferences prefRemember = getApplicationContext().getSharedPreferences("account", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefRemember.edit();
-        editor.putString("name", user.getUsername());
-        editor.putString("email", user.getEmail());
-        editor.putString("id", user.getUserid());
-        editor.putString("token", user.getToken());
-        editor.commit();
     }
 
     //this method is called on click

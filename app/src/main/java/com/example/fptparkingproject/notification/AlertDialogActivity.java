@@ -23,6 +23,7 @@ public class AlertDialogActivity extends Activity {
     private String message;
     private String token;
     private String sendtoken;
+    Constant constant = new Constant();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +45,10 @@ public class AlertDialogActivity extends Activity {
 
     private void showAlertDialogConfimShareVehicle() {
         Intent intent = getIntent();
-        title = intent.getStringExtra("title");
-        message = intent.getStringExtra("message");
-        token = intent.getStringExtra("token");
-        sendtoken = intent.getStringExtra("sendtoken");
+        title = intent.getStringExtra(constant.INTENT_ALERTDIALOG_TITLE);
+        message = intent.getStringExtra(constant.INTENT_ALERTDIALOG_MESSAGE);
+        token = intent.getStringExtra(constant.INTENT_ALERTDIALOG_TOKEN);
+        sendtoken = intent.getStringExtra(constant.INTENT_ALERTDIALOG_SENDTOKEN);
         AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
         builder.setMessage(message);
         builder.setTitle(title);

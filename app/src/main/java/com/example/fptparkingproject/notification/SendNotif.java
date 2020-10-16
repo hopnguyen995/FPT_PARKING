@@ -2,6 +2,8 @@ package com.example.fptparkingproject.notification;
 
 import android.os.AsyncTask;
 
+import com.example.fptparkingproject.constant.Constant;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,23 +15,23 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class SendNotif {
-    private int success;
+    Constant constant = new Constant();
 
-    public int sendMessage(final String title, final String body, final String token, final String tagToken,final String code,final String time) {
+    public void sendMessage(final String title, final String body, final String token, final String sendToken, final String code, final String time) {
         new AsyncTask<String, String, String>() {
             @Override
             protected String doInBackground(String... params) {
                 try {
                     JSONObject data = new JSONObject();
-                    data.put("body", body);
-                    data.put("title", title);
-                    data.put("sendtoken", tagToken);
-                    data.put("token",token);
-                    data.put("code",code);
-                    data.put("time",time);
+                    data.put(constant.JSON_KEY_BODY, body);
+                    data.put(constant.JSON_KEY_TITLE, title);
+                    data.put(constant.JSON_KEY_SENDTOKEN, sendToken);
+                    data.put(constant.JSON_KEY_TOKEN, token);
+                    data.put(constant.JSON_KEY_CODE, code);
+                    data.put(constant.JSON_KEY_TIME, time);
                     JSONObject root = new JSONObject();
-                    root.put("data", data);
-                    root.put("to", token);
+                    root.put(constant.JSON_KEY_DATA, data);
+                    root.put(constant.JSON_KEY_TO, token);
 
                     String result = postToFCM(root.toString());
                     return result;
@@ -38,18 +40,7 @@ public class SendNotif {
                 }
                 return null;
             }
-
-            @Override
-            protected void onPostExecute(String result) {
-                try {
-                    JSONObject resultJson = new JSONObject(result);
-                    success = resultJson.getInt("success");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
         }.execute();
-        return success;
     }
 
     private String postToFCM(String bodyString) throws IOException {
@@ -59,7 +50,7 @@ public class SendNotif {
         Request request = new Request.Builder()
                 .url(notif.getFCM_MESSAGE_URL())
                 .post(body)
-                .addHeader("Authorization", notif.getSERVER_KEY())
+                .addHeader(notif.getHEADER(), notif.getSERVER_KEY())
                 .build();
         Response response = mClient.newCall(request).execute();
         return response.body().string();

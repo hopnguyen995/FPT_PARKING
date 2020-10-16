@@ -1,16 +1,12 @@
 package com.example.fptparkingproject.ui.menu;
 
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.RoundedBitmapDrawable;
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -18,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +26,7 @@ import android.widget.Toast;
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.Share;
+import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.notification.SendNotif;
 import com.example.fptparkingproject.qrscan.QRScanActivity;
 import com.example.fptparkingproject.qrshare.ShareActivity;
@@ -37,8 +35,6 @@ import com.example.fptparkingproject.untils.Until;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -46,27 +42,25 @@ import java.io.IOException;
 import java.util.Date;
 
 public class MenuFragment extends Fragment {
-    SharedPreferences sharedPreferences;
     private FirebaseAuth mAuth;
     private ImageView imgAvatar;
     private TextView txtUsername;
-    private String userID;
-    private String username;
-    private String token;
     Constant constant = new Constant();
     Until until = new Until();
-
+    private SharedPreferences prefs;
+    User user;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_menu, container, false);
+        prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         mAuth = FirebaseAuth.getInstance();
         final Button buttonSignOut = root.findViewById(R.id.buttonSignOut);
         buttonSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //remove token in db
-                new Until().connectDatabase().child("Users").child(userID).child("token").setValue("");
+                new Until().connectDatabase().child("Users").child(user.getUserid()).child("token").setValue("");
                 mAuth.signOut();
                 FirebaseAuth.getInstance().signOut();
                 GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -74,9 +68,9 @@ public class MenuFragment extends Fragment {
                         .requestEmail()
                         .build();
                 GoogleSignIn.getClient(getActivity(), gso).signOut();
-                SharedPreferences prefRemember = getActivity().getSharedPreferences("account", Context.MODE_PRIVATE);
+                SharedPreferences prefRemember = getActivity().getSharedPreferences(constant.KEY_USER, Context.MODE_PRIVATE);
                 prefRemember.edit().clear().commit();
-                Toast.makeText(getContext(), "Signed out", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.signoutsuccess, Toast.LENGTH_SHORT).show();
                 startActivityForResult(new Intent(getContext(), SignInWithGoogle.class), constant.SIGNIN_REQUEST_CODE);
             }
         });
@@ -112,11 +106,8 @@ public class MenuFragment extends Fragment {
         if (mAuth.getCurrentUser() == null) {
             startActivityForResult(new Intent(getContext(), SignInWithGoogle.class), constant.SIGNIN_REQUEST_CODE);
         } else {
-            sharedPreferences = getActivity().getSharedPreferences("account", Context.MODE_PRIVATE);
-            username = sharedPreferences.getString("name", "");
-            token = sharedPreferences.getString("token", "");
-            txtUsername.setText(username);
-            userID = sharedPreferences.getString("id", "");
+            user = new User().getUser(prefs);
+            txtUsername.setText(user.getUsername());
             until.circleTransformAvatar(getContext(),imgAvatar, mAuth.getCurrentUser().getPhotoUrl().toString(),R.drawable.ic_baseline_account_circle_24);
         }
     }
@@ -126,13 +117,11 @@ public class MenuFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == constant.SIGNIN_REQUEST_CODE && resultCode == constant.SIGNIN_RESPONSE_CODE) {
             until.circleTransformAvatar(getContext(),imgAvatar, mAuth.getCurrentUser().getPhotoUrl().toString(),R.drawable.ic_baseline_account_circle_24);
-            sharedPreferences = getActivity().getSharedPreferences("account", Context.MODE_PRIVATE);
-            token = sharedPreferences.getString("token", "");
-            txtUsername.setText(username);
-            userID = sharedPreferences.getString("id", "");
+            user = new User().getUser(prefs);
+            txtUsername.setText(user.getUsername());
         } else if (requestCode == constant.QRSCAN_REQUEST_CODE && resultCode == constant.QRSCAN_RESPONSE_CODE) {
             //get result qr scan
-            String QRresult = data.getStringExtra("QRResult");
+            String QRresult = data.getStringExtra(constant.QRSCAN_RESULT);
             //process
             if (constant.PARKING_IN.equals(QRresult)) {
                 until.showAlertDialog(R.string.information, R.string.parkingin, getContext());
@@ -146,7 +135,7 @@ public class MenuFragment extends Fragment {
                     //Update database
 
                     //notification
-                    new SendNotif().sendMessage("", username, sToken, token, constant.KEY_CONFIRM_SHARE, until.dateTimeToString(new Date()));
+                    new SendNotif().sendMessage("", user.getUsername(), sToken, user.getToken(), constant.KEY_CONFIRM_SHARE, until.dateTimeToString(new Date()));
 
                 } catch (IOException e) {
                     e.printStackTrace();

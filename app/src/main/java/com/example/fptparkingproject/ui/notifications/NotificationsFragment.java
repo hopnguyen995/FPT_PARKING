@@ -6,13 +6,13 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fptparkingproject.R;
+import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.customadapter.NotificationAdapter;
 import com.example.fptparkingproject.model.Notification;
 import com.example.fptparkingproject.untils.Until;
@@ -32,21 +32,24 @@ public class NotificationsFragment extends Fragment {
     ArrayList<Notification> listNotification;
     NotificationAdapter notificationAdapter;
     private DatabaseReference ref;
+    private SharedPreferences prefs;
+    Constant constant = new Constant();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);
         recyclerView = root.findViewById(R.id.recyclerView);
+        prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         final ArrayList<Notification> listNotificationDb = new ArrayList<>();
-        listNotification = getListNotification();
-        if(listNotification == null){
+        listNotification = new Notification().getListNotification(prefs);
+        if (listNotification == null) {
             listNotification = new ArrayList<>();
             listNotification.add(new Notification("1"));
         }
         notificationAdapter = new NotificationAdapter(getContext(), listNotification);
         recyclerView.setAdapter(notificationAdapter);
         ref = new Until().connectDatabase();
-        ref.child("Notifications").addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.child("Notifications").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
@@ -70,7 +73,7 @@ public class NotificationsFragment extends Fragment {
                 }
                 notificationAdapter = new NotificationAdapter(getContext(), listNotification);
                 recyclerView.setAdapter(notificationAdapter);
-                saveListNotification(listNotification);
+                new Notification().saveListNotification(prefs,listNotification);
             }
 
             @Override
@@ -81,24 +84,5 @@ public class NotificationsFragment extends Fragment {
         notificationAdapter = new NotificationAdapter(getContext(), listNotification);
         recyclerView.setAdapter(notificationAdapter);
         return root;
-    }
-
-    public void saveListNotification(ArrayList<Notification> listArray) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-        SharedPreferences.Editor editor = prefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(listArray);
-        editor.putString("notifications", json);
-        editor.commit();
-    }
-
-    public ArrayList<Notification> getListNotification() {
-        SharedPreferences prefs =
-                PreferenceManager.getDefaultSharedPreferences(getContext());
-        Gson gson = new Gson();
-        String json = prefs.getString("notifications", null);
-        Type listType = new TypeToken<ArrayList<Notification>>() {
-        }.getType();
-        return gson.fromJson(json, listType);
     }
 }

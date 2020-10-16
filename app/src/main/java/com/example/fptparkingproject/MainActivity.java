@@ -5,11 +5,13 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fptparkingproject.R;
+import com.example.fptparkingproject.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -20,11 +22,10 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
-    SharedPreferences sharedPreferences;
-    private TextView user;
-    private String uid;
-    private String username;
+    private SharedPreferences prefs;
+    User user;
     FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,15 +36,15 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications,R.id.navigation_menu)
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.navigation_menu)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
         mAuth = FirebaseAuth.getInstance();
-        sharedPreferences = getApplicationContext().getSharedPreferences("account", Context.MODE_PRIVATE);
-        username = sharedPreferences.getString("name","");
-        if(username.equals("")){
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        user = new User().getUser(prefs);
+        if (user == null) {
             mAuth.signOut();
         }
         if (!isInternetConnection()) {

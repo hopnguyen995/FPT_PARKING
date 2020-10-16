@@ -9,30 +9,30 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
+import com.example.fptparkingproject.model.Share;
+import com.example.fptparkingproject.model.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.gson.Gson;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
 public class ShareActivity extends AppCompatActivity {
-    SharedPreferences sharedPreferences;
-    private FirebaseAuth mAuth;
-    private int QRcodeWidth = 350;
     private ImageView imageView;
     private Bitmap bitmap;
-    private String uid;
     private String qrcodeshare;
-    private String token = "";
     private TextView txtShareInfo;
     Constant constant = new Constant();
-
+    private SharedPreferences prefs;
+    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,15 +42,18 @@ public class ShareActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorToolbar)));
         setContentView(R.layout.activity_share);
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        user = new User().getUser(prefs);
         imageView = findViewById(R.id.imageView);
         txtShareInfo = findViewById(R.id.txtInfo);
-        sharedPreferences = getApplicationContext().getSharedPreferences("account", Context.MODE_PRIVATE);
-        token = sharedPreferences.getString("token", "");
-        uid = sharedPreferences.getString("id", "");
+
         try {
-            mAuth = FirebaseAuth.getInstance();
-            qrcodeshare = "{\"" + constant.SHARE_VEHICLE + "\":\"" + uid + "\",\"" + constant.TOKEN + "\":\"" + token + "\"}";
-            bitmap = TextToImageEncode(qrcodeshare);
+            Share share = new Share();
+            share.setShare_vehicle(user.getUserid());
+            share.setToken(user.getToken());
+            Gson gson = new Gson();
+            qrcodeshare = "{\"" + constant.SHARE_VEHICLE + "\":\"" + user.getUserid() + "\",\"" + constant.TOKEN + "\":\"" + user.getToken() + "\"}";
+            bitmap = TextToImageEncode(gson.toJson(share));
             imageView.setImageBitmap(bitmap);
             txtShareInfo.setText(R.string.share_info);
         } catch (Exception ex) {
@@ -77,7 +80,7 @@ public class ShareActivity extends AppCompatActivity {
             bitMatrix = new MultiFormatWriter().encode(
                     Value,
                     BarcodeFormat.DATA_MATRIX.QR_CODE,
-                    QRcodeWidth, QRcodeWidth, null
+                    constant.QRCODE_WIDTH, constant.QRCODE_WIDTH, null
             );
 
         } catch (IllegalArgumentException Illegalargumentexception) {

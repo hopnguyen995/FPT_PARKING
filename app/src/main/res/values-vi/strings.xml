@@ -16,6 +16,7 @@
     <string name="accountnotsupport">Tài khoản không hỗ trợ</string>
     <string name="signinfailed">Lỗi đăng nhập</string>
     <string name="signinsuccess">Đăng nhập thành công!</string>
+    <string name="signoutsuccess">Đăng xuất!</string>
     <!-- Button -->
     <string name="button_qr">Quét QR</string>
     <string name="button_feedback">Góp ý</string>
@@ -53,4 +54,7 @@
     <string name="message_error_borrow_vehicle">🔊 Có lỗi xảy ra khi mượn xe vào lúc\u0020\u0020</string>
     <string name="message_signin_success">🔊 Đăng nhập trên thiết bị mới thành công.</string>
     <string name="message_signin_warning">⛔ Tài khoản của bạn đã đăng nhập trên thiết bị khác vào lúc\u0020\u0020</string>
+    <!--permission-->
+    <string name="permission_camera_granted">Đã cấp quyền máy ảnh</string>
+    <string name="permission_camera_denied">Quyền đối với máy ảnh bị từ chối</string>
 </resources>

@@ -16,6 +16,7 @@
     <string name="accountnotsupport">Account not support</string>
     <string name="signinfailed">Sign in failed</string>
     <string name="signinsuccess">Sign in success!</string>
+    <string name="signoutsuccess">Signed out!</string>
     <!-- Button -->
     <string name="button_qr">QR Scan</string>
     <string name="button_feedback">Feedback</string>
@@ -53,4 +54,7 @@
     <string name="message_error_borrow_vehicle">🔊 An error occurred while borrowing a vehicle at\u0020\u0020</string>
     <string name="message_signin_success">🔊 Sign in on the new device successfully.</string>
     <string name="message_signin_warning">⛔ Your account is signed in on another device at\u0020\u0020</string>
+    <!--permission-->
+    <string name="permission_camera_granted">Camera permission granted</string>
+    <string name="permission_camera_denied">Camera permission denied</string>
 </resources>

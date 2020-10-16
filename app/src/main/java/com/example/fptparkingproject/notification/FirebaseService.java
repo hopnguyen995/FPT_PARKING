@@ -56,7 +56,7 @@ public class FirebaseService extends FirebaseMessagingService {
             RemoteMessage.Notification notification = remoteMessage.getNotification();
             sendNotification(notification.getBody(), notification.getTitle(), notification.getImageUrl(), notification.getTag(), "", "", "");
         } else if (remoteMessage.getData() != null) {
-            sendNotification(remoteMessage.getData().get("body"), remoteMessage.getData().get("title"), null, remoteMessage.getData().get("sendtoken"), remoteMessage.getData().get("token"), remoteMessage.getData().get("code"), remoteMessage.getData().get("time"));
+            sendNotification(remoteMessage.getData().get(constant.JSON_KEY_BODY), remoteMessage.getData().get(constant.JSON_KEY_TITLE), null, remoteMessage.getData().get(constant.JSON_KEY_SENDTOKEN), remoteMessage.getData().get(constant.JSON_KEY_TOKEN), remoteMessage.getData().get(constant.JSON_KEY_CODE), remoteMessage.getData().get(constant.JSON_KEY_TIME));
         }
     }
 
@@ -83,7 +83,7 @@ public class FirebaseService extends FirebaseMessagingService {
                         .requestEmail()
                         .build();
                 GoogleSignIn.getClient(getApplicationContext(), gso).signOut();
-                SharedPreferences prefRemember = getApplicationContext().getSharedPreferences("account", Context.MODE_PRIVATE);
+                SharedPreferences prefRemember = getApplicationContext().getSharedPreferences(constant.KEY_USER, Context.MODE_PRIVATE);
                 prefRemember.edit().clear().commit();
                 if (subtime < constant.TIMEOUT) {
                     new SendNotif().sendMessage("", "", sendToken, sendToken, constant.KEY_SUCCESS, until.dateTimeToString(new Date()));
@@ -106,10 +106,10 @@ public class FirebaseService extends FirebaseMessagingService {
                 messageTitle = getResources().getString(R.string.title_confirm);
                 messageBody = messageBody + getResources().getString(R.string.message_borrow_vehicle);
                 Intent dialogIntent = new Intent(getApplicationContext(), AlertDialogActivity.class);
-                dialogIntent.putExtra("title", messageTitle);
-                dialogIntent.putExtra("message", messageBody);
-                dialogIntent.putExtra("token", token);
-                dialogIntent.putExtra("sendtoken", sendToken);
+                dialogIntent.putExtra(constant.INTENT_ALERTDIALOG_TITLE, messageTitle);
+                dialogIntent.putExtra(constant.INTENT_ALERTDIALOG_MESSAGE, messageBody);
+                dialogIntent.putExtra(constant.INTENT_ALERTDIALOG_TOKEN, token);
+                dialogIntent.putExtra(constant.INTENT_ALERTDIALOG_SENDTOKEN, sendToken);
                 dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(dialogIntent);
             } else {
@@ -178,14 +178,13 @@ public class FirebaseService extends FirebaseMessagingService {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 NotificationChannel channel = new NotificationChannel(
                         channelId,
-                        "Channel human readable title",
+                        constant.CHANNEL,
                         NotificationManager.IMPORTANCE_DEFAULT);
                 notificationManager.createNotificationChannel(channel);
             }
             notificationManager.notify(notificationId, notificationBuilder.build());
         }
     }
-
 
     private boolean isRuning() {
         ActivityManager.RunningAppProcessInfo myProcess = new ActivityManager.RunningAppProcessInfo();

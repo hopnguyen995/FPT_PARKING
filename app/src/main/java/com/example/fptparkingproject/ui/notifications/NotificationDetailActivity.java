@@ -12,13 +12,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.fptparkingproject.R;
+import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.Notification;
 import com.example.fptparkingproject.untils.Until;
+import com.google.gson.Gson;
 
 public class NotificationDetailActivity extends AppCompatActivity {
     private TextView textViewTitle;
     private TextView textViewDateTime;
     private TextView textViewContent;
+    Constant constant = new Constant();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +35,9 @@ public class NotificationDetailActivity extends AppCompatActivity {
         textViewTitle = findViewById(R.id.textViewTitle);
         textViewDateTime = findViewById(R.id.textViewDateTime);
         textViewContent = findViewById(R.id.textViewContent);
-
+        Gson gson = new Gson();
         Intent intent = getIntent();
-        Notification notification = (Notification) intent.getSerializableExtra("notification");
+        Notification notification = gson.fromJson(intent.getStringExtra(constant.INTENT_NOTIFICATION_DETAIL_NOTIFICATION),Notification.class);
         textViewTitle.setText(notification.getNotificationTitle());
         textViewDateTime.setText(notification.getNotificationDateTime());
         textViewContent.setText(notification.getNotificationContent());
@@ -45,7 +49,6 @@ public class NotificationDetailActivity extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 return true;
-
             default:
                 break;
         }
