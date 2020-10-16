@@ -16,8 +16,6 @@ import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.Notification;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -29,6 +27,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class Until {
     public boolean isRunning(Context ctx) {
@@ -94,5 +93,9 @@ public class Until {
                 img.setImageResource(defaultImage);
             }
         });
+    }
+
+    public String randomID(){
+        return UUID.randomUUID().toString();
     }
 }

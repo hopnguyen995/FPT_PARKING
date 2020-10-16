@@ -21,6 +21,7 @@ import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.Share;
 import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.notification.SendNotif;
+import com.example.fptparkingproject.qrscan.ParkingIn;
 import com.example.fptparkingproject.qrscan.QRScanActivity;
 import com.example.fptparkingproject.qrshare.ShareActivity;
 import com.example.fptparkingproject.signin.SignInWithGoogle;
@@ -88,6 +89,7 @@ public class HomeFragment extends Fragment {
             String QRresult = data.getStringExtra(constant.INTENT_QRSCAN_RESULT);
             //process
             if (constant.PARKING_IN.equals(QRresult)) {
+                new ParkingIn().parkingIn(user);
                 until.showAlertDialog(R.string.information, R.string.parkingin, getContext());
             } else if (constant.PARKING_OUT.equals(QRresult)) {
                 until.showAlertDialog(R.string.information, R.string.parkingout, getContext());

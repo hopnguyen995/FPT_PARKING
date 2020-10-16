@@ -198,6 +198,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                                                 }
                                                 Toast.makeText(SignInWithGoogle.this, R.string.signinsuccess,
                                                         Toast.LENGTH_SHORT).show();
+                                                ref.removeEventListener(this);
                                             } else {
                                                 SendNotif sendNotif = new SendNotif();
                                                 sendNotif.sendMessage("", "" + until.dateTimeToString(new Date()) + ".", fuser.getToken(), newUser.getToken(),constant.KEY_SIGNOUT,until.dateTimeToString(new Date()));
