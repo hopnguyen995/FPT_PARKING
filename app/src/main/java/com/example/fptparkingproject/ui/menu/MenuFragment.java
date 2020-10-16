@@ -121,7 +121,7 @@ public class MenuFragment extends Fragment {
             txtUsername.setText(user.getUsername());
         } else if (requestCode == constant.QRSCAN_REQUEST_CODE && resultCode == constant.QRSCAN_RESPONSE_CODE) {
             //get result qr scan
-            String QRresult = data.getStringExtra(constant.QRSCAN_RESULT);
+            String QRresult = data.getStringExtra(constant.INTENT_QRSCAN_RESULT);
             //process
             if (constant.PARKING_IN.equals(QRresult)) {
                 until.showAlertDialog(R.string.information, R.string.parkingin, getContext());

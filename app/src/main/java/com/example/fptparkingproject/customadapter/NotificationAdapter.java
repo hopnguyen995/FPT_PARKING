@@ -55,7 +55,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Notification notification = listNotification.get(position);
         if (holder instanceof HeaderViewHolder) {
-            ((HeaderViewHolder) holder).headerTitle.setText(R.string.title_notifications);
+            ((HeaderViewHolder) holder).headerTitle.setText("");
         } else if (holder instanceof ItemViewHolder) {
             ((ItemViewHolder) holder).txtTitle.setText(notification.getNotificationTitle());
             ((ItemViewHolder) holder).txtShortContent.setText(notification.getNotificationShortContent());
