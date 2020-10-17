@@ -35,8 +35,10 @@ public class Constant {
     public final String KEY_SHARE_FAILED = "81896888455510588869";
     public final String KEY_SHARE_ERROR = "98432742839287548736";
     //TIME OUT
-    public final int TIMEOUT = 10000;
+    public final int TIMEOUT_SIGNIN = 10000;
     public final int COUNTDOWN = 1000;
+    public final int TIMEOUT_PARKING = 3000;
+
     //notification
     public static final int TYPE_HEADER = 0;
     public static final int TYPE_ITEM = 1;
@@ -55,4 +57,8 @@ public class Constant {
     public final String TABLE_USERS_CHILD_TOKEN = "tokens";
     public final String TABLE_PARKINGS = "Parkings";
     public final String TABLE_NOTIFICATIONS = "Notifications";
+    public final String TABLE_PARKINGS_TEMP = "Parkings_temp";
+    public final String TABLE_PARKINGS_TEMP_CHILD_PARKING_STATUS = "parking_status";
+    public final String TABLE_VEHICLES_TEMP = "Vehicles_temp";
+    public final String TABLE_VEHICLES_TEMP_CHILD_VEHICLEID = "vehicleid";
 }

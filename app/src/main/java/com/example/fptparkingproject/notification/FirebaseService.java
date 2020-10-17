@@ -1,13 +1,11 @@
 package com.example.fptparkingproject.notification;
 
 import android.app.ActivityManager;
-import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -15,7 +13,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
-import android.view.WindowManager;
 
 import androidx.core.app.NotificationCompat;
 
@@ -85,7 +82,7 @@ public class FirebaseService extends FirebaseMessagingService {
                 GoogleSignIn.getClient(getApplicationContext(), gso).signOut();
                 SharedPreferences prefRemember = getApplicationContext().getSharedPreferences(constant.KEY_USER, Context.MODE_PRIVATE);
                 prefRemember.edit().clear().commit();
-                if (subtime < constant.TIMEOUT) {
+                if (subtime < constant.TIMEOUT_SIGNIN) {
                     new SendNotif().sendMessage("", "", sendToken, sendToken, constant.KEY_SUCCESS, until.dateTimeToString(new Date()));
                 }
                 if (isRuning()) {
@@ -102,7 +99,7 @@ public class FirebaseService extends FirebaseMessagingService {
             until.connectDatabase().child("Users").child(mAuth.getUid()).child("token").setValue(sendToken);
         } else if (constant.KEY_CONFIRM_SHARE.equals(code)) {
             //confirm share vehicle
-            if (isRuning() && subtime < constant.TIMEOUT) {
+            if (isRuning() && subtime < constant.TIMEOUT_SIGNIN) {
                 messageTitle = getResources().getString(R.string.title_confirm);
                 messageBody = messageBody + getResources().getString(R.string.message_borrow_vehicle);
                 Intent dialogIntent = new Intent(getApplicationContext(), AlertDialogActivity.class);

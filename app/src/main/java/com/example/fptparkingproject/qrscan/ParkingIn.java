@@ -1,9 +1,21 @@
 package com.example.fptparkingproject.qrscan;
 
-import androidx.annotation.NonNull;
+import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.PersistableBundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.fptparkingproject.R;
+import com.example.fptparkingproject.constant.Constant;
+import com.example.fptparkingproject.firebasedatabase.ParkingInSynchronously;
 import com.example.fptparkingproject.model.Parking;
 import com.example.fptparkingproject.model.User;
+import com.example.fptparkingproject.ui.home.HomeFragment;
 import com.example.fptparkingproject.untils.Until;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -11,54 +23,30 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-public class ParkingIn {
+public class ParkingIn extends AppCompatActivity {
+    Constant constant = new Constant();
     Until until = new Until();
-    DatabaseReference ref;
+    ParkingInSynchronously parkingInSynchronously = new ParkingInSynchronously();
 
     //save parking in information to database
-    public void parkingIn(User user) {
-        if (!isExistParking(getListParking(), user)) {
-            Parking parking = new Parking(until.randomID(), user.getUserid(), "7fCqjZjS19qQ6Ba4Kew1", true, until.nomalizeDateTime(new Date()));
-            ref = until.connectDatabase();
-            ref.child("Parkings").child(parking.getParkingid()).setValue(parking);
-        }
-    }
-
-    private ArrayList<Parking> getListParking() {
-        ref = until.connectDatabase();
-        final ArrayList<Parking> listParking = new ArrayList<>();
-        ref.child("Parkings").addListenerForSingleValueEvent(new ValueEventListener() {
+    public void parkingIn(User user,String vehicleid) {
+        parkingInSynchronously.addDataParkingSynchronous(user,vehicleid);
+        CountDownTimer timer = new CountDownTimer(constant.TIMEOUT_PARKING, constant.COUNTDOWN) {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
-                    for (DataSnapshot ds : snapshot.getChildren()) {
-                        Parking parking = ds.getValue(Parking.class);
-                        listParking.add(parking);
-                    }
-                }
+            public void onTick(long millisUntilFinished) {
+
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        return listParking;
-    }
-
-    private boolean isExistParking(ArrayList<Parking> listParking, User user) {
-        boolean isExist = false;
-        for (Parking parking : listParking
-        ) {
-            if (user.getUserid().equals(parking.getUserid())) {
-                if (parking.isStatus()) {
-                    isExist = true;
-                    break;
+            public void onFinish() {
+                if (parkingInSynchronously.getResult()) {
+                    until.showAlertDialog(R.string.information, R.string.parkinginsuccess, HomeFragment.getAppContext());
+                } else {
+                    until.showAlertDialog(R.string.title_warning, R.string.parkinginfailed, HomeFragment.getAppContext());
                 }
             }
-        }
-        return isExist;
+        };
+        timer.start();
     }
 }

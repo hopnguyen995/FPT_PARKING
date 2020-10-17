@@ -38,8 +38,10 @@
     <string name="information">Thông tin</string>
     <!--Message-->
     <string name="failConnect">Lỗi kết nối mạng</string>
-    <string name="parkingin">Gửi xe thành công!</string>
-    <string name="parkingout">Lấy xe thành công!</string>
+    <string name="parkinginsuccess">Gửi xe thành công!</string>
+    <string name="parkinginfailed">Có lỗi xảy ra khi gửi xe!</string>
+    <string name="parkingoutsuccess">Lấy xe thành công!</string>
+    <string name="parkingoutfailed">Có lỗi xảy ra khi lấy xe!</string>
     <string name="shareSuccess">Mượn xe</string>
     <string name="cannotshare">Không thể chia sẻ xe của bạn!</string>
     <!--Notification-->
