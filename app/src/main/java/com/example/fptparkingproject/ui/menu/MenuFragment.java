@@ -60,7 +60,7 @@ public class MenuFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //remove token in db
-                new Until().connectDatabase().child("Users").child(user.getUserid()).child("token").setValue("");
+                new Until().connectDatabase().child(constant.TABLE_USERS).child(user.getUserid()).child(constant.TABLE_USERS_CHILD_TOKEN).setValue("");
                 mAuth.signOut();
                 FirebaseAuth.getInstance().signOut();
                 GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
