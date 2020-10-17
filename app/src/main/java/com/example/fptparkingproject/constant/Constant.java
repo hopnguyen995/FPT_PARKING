@@ -58,4 +58,7 @@ public class Constant {
     public final String TABLE_PARKINGS = "Parkings";
     public final String TABLE_NOTIFICATIONS = "Notifications";
     public final String TABLE_PARKINGS_TEMP = "Parkings_temp";
+    public final String TABLE_PARKINGS_TEMP_CHILD_PARKING_STATUS = "parking_status";
+    public final String TABLE_VEHICLES_TEMP = "Vehicles_temp";
+    public final String TABLE_VEHICLES_TEMP_CHILD_VEHICLEID = "vehicleid";
 }

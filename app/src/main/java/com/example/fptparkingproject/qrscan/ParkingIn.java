@@ -1,8 +1,13 @@
 package com.example.fptparkingproject.qrscan;
 
+import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.PersistableBundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fptparkingproject.R;
@@ -25,12 +30,12 @@ public class ParkingIn extends AppCompatActivity {
     ParkingInSynchronously parkingInSynchronously = new ParkingInSynchronously();
 
     //save parking in information to database
-    public void parkingIn(User user) {
-        parkingInSynchronously.addDataParkingSynchronous(user);
+    public void parkingIn(User user,String vehicleid) {
+        parkingInSynchronously.addDataParkingSynchronous(user,vehicleid);
         CountDownTimer timer = new CountDownTimer(constant.TIMEOUT_PARKING, constant.COUNTDOWN) {
             @Override
             public void onTick(long millisUntilFinished) {
-                System.out.println(millisUntilFinished);
+
             }
 
             @Override

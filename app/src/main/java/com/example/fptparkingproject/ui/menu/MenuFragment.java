@@ -28,6 +28,8 @@ import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.Share;
 import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.notification.SendNotif;
+import com.example.fptparkingproject.qrscan.ParkingIn;
+import com.example.fptparkingproject.qrscan.ParkingOut;
 import com.example.fptparkingproject.qrscan.QRScanActivity;
 import com.example.fptparkingproject.qrshare.ShareActivity;
 import com.example.fptparkingproject.signin.SignInWithGoogle;
@@ -49,6 +51,7 @@ public class MenuFragment extends Fragment {
     Until until = new Until();
     private SharedPreferences prefs;
     User user;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -108,7 +111,7 @@ public class MenuFragment extends Fragment {
         } else {
             user = new User().getUser(prefs);
             txtUsername.setText(user.getUsername());
-            until.circleTransformAvatar(getContext(),imgAvatar, mAuth.getCurrentUser().getPhotoUrl().toString(),R.drawable.ic_baseline_account_circle_24);
+            until.circleTransformAvatar(getContext(), imgAvatar, mAuth.getCurrentUser().getPhotoUrl().toString(), R.drawable.ic_baseline_account_circle_24);
         }
     }
 
@@ -116,7 +119,7 @@ public class MenuFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == constant.SIGNIN_REQUEST_CODE && resultCode == constant.SIGNIN_RESPONSE_CODE) {
-            until.circleTransformAvatar(getContext(),imgAvatar, mAuth.getCurrentUser().getPhotoUrl().toString(),R.drawable.ic_baseline_account_circle_24);
+            until.circleTransformAvatar(getContext(), imgAvatar, mAuth.getCurrentUser().getPhotoUrl().toString(), R.drawable.ic_baseline_account_circle_24);
             user = new User().getUser(prefs);
             txtUsername.setText(user.getUsername());
         } else if (requestCode == constant.QRSCAN_REQUEST_CODE && resultCode == constant.QRSCAN_RESPONSE_CODE) {
@@ -124,9 +127,13 @@ public class MenuFragment extends Fragment {
             String QRresult = data.getStringExtra(constant.INTENT_QRSCAN_RESULT);
             //process
             if (constant.PARKING_IN.equals(QRresult)) {
-                until.showAlertDialog(R.string.information, R.string.parkinginsuccess, getContext());
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("vehicleid", Context.MODE_PRIVATE);
+                String vehicleid = sharedPreferences.getString("vehicleid", "");
+                new ParkingIn().parkingIn(user, vehicleid);
             } else if (constant.PARKING_OUT.equals(QRresult)) {
-                until.showAlertDialog(R.string.information, R.string.parkingout, getContext());
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("vehicleid", Context.MODE_PRIVATE);
+                String vehicleid = sharedPreferences.getString("vehicleid", "");
+                new ParkingOut().parkingOut(user, vehicleid);
             } else if (QRresult.contains(constant.SHARE_VEHICLE)) {
                 try {
                     ObjectMapper mapper = new ObjectMapper();

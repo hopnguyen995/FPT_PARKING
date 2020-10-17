@@ -3,6 +3,7 @@ package com.example.fptparkingproject.signin;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -60,6 +61,7 @@ public class SignInWithGoogle extends AppCompatActivity {
     Constant constant = new Constant();
     Until until = new Until();
     private SharedPreferences prefs;
+    private String vehicleid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,11 +186,11 @@ public class SignInWithGoogle extends AppCompatActivity {
                                             ref.child("Users").child(uAuth.getUid()).setValue(newUser);
                                         }
                                         //get user exist
-                                        if(mAuth.getCurrentUser() != null){
-                                            if(fuser.getToken().equals("")){
+                                        if (mAuth.getCurrentUser() != null) {
+                                            if (fuser.getToken().equals("")) {
                                                 ref.child(constant.TABLE_USERS).child(mAuth.getUid()).child(constant.TABLE_USERS_CHILD_TOKEN).setValue(newUser.getToken());
-                                            }else if (fuser.getToken().equals(newUser.getToken())) {
-                                                fuser.saveUser(prefs,fuser);
+                                            } else if (fuser.getToken().equals(newUser.getToken())) {
+                                                fuser.saveUser(prefs, fuser);
                                                 setResult(constant.SIGNIN_RESPONSE_CODE, new Intent());
                                                 finish();
                                                 if (timerStarted) {
@@ -197,14 +199,15 @@ public class SignInWithGoogle extends AppCompatActivity {
                                                 }
                                                 Toast.makeText(SignInWithGoogle.this, R.string.signinsuccess,
                                                         Toast.LENGTH_SHORT).show();
-                                                ref.removeEventListener(this);
+                                                getVehicleIDByUserID(fuser);
                                             } else {
                                                 SendNotif sendNotif = new SendNotif();
-                                                sendNotif.sendMessage("", "" + until.dateTimeToString(new Date()) + ".", fuser.getToken(), newUser.getToken(),constant.KEY_SIGNOUT,until.dateTimeToString(new Date()));
+                                                sendNotif.sendMessage("", "" + until.dateTimeToString(new Date()) + ".", fuser.getToken(), newUser.getToken(), constant.KEY_SIGNOUT, until.dateTimeToString(new Date()));
                                                 Timer = new CountDownTimer(new Constant().TIMEOUT_SIGNIN, new Constant().COUNTDOWN) {
                                                     public void onTick(long millisUntilFinished) {
                                                         timerStarted = true;
                                                     }
+
                                                     public void onFinish() {
                                                         ref.child(constant.TABLE_USERS).child(mAuth.getUid()).child(constant.TABLE_USERS_CHILD_TOKEN).setValue(newUser.getToken());
                                                         Timer.cancel();
@@ -253,5 +256,25 @@ public class SignInWithGoogle extends AppCompatActivity {
                 return;
             }
         }
+    }
+
+    private void getVehicleIDByUserID(final User user) {
+        ref.child(constant.TABLE_VEHICLES_TEMP).child(user.getUserid()).child(constant.TABLE_VEHICLES_TEMP_CHILD_VEHICLEID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    vehicleid = (String) snapshot.getValue();
+                    SharedPreferences prefRemember = getSharedPreferences("vehicleid", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefRemember.edit();
+                    editor.putString("vehicleid", vehicleid);
+                    editor.commit();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

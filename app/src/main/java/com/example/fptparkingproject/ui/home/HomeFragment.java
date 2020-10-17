@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import com.example.fptparkingproject.model.Share;
 import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.notification.SendNotif;
 import com.example.fptparkingproject.qrscan.ParkingIn;
+import com.example.fptparkingproject.qrscan.ParkingOut;
 import com.example.fptparkingproject.qrscan.QRScanActivity;
 import com.example.fptparkingproject.qrshare.ShareActivity;
 import com.example.fptparkingproject.signin.SignInWithGoogle;
@@ -92,9 +94,13 @@ public class HomeFragment extends Fragment {
             String QRresult = data.getStringExtra(constant.INTENT_QRSCAN_RESULT);
             //process
             if (constant.PARKING_IN.equals(QRresult)) {
-                new ParkingIn().parkingIn(user);
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("vehicleid", Context.MODE_PRIVATE);
+                String vehicleid = sharedPreferences.getString("vehicleid", "");
+                new ParkingIn().parkingIn(user, vehicleid);
             } else if (constant.PARKING_OUT.equals(QRresult)) {
-                until.showAlertDialog(R.string.information, R.string.parkingout, getContext());
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("vehicleid", Context.MODE_PRIVATE);
+                String vehicleid = sharedPreferences.getString("vehicleid", "");
+                new ParkingOut().parkingOut(user, vehicleid);
             } else if (QRresult.contains(constant.SHARE_VEHICLE)) {
                 Gson gson = new Gson();
                 Share shareVehicle = gson.fromJson(QRresult, Share.class);

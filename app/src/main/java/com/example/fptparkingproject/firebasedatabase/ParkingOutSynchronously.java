@@ -7,17 +7,14 @@ import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.Parking;
 import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.untils.Until;
-import com.google.firebase.FirebaseError;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.concurrent.CountDownLatch;
 
-public class ParkingInSynchronously {
+public class ParkingOutSynchronously {
     DatabaseReference ref = new Until().connectDatabase();
     Boolean isSuccess = false;
     Boolean status = false;
@@ -41,8 +38,8 @@ public class ParkingInSynchronously {
     }
 
     private void addParking(User user,String vehicleid) {
-        if (!status) {
-            Parking parking = new Parking(new Until().randomID(), user.getUserid(), vehicleid, true, new Until().nomalizeDateTime(new Date()));
+        if (status) {
+            Parking parking = new Parking(new Until().randomID(), user.getUserid(), vehicleid, false, new Until().nomalizeDateTime(new Date()));
             ref.child(constant.TABLE_PARKINGS).child(parking.getParkingid()).setValue(parking, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
@@ -53,7 +50,7 @@ public class ParkingInSynchronously {
                     }
                 }
             });
-            ref.child(constant.TABLE_PARKINGS_TEMP).child(user.getUserid()).child(constant.TABLE_PARKINGS_TEMP_CHILD_PARKING_STATUS).setValue(true);
+            ref.child(constant.TABLE_PARKINGS_TEMP).child(user.getUserid()).child(constant.TABLE_PARKINGS_TEMP_CHILD_PARKING_STATUS).setValue(false);
         } else {
             isSuccess = false;
         }

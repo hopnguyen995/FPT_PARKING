@@ -4,17 +4,17 @@ public class Parking {
     private String parkingid;
     private String userid;
     private String vehicleid;
-    private boolean status;
+    private boolean type;
     private String time;
 
     public Parking() {
     }
 
-    public Parking(String parkingid, String userid, String vehicleid, boolean status, String time) {
+    public Parking(String parkingid, String userid, String vehicleid, boolean type, String time) {
         this.parkingid = parkingid;
         this.userid = userid;
         this.vehicleid = vehicleid;
-        this.status = status;
+        this.type = type;
         this.time = time;
     }
 
@@ -42,12 +42,12 @@ public class Parking {
         this.vehicleid = vehicleid;
     }
 
-    public boolean isStatus() {
-        return status;
+    public boolean isType() {
+        return type;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setType(boolean type) {
+        this.type = type;
     }
 
     public String getTime() {
