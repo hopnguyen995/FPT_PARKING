@@ -264,16 +264,16 @@ public class SignInWithGoogle extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     vehicleid = (String) snapshot.getValue();
-                    SharedPreferences prefRemember = getSharedPreferences("vehicleid", Context.MODE_PRIVATE);
+                    SharedPreferences prefRemember = getSharedPreferences(constant.KEY_VEHICLEID, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefRemember.edit();
-                    editor.putString("vehicleid", vehicleid);
+                    editor.putString(constant.KEY_VEHICLEID, vehicleid);
                     editor.commit();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                vehicleid = "";
             }
         });
     }

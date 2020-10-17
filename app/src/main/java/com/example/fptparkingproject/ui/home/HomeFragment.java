@@ -93,13 +93,11 @@ public class HomeFragment extends Fragment {
             //get result qr scan
             String QRresult = data.getStringExtra(constant.INTENT_QRSCAN_RESULT);
             //process
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(constant.KEY_VEHICLEID, Context.MODE_PRIVATE);
+            String vehicleid = sharedPreferences.getString(constant.KEY_VEHICLEID, "");
             if (constant.PARKING_IN.equals(QRresult)) {
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("vehicleid", Context.MODE_PRIVATE);
-                String vehicleid = sharedPreferences.getString("vehicleid", "");
                 new ParkingIn().parkingIn(user, vehicleid);
             } else if (constant.PARKING_OUT.equals(QRresult)) {
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("vehicleid", Context.MODE_PRIVATE);
-                String vehicleid = sharedPreferences.getString("vehicleid", "");
                 new ParkingOut().parkingOut(user, vehicleid);
             } else if (QRresult.contains(constant.SHARE_VEHICLE)) {
                 Gson gson = new Gson();

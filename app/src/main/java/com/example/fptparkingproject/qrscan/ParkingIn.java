@@ -28,25 +28,33 @@ public class ParkingIn extends AppCompatActivity {
     Constant constant = new Constant();
     Until until = new Until();
     ParkingInSynchronously parkingInSynchronously = new ParkingInSynchronously();
+    CountDownTimer timer;
 
     //save parking in information to database
-    public void parkingIn(User user,String vehicleid) {
-        parkingInSynchronously.addDataParkingSynchronous(user,vehicleid);
-        CountDownTimer timer = new CountDownTimer(constant.TIMEOUT_PARKING, constant.COUNTDOWN) {
+    public void parkingIn(User user, String vehicleid) {
+        parkingInSynchronously.addDataParkingSynchronous(user, vehicleid);
+        timer = new CountDownTimer(constant.TIMEOUT_PARKING, constant.COUNTDOWN) {
             @Override
             public void onTick(long millisUntilFinished) {
-
+                if (parkingInSynchronously.getResult()) {
+                    showAlertDialog(parkingInSynchronously.getResult());
+                    timer.cancel();
+                }
             }
 
             @Override
             public void onFinish() {
-                if (parkingInSynchronously.getResult()) {
-                    until.showAlertDialog(R.string.information, R.string.parkinginsuccess, HomeFragment.getAppContext());
-                } else {
-                    until.showAlertDialog(R.string.title_warning, R.string.parkinginfailed, HomeFragment.getAppContext());
-                }
+                showAlertDialog(parkingInSynchronously.getResult());
             }
         };
         timer.start();
+    }
+
+    private void showAlertDialog(Boolean isSuccess) {
+        if (isSuccess) {
+            until.showAlertDialog(R.string.information, R.string.parkinginsuccess, HomeFragment.getAppContext());
+        } else {
+            until.showAlertDialog(R.string.title_warning, R.string.parkinginfailed, HomeFragment.getAppContext());
+        }
     }
 }
