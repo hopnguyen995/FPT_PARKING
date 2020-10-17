@@ -11,28 +11,36 @@ import com.example.fptparkingproject.ui.home.HomeFragment;
 import com.example.fptparkingproject.untils.Until;
 
 public class ParkingOut {
+    CountDownTimer timer;
     Constant constant = new Constant();
     Until until = new Until();
     ParkingOutSynchronously parkingOutSynchronously = new ParkingOutSynchronously();
 
     //save parking in information to database
     public void parkingOut(User user, String vehicleid) {
-        parkingOutSynchronously.addDataParkingSynchronous(user,vehicleid);
-        CountDownTimer timer = new CountDownTimer(constant.TIMEOUT_PARKING, constant.COUNTDOWN) {
+        parkingOutSynchronously.addDataParkingSynchronous(user, vehicleid);
+        timer = new CountDownTimer(constant.TIMEOUT_PARKING, constant.COUNTDOWN) {
             @Override
             public void onTick(long millisUntilFinished) {
-
+                if (parkingOutSynchronously.getResult()) {
+                    showAlertDialog(parkingOutSynchronously.getResult());
+                    timer.cancel();
+                }
             }
 
             @Override
             public void onFinish() {
-                if (parkingOutSynchronously.getResult()) {
-                    until.showAlertDialog(R.string.information, R.string.parkingoutsuccess, HomeFragment.getAppContext());
-                } else {
-                    until.showAlertDialog(R.string.title_warning, R.string.parkingoutfailed, HomeFragment.getAppContext());
-                }
+                showAlertDialog(parkingOutSynchronously.getResult());
             }
         };
         timer.start();
+    }
+
+    private void showAlertDialog(Boolean isSuccess) {
+        if (isSuccess) {
+            until.showAlertDialog(R.string.information, R.string.parkingoutsuccess, HomeFragment.getAppContext());
+        } else {
+            until.showAlertDialog(R.string.title_warning, R.string.parkingoutfailed, HomeFragment.getAppContext());
+        }
     }
 }

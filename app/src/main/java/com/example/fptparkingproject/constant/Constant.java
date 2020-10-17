@@ -19,6 +19,7 @@ public class Constant {
     //SharedPreferences
     public final String KEY_NOTIFICATION = "notifications";
     public final String KEY_USER = "user";
+    public final String KEY_VEHICLEID = "vehicleid";
     //mail
     public final String MAIL = "@fpt.edu.vn";
     //parking
@@ -37,7 +38,7 @@ public class Constant {
     //TIME OUT
     public final int TIMEOUT_SIGNIN = 10000;
     public final int COUNTDOWN = 1000;
-    public final int TIMEOUT_PARKING = 3000;
+    public final int TIMEOUT_PARKING = 5000;
 
     //notification
     public static final int TYPE_HEADER = 0;
@@ -54,7 +55,7 @@ public class Constant {
     public final String JSON_KEY_TIME = "time";
     //database
     public final String TABLE_USERS = "Users";
-    public final String TABLE_USERS_CHILD_TOKEN = "tokens";
+    public final String TABLE_USERS_CHILD_TOKEN = "token";
     public final String TABLE_PARKINGS = "Parkings";
     public final String TABLE_NOTIFICATIONS = "Notifications";
     public final String TABLE_PARKINGS_TEMP = "Parkings_temp";

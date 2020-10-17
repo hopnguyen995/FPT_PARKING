@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
+import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.Notification;
 import com.google.firebase.database.DatabaseReference;
@@ -71,6 +72,7 @@ public class Until {
 
     public void showAlertDialog(int title, int mesage, Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setIcon(R.drawable.ic_scooter);
         builder.setMessage(context.getResources().getText(mesage));
         builder.setTitle(context.getResources().getText(title));
         builder.create();
