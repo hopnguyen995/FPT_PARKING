@@ -50,4 +50,9 @@ public class Constant {
     public final String JSON_KEY_TOKEN = "token";
     public final String JSON_KEY_CODE = "code";
     public final String JSON_KEY_TIME = "time";
+    //database
+    public final String TABLE_USERS = "Users";
+    public final String TABLE_USERS_CHILD_TOKEN = "tokens";
+    public final String TABLE_PARKINGS = "Parkings";
+    public final String TABLE_NOTIFICATIONS = "Notifications";
 }

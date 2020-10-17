@@ -151,7 +151,7 @@ public class SignInWithGoogle extends AppCompatActivity {
     //function authentication with google
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         //getting the auth credential
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        final AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         //Now using firebase we are signing in the user here
         final User newUser = new User();
         mAuth.signInWithCredential(credential)
@@ -173,7 +173,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                                             }
                                         });
                                 ref = until.connectDatabase();
-                                ref.child("Users").child(uAuth.getUid()).addValueEventListener(new ValueEventListener() {
+                                ref.child(constant.TABLE_USERS).child(uAuth.getUid()).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         User fuser = dataSnapshot.getValue(User.class);
@@ -187,7 +187,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                                         //get user exist
                                         if(mAuth.getCurrentUser() != null){
                                             if(fuser.getToken().equals("")){
-                                                ref.child("Users").child(mAuth.getUid()).child("token").setValue(newUser.getToken());
+                                                ref.child(constant.TABLE_USERS).child(mAuth.getUid()).child(constant.TABLE_USERS_CHILD_TOKEN).setValue(newUser.getToken());
                                             }else if (fuser.getToken().equals(newUser.getToken())) {
                                                 fuser.saveUser(prefs,fuser);
                                                 setResult(constant.SIGNIN_RESPONSE_CODE, new Intent());
@@ -207,7 +207,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                                                         timerStarted = true;
                                                     }
                                                     public void onFinish() {
-                                                        ref.child("Users").child(mAuth.getUid()).child("token").setValue(newUser.getToken());
+                                                        ref.child(constant.TABLE_USERS).child(mAuth.getUid()).child(constant.TABLE_USERS_CHILD_TOKEN).setValue(newUser.getToken());
                                                         Timer.cancel();
                                                     }
                                                 }.start();
