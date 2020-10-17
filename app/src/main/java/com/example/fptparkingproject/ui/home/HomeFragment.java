@@ -1,5 +1,6 @@
 package com.example.fptparkingproject.ui.home;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ import java.io.IOException;
 import java.util.Date;
 
 public class HomeFragment extends Fragment {
+    private static Context context;
     private FirebaseAuth mAuth;
     private TextView txtUsername;
     Constant constant = new Constant();
@@ -47,6 +49,7 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         final Button buttonQRScan = root.findViewById(R.id.buttonQR);
+        context = getContext();
         buttonQRScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,20 +93,19 @@ public class HomeFragment extends Fragment {
             //process
             if (constant.PARKING_IN.equals(QRresult)) {
                 new ParkingIn().parkingIn(user);
-                until.showAlertDialog(R.string.information, R.string.parkingin, getContext());
             } else if (constant.PARKING_OUT.equals(QRresult)) {
                 until.showAlertDialog(R.string.information, R.string.parkingout, getContext());
             } else if (QRresult.contains(constant.SHARE_VEHICLE)) {
-                    Gson gson = new Gson();
-                    Share shareVehicle = gson.fromJson(QRresult, Share.class);
-                    String sToken = shareVehicle.getToken();
-                    //Update database
-                    if(!shareVehicle.getShare_vehicle().equals(mAuth.getUid())){
-                        //notification
-                        new SendNotif().sendMessage("", user.getUsername(), sToken, user.getToken(), constant.KEY_CONFIRM_SHARE,until.dateTimeToString(new Date()));
-                    }else{
-                        Toast.makeText(getContext(), R.string.cannotshare, Toast.LENGTH_LONG).show();
-                    }
+                Gson gson = new Gson();
+                Share shareVehicle = gson.fromJson(QRresult, Share.class);
+                String sToken = shareVehicle.getToken();
+                //Update database
+                if (!shareVehicle.getShare_vehicle().equals(mAuth.getUid())) {
+                    //notification
+                    new SendNotif().sendMessage("", user.getUsername(), sToken, user.getToken(), constant.KEY_CONFIRM_SHARE, until.dateTimeToString(new Date()));
+                } else {
+                    Toast.makeText(getContext(), R.string.cannotshare, Toast.LENGTH_LONG).show();
+                }
             } else {
                 Toast.makeText(getContext(), R.string.not_support, Toast.LENGTH_LONG).show();
             }
@@ -111,5 +113,9 @@ public class HomeFragment extends Fragment {
             user = new User().getUser(prefs);
             txtUsername.setText(user.getUsername());
         }
+    }
+
+    public static Context getAppContext() {
+        return context;
     }
 }

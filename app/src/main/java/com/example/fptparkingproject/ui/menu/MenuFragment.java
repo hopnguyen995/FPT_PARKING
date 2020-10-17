@@ -124,7 +124,7 @@ public class MenuFragment extends Fragment {
             String QRresult = data.getStringExtra(constant.INTENT_QRSCAN_RESULT);
             //process
             if (constant.PARKING_IN.equals(QRresult)) {
-                until.showAlertDialog(R.string.information, R.string.parkingin, getContext());
+                until.showAlertDialog(R.string.information, R.string.parkinginsuccess, getContext());
             } else if (constant.PARKING_OUT.equals(QRresult)) {
                 until.showAlertDialog(R.string.information, R.string.parkingout, getContext());
             } else if (QRresult.contains(constant.SHARE_VEHICLE)) {

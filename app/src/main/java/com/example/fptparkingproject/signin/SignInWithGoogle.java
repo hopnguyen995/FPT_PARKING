@@ -3,7 +3,6 @@ package com.example.fptparkingproject.signin;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -202,7 +201,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                                             } else {
                                                 SendNotif sendNotif = new SendNotif();
                                                 sendNotif.sendMessage("", "" + until.dateTimeToString(new Date()) + ".", fuser.getToken(), newUser.getToken(),constant.KEY_SIGNOUT,until.dateTimeToString(new Date()));
-                                                Timer = new CountDownTimer(new Constant().TIMEOUT, new Constant().COUNTDOWN) {
+                                                Timer = new CountDownTimer(new Constant().TIMEOUT_SIGNIN, new Constant().COUNTDOWN) {
                                                     public void onTick(long millisUntilFinished) {
                                                         timerStarted = true;
                                                     }
