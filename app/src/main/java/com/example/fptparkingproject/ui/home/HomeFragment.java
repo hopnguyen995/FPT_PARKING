@@ -79,8 +79,8 @@ public class HomeFragment extends Fragment {
     public void onStart() {
         super.onStart();
         if (mAuth.getCurrentUser() == null) {
-            startActivityForResult(new Intent(getContext(), SignInWithGoogle.class), constant.SIGNIN_REQUEST_CODE);
-        } else {
+            startActivity(new Intent(getContext(), SignInWithGoogle.class));
+        }else {
             user = new User().getUser(prefs);
             txtUsername.setText(user.getUsername());
         }
@@ -113,9 +113,6 @@ public class HomeFragment extends Fragment {
             } else {
                 Toast.makeText(getContext(), R.string.not_support, Toast.LENGTH_LONG).show();
             }
-        } else if (requestCode == constant.SIGNIN_REQUEST_CODE && resultCode == constant.SIGNIN_RESPONSE_CODE) {
-            user = new User().getUser(prefs);
-            txtUsername.setText(user.getUsername());
         }
     }
 

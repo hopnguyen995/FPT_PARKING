@@ -12,6 +12,7 @@ import android.graphics.Bitmap;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 
 import androidx.core.app.NotificationCompat;
@@ -19,6 +20,7 @@ import androidx.core.app.NotificationCompat;
 import com.example.fptparkingproject.MainActivity;
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
+import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.signin.SignInWithGoogle;
 import com.example.fptparkingproject.untils.Until;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -36,6 +38,7 @@ public class FirebaseService extends FirebaseMessagingService {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     Constant constant = new Constant();
     Until until = new Until();
+    private SharedPreferences prefs;
 
     public FirebaseService() {
     }
@@ -44,6 +47,7 @@ public class FirebaseService extends FirebaseMessagingService {
     public void onCreate() {
         super.onCreate();
         new Until().connectDatabase().push();
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     }
 
     @Override
@@ -75,13 +79,8 @@ public class FirebaseService extends FirebaseMessagingService {
             if (mAuth.getCurrentUser() != null) {
                 mAuth.signOut();
                 FirebaseAuth.getInstance().signOut();
-                GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                        .requestIdToken(getString(R.string.default_web_client_id))
-                        .requestEmail()
-                        .build();
-                GoogleSignIn.getClient(getApplicationContext(), gso).signOut();
-                SharedPreferences prefRemember = getApplicationContext().getSharedPreferences(constant.KEY_USER, Context.MODE_PRIVATE);
-                prefRemember.edit().clear().commit();
+                User user = new User();
+                user.saveUser(prefs,user);
                 if (subtime < constant.TIMEOUT_SIGNIN) {
                     new SendNotif().sendMessage("", "", sendToken, sendToken, constant.KEY_SUCCESS, until.dateTimeToString(new Date()));
                 }

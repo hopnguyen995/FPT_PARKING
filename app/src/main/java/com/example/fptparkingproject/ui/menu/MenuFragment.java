@@ -66,15 +66,10 @@ public class MenuFragment extends Fragment {
                 new Until().connectDatabase().child(constant.TABLE_USERS).child(user.getUserid()).child(constant.TABLE_USERS_CHILD_TOKEN).setValue("");
                 mAuth.signOut();
                 FirebaseAuth.getInstance().signOut();
-                GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                        .requestIdToken(getString(R.string.default_web_client_id))
-                        .requestEmail()
-                        .build();
-                GoogleSignIn.getClient(getActivity(), gso).signOut();
-                SharedPreferences prefRemember = getActivity().getSharedPreferences(constant.KEY_USER, Context.MODE_PRIVATE);
-                prefRemember.edit().clear().commit();
+                user = new User();
+                user.saveUser(prefs,user);
                 Toast.makeText(getContext(), R.string.signoutsuccess, Toast.LENGTH_SHORT).show();
-                startActivityForResult(new Intent(getContext(), SignInWithGoogle.class), constant.SIGNIN_REQUEST_CODE);
+                startActivity(new Intent(getContext(), SignInWithGoogle.class));
             }
         });
         final Button buttonQRScan = root.findViewById(R.id.buttonMenuQrCode);
@@ -107,7 +102,7 @@ public class MenuFragment extends Fragment {
     public void onStart() {
         super.onStart();
         if (mAuth.getCurrentUser() == null) {
-            startActivityForResult(new Intent(getContext(), SignInWithGoogle.class), constant.SIGNIN_REQUEST_CODE);
+            startActivity(new Intent(getContext(), SignInWithGoogle.class));
         } else {
             user = new User().getUser(prefs);
             txtUsername.setText(user.getUsername());
@@ -118,11 +113,7 @@ public class MenuFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == constant.SIGNIN_REQUEST_CODE && resultCode == constant.SIGNIN_RESPONSE_CODE) {
-            until.circleTransformAvatar(getContext(), imgAvatar, mAuth.getCurrentUser().getPhotoUrl().toString(), R.drawable.ic_baseline_account_circle_24);
-            user = new User().getUser(prefs);
-            txtUsername.setText(user.getUsername());
-        } else if (requestCode == constant.QRSCAN_REQUEST_CODE && resultCode == constant.QRSCAN_RESPONSE_CODE) {
+         if (requestCode == constant.QRSCAN_REQUEST_CODE && resultCode == constant.QRSCAN_RESPONSE_CODE) {
             //get result qr scan
             String QRresult = data.getStringExtra(constant.INTENT_QRSCAN_RESULT);
             //process

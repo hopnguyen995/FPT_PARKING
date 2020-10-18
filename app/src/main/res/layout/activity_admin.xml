@@ -1,10 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-  <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.fptparkingproject.AdminActivity">
+    android:background="#ffffff"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context="com.example.fptparkingproject.ui.home.HomeFragment">
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="205dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorAccent"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/fpt_banner"
+                tools:src="@tools:sample/avatars"
+                tools:srcCompat="@drawable/fpt_banner" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="100dp"
+                android:text="@string/welcomeadmin"
+                android:textColor="#ffffff"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></TextView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/contraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/linearLayoutCompat"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <Button
+                        android:id="@+id/buttonQR"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_weight="1"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:drawableTop="@drawable/ic_information"
+                        android:paddingLeft="@dimen/cardview_default_radius"
+                        android:paddingTop="@dimen/cardview_default_radius"
+                        android:paddingRight="@dimen/cardview_default_radius"
+                        android:paddingBottom="@dimen/cardview_default_radius"
+                        android:drawablePadding="10dp"
+                        android:text="@string/button_CheckInfo"
+                        android:textColor="#676767"
+                        android:textSize="14dp" />
+
+                    <Button
+                        android:id="@+id/buttonFeedback"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:drawableTop="@drawable/ic_notification"
+                        android:paddingLeft="@dimen/cardview_default_radius"
+                        android:paddingTop="@dimen/cardview_default_radius"
+                        android:paddingRight="@dimen/cardview_default_radius"
+                        android:paddingBottom="@dimen/cardview_default_radius"
+                        android:drawablePadding="10dp"
+                        android:text="@string/button_SendNotif"
+                        android:textColor="#676767"
+                        android:textSize="14dp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/linearLayoutCompat2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat"
+                    tools:layout_editor_absoluteX="0dp">
+
+                    <Button
+                        android:id="@+id/buttonShare"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_weight="1"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:drawableTop="@drawable/ic_status"
+                        android:paddingLeft="@dimen/cardview_default_radius"
+                        android:paddingTop="@dimen/cardview_default_radius"
+                        android:paddingRight="@dimen/cardview_default_radius"
+                        android:paddingBottom="@dimen/cardview_default_radius"
+                        android:drawablePadding="10dp"
+                        android:text="@string/button_PostStatus"
+                        android:textColor="#676767"
+                        android:textSize="14dp" />
+
+                    <Button
+                        android:id="@+id/buttonHistory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:drawableTop="@drawable/ic_viewfeedback"
+                        android:paddingLeft="@dimen/cardview_default_radius"
+                        android:paddingTop="@dimen/cardview_default_radius"
+                        android:paddingRight="@dimen/cardview_default_radius"
+                        android:paddingBottom="@dimen/cardview_default_radius"
+                        android:drawablePadding="10dp"
+                        android:text="@string/button_ViewFeedback"
+                        android:textColor="#676767"
+                        android:textSize="14dp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/linearLayoutCompat3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="80dp"
+                    android:gravity="center"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat2"
+                    tools:layout_editor_absoluteX="0dp">
+
+                    <Button
+                        android:id="@+id/buttonAdminSignOut"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:background="#ed7129"
+                        android:drawablePadding="10dp"
+                        android:paddingLeft="@dimen/cardview_default_radius"
+                        android:paddingTop="@dimen/cardview_default_radius"
+                        android:paddingRight="@dimen/cardview_default_radius"
+                        android:paddingBottom="@dimen/cardview_default_radius"
+                        android:text="@string/signout"
+                        android:textColor="#ffffff" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

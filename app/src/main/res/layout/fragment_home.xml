@@ -18,7 +18,6 @@
             android:layout_width="match_parent"
             android:layout_height="205dp"
             android:layout_marginBottom="4dp"
-            app:layout_constraintBottom_toTopOf="@+id/contraintLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -102,6 +101,7 @@
                         android:paddingTop="@dimen/cardview_default_radius"
                         android:paddingRight="@dimen/cardview_default_radius"
                         android:paddingBottom="@dimen/cardview_default_radius"
+                        android:drawablePadding="10dp"
                         android:text="@string/button_qr"
                         android:textColor="#676767"
                         android:textSize="14dp" />
@@ -119,6 +119,7 @@
                         android:paddingTop="@dimen/cardview_default_radius"
                         android:paddingRight="@dimen/cardview_default_radius"
                         android:paddingBottom="@dimen/cardview_default_radius"
+                        android:drawablePadding="10dp"
                         android:text="@string/button_feedback"
                         android:textColor="#676767"
                         android:textSize="14dp" />
@@ -146,6 +147,7 @@
                         android:paddingTop="@dimen/cardview_default_radius"
                         android:paddingRight="@dimen/cardview_default_radius"
                         android:paddingBottom="@dimen/cardview_default_radius"
+                        android:drawablePadding="10dp"
                         android:text="@string/button_share"
                         android:textColor="#676767"
                         android:textSize="14dp" />
@@ -163,6 +165,7 @@
                         android:paddingTop="@dimen/cardview_default_radius"
                         android:paddingRight="@dimen/cardview_default_radius"
                         android:paddingBottom="@dimen/cardview_default_radius"
+                        android:drawablePadding="10dp"
                         android:text="@string/button_history"
                         android:textColor="#676767"
                         android:textSize="14dp" />
