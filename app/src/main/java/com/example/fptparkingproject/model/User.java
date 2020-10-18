@@ -12,13 +12,23 @@ public class User implements Serializable {
     private String username;
     private String email;
     private String token;
+    private Boolean role;
     Constant constant = new Constant();
 
-    public User(String userid, String username, String email, String token) {
+    public User(String userid, String username, String email, String token, Boolean role, Constant constant) {
         this.userid = userid;
         this.username = username;
         this.email = email;
         this.token = token;
+        this.role = role;
+    }
+
+    public Boolean getRole() {
+        return role;
+    }
+
+    public void setRole(Boolean role) {
+        this.role = role;
     }
 
     public String getToken() {

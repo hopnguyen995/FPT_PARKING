@@ -18,6 +18,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fptparkingproject.AdminActivity;
+import com.example.fptparkingproject.MainActivity;
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.User;
@@ -113,20 +115,42 @@ public class SignInWithGoogle extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        User user = new User().getUser(prefs);
+        try {
+            if (mAuth.getCurrentUser() != null) {
+                if (user.getRole()) {
+                    startActivity(new Intent(getApplicationContext(), AdminActivity.class));
+                } else {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                }
+            }
+        } catch (Exception e) {
+            mAuth.signOut();
+        }
+    }
+
     // sign in with button sign in
     public void signIn(String email, String password) {
         progressBar.setVisibility(View.VISIBLE);
         mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                FirebaseUser user = mAuth.getCurrentUser();
+                FirebaseUser fuser = mAuth.getCurrentUser();
+                User user = new User();
+                user.setUserid(fuser.getUid());
+                user.setUsername(fuser.getDisplayName());
+                user.setEmail(fuser.getEmail());
+                user.setRole(true);
+                user.saveUser(prefs, user);
+                startActivity(new Intent(getApplicationContext(), AdminActivity.class));
                 Toast.makeText(SignInWithGoogle.this, R.string.signinsuccess,
                         Toast.LENGTH_SHORT).show();
                 return;
             }
         });
-        Toast.makeText(SignInWithGoogle.this, R.string.signinfailed,
-                Toast.LENGTH_SHORT).show();
         progressBar.setVisibility(View.INVISIBLE);
     }
 
@@ -183,6 +207,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                                             newUser.setUserid(uAuth.getUid());
                                             newUser.setEmail(uAuth.getEmail());
                                             newUser.setUsername(uAuth.getDisplayName());
+                                            newUser.setRole(false);
                                             ref.child("Users").child(uAuth.getUid()).setValue(newUser);
                                         }
                                         //get user exist
@@ -191,7 +216,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                                                 ref.child(constant.TABLE_USERS).child(mAuth.getUid()).child(constant.TABLE_USERS_CHILD_TOKEN).setValue(newUser.getToken());
                                             } else if (fuser.getToken().equals(newUser.getToken())) {
                                                 fuser.saveUser(prefs, fuser);
-                                                setResult(constant.SIGNIN_RESPONSE_CODE, new Intent());
+                                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                                 finish();
                                                 if (timerStarted) {
                                                     Timer.cancel();

@@ -36,9 +36,9 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="70dp"
-                android:text="@string/hello_blank"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="100dp"
+                android:text="@string/welcomeadmin"
                 android:textColor="#ffffff"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -46,20 +46,6 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"></TextView>
-
-            <TextView
-                android:id="@+id/user"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="40dp"
-                android:textColor="#ffffff"
-                android:textSize="18sp"
-                android:textStyle="normal"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintStart_toStartOf="@id/textView"
-                app:layout_constraintTop_toTopOf="@id/textView"></TextView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ScrollView
@@ -96,13 +82,13 @@
                         android:layout_marginTop="30dp"
                         android:layout_weight="1"
                         android:background="?android:attr/selectableItemBackground"
-                        android:drawableTop="@drawable/ic_qr"
+                        android:drawableTop="@drawable/ic_information"
                         android:paddingLeft="@dimen/cardview_default_radius"
                         android:paddingTop="@dimen/cardview_default_radius"
                         android:paddingRight="@dimen/cardview_default_radius"
                         android:paddingBottom="@dimen/cardview_default_radius"
                         android:drawablePadding="10dp"
-                        android:text="@string/button_qr"
+                        android:text="@string/button_CheckInfo"
                         android:textColor="#676767"
                         android:textSize="14dp" />
 
@@ -114,16 +100,15 @@
                         android:layout_marginRight="20dp"
                         android:layout_weight="1"
                         android:background="?android:attr/selectableItemBackground"
-                        android:drawableTop="@drawable/ic_chat"
+                        android:drawableTop="@drawable/ic_notification"
                         android:paddingLeft="@dimen/cardview_default_radius"
                         android:paddingTop="@dimen/cardview_default_radius"
                         android:paddingRight="@dimen/cardview_default_radius"
                         android:paddingBottom="@dimen/cardview_default_radius"
                         android:drawablePadding="10dp"
-                        android:text="@string/button_feedback"
+                        android:text="@string/button_SendNotif"
                         android:textColor="#676767"
                         android:textSize="14dp" />
-
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -142,13 +127,13 @@
                         android:layout_marginTop="30dp"
                         android:layout_weight="1"
                         android:background="?android:attr/selectableItemBackground"
-                        android:drawableTop="@drawable/ic_share"
+                        android:drawableTop="@drawable/ic_status"
                         android:paddingLeft="@dimen/cardview_default_radius"
                         android:paddingTop="@dimen/cardview_default_radius"
                         android:paddingRight="@dimen/cardview_default_radius"
                         android:paddingBottom="@dimen/cardview_default_radius"
                         android:drawablePadding="10dp"
-                        android:text="@string/button_share"
+                        android:text="@string/button_PostStatus"
                         android:textColor="#676767"
                         android:textSize="14dp" />
 
@@ -160,15 +145,39 @@
                         android:layout_marginRight="20dp"
                         android:layout_weight="1"
                         android:background="?android:attr/selectableItemBackground"
-                        android:drawableTop="@drawable/ic_history"
+                        android:drawableTop="@drawable/ic_viewfeedback"
                         android:paddingLeft="@dimen/cardview_default_radius"
                         android:paddingTop="@dimen/cardview_default_radius"
                         android:paddingRight="@dimen/cardview_default_radius"
                         android:paddingBottom="@dimen/cardview_default_radius"
                         android:drawablePadding="10dp"
-                        android:text="@string/button_history"
+                        android:text="@string/button_ViewFeedback"
                         android:textColor="#676767"
                         android:textSize="14dp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/linearLayoutCompat3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="80dp"
+                    android:gravity="center"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat2"
+                    tools:layout_editor_absoluteX="0dp">
+
+                    <Button
+                        android:id="@+id/buttonAdminSignOut"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:background="#ed7129"
+                        android:drawablePadding="10dp"
+                        android:paddingLeft="@dimen/cardview_default_radius"
+                        android:paddingTop="@dimen/cardview_default_radius"
+                        android:paddingRight="@dimen/cardview_default_radius"
+                        android:paddingBottom="@dimen/cardview_default_radius"
+                        android:text="@string/signout"
+                        android:textColor="#ffffff" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
