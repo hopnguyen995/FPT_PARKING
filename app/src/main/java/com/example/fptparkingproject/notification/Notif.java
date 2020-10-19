@@ -2,9 +2,13 @@ package com.example.fptparkingproject.notification;
 
 import okhttp3.MediaType;
 
-public class Notif implements APIService{
+public class Notif implements APIService {
     public String getFCM_MESSAGE_URL() {
         return FCM_MESSAGE_URL;
+    }
+
+    public String getHEADER() {
+        return HEADER;
     }
 
     public MediaType getJSON() {

@@ -23,6 +23,7 @@ public class AlertDialogActivity extends Activity {
     private String message;
     private String token;
     private String sendtoken;
+    Constant constant = new Constant();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +45,10 @@ public class AlertDialogActivity extends Activity {
 
     private void showAlertDialogConfimShareVehicle() {
         Intent intent = getIntent();
-        title = intent.getStringExtra("title");
-        message = intent.getStringExtra("message");
-        token = intent.getStringExtra("token");
-        sendtoken = intent.getStringExtra("sendtoken");
+        title = intent.getStringExtra(constant.INTENT_ALERTDIALOG_TITLE);
+        message = intent.getStringExtra(constant.INTENT_ALERTDIALOG_MESSAGE);
+        token = intent.getStringExtra(constant.INTENT_ALERTDIALOG_TOKEN);
+        sendtoken = intent.getStringExtra(constant.INTENT_ALERTDIALOG_SENDTOKEN);
         AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
         builder.setMessage(message);
         builder.setTitle(title);
@@ -55,7 +56,7 @@ public class AlertDialogActivity extends Activity {
         builder.setPositiveButton(getResources().getString(R.string.button_Yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                new SendNotif().sendMessage("", "", sendtoken, token, new Constant().KEY_CONFIRM_SHARE_SUCCESS, new Until().dateTimeToString(new Date()));
+                new SendNotif().sendMessage("", "","", sendtoken, token, new Constant().KEY_CONFIRM_SHARE_SUCCESS, new Until().dateTimeToString(new Date()));
                 //update database: sharing
                 dialog.cancel();
                 finish();
@@ -64,7 +65,7 @@ public class AlertDialogActivity extends Activity {
         builder.setNegativeButton(getResources().getString(R.string.button_Cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                new SendNotif().sendMessage("", mAuth.getCurrentUser().getDisplayName(), sendtoken, token, new Constant().KEY_CONFIRM_SHARE_FAILED, new Until().dateTimeToString(new Date()));
+                new SendNotif().sendMessage("", mAuth.getCurrentUser().getDisplayName(),"", sendtoken, token, new Constant().KEY_CONFIRM_SHARE_FAILED, new Until().dateTimeToString(new Date()));
                 //update database: not sharing
                 dialog.cancel();
                 finish();

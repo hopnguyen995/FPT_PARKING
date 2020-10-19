@@ -9,6 +9,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_blank">Xin chào!</string>
+    <string name="welcomeadmin">Quản trị viên</string>
     <string name="share_info">Quét mã QR phía trên để mượn xe</string>
     <string name="email">Email</string>
     <string name="password">Mật khẩu</string>
@@ -16,6 +17,7 @@
     <string name="accountnotsupport">Tài khoản không hỗ trợ</string>
     <string name="signinfailed">Lỗi đăng nhập</string>
     <string name="signinsuccess">Đăng nhập thành công!</string>
+    <string name="signoutsuccess">Đăng xuất!</string>
     <!-- Button -->
     <string name="button_qr">Quét QR</string>
     <string name="button_feedback">Góp ý</string>
@@ -26,6 +28,10 @@
     <string name="button_signin_google">FPT.EDU.VN</string>
     <string name="button_Yes">ĐỒNG Ý</string>
     <string name="button_Cancel">HỦY BỎ</string>
+    <string name="button_CheckInfo">Kiểm tra thông tin</string>
+    <string name="button_SendNotif">Gửi thông báo</string>
+    <string name="button_PostStatus">Đăng tin</string>
+    <string name="button_ViewFeedback">Góp ý</string>
     <!--TextView-->
     <string name="txtProfile">Thông tin tài khoản</string>
     <string name="txtHistory">Nhật ký hoạt động</string>
@@ -37,8 +43,10 @@
     <string name="information">Thông tin</string>
     <!--Message-->
     <string name="failConnect">Lỗi kết nối mạng</string>
-    <string name="parkingin">Gửi xe thành công!</string>
-    <string name="parkingout">Lấy xe thành công!</string>
+    <string name="parkinginsuccess">Gửi xe thành công!</string>
+    <string name="parkinginfailed">Có lỗi xảy ra khi gửi xe!</string>
+    <string name="parkingoutsuccess">Lấy xe thành công!</string>
+    <string name="parkingoutfailed">Có lỗi xảy ra khi lấy xe!</string>
     <string name="shareSuccess">Mượn xe</string>
     <string name="cannotshare">Không thể chia sẻ xe của bạn!</string>
     <!--Notification-->
@@ -53,4 +61,14 @@
     <string name="message_error_borrow_vehicle">🔊 Có lỗi xảy ra khi mượn xe vào lúc\u0020\u0020</string>
     <string name="message_signin_success">🔊 Đăng nhập trên thiết bị mới thành công.</string>
     <string name="message_signin_warning">⛔ Tài khoản của bạn đã đăng nhập trên thiết bị khác vào lúc\u0020\u0020</string>
+    <!--permission-->
+    <string name="permission_camera_granted">Đã cấp quyền máy ảnh</string>
+    <string name="permission_camera_denied">Quyền đối với máy ảnh bị từ chối</string>
+    <!--admin-->
+    <!--Sendnotification-->
+    <string name="title_sendnotification">Tiêu đề</string>
+    <string name="imgsendnotification">Địa chỉ ảnh</string>
+    <string name="shortcontentsendnotification">Mô tả</string>
+    <string name="contentsendnotification">Nội dung</string>
+    <string name="button_send">Gửi</string>
 </resources>

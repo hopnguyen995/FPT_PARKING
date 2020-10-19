@@ -3,6 +3,7 @@ package com.example.fptparkingproject.untils;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -11,18 +12,23 @@ import android.widget.ImageView;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
+import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
+import com.example.fptparkingproject.model.Notification;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class Until {
     public boolean isRunning(Context ctx) {
@@ -66,6 +72,7 @@ public class Until {
 
     public void showAlertDialog(int title, int mesage, Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setIcon(R.drawable.ic_scooter);
         builder.setMessage(context.getResources().getText(mesage));
         builder.setTitle(context.getResources().getText(title));
         builder.create();
@@ -88,5 +95,9 @@ public class Until {
                 img.setImageResource(defaultImage);
             }
         });
+    }
+
+    public String randomID(){
+        return UUID.randomUUID().toString();
     }
 }

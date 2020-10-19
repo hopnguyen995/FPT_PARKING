@@ -9,6 +9,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_blank">Hello!</string>
+    <string name="welcomeadmin">Administrator</string>
     <string name="share_info">Scan the QR code above to get the shared vehicle</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -16,6 +17,7 @@
     <string name="accountnotsupport">Account not support</string>
     <string name="signinfailed">Sign in failed</string>
     <string name="signinsuccess">Sign in success!</string>
+    <string name="signoutsuccess">Signed out!</string>
     <!-- Button -->
     <string name="button_qr">QR Scan</string>
     <string name="button_feedback">Feedback</string>
@@ -26,6 +28,10 @@
     <string name="button_signin_google">FPT.EDU.VN</string>
     <string name="button_Yes">YES</string>
     <string name="button_Cancel">CANCEL</string>
+    <string name="button_CheckInfo">Check Information</string>
+    <string name="button_SendNotif">Send Notification</string>
+    <string name="button_PostStatus">Post Status</string>
+    <string name="button_ViewFeedback">Feedback</string>
     <!--TextView-->
     <string name="txtProfile">Profile</string>
     <string name="txtHistory">History</string>
@@ -37,8 +43,10 @@
     <string name="information">Information</string>
     <!--Message-->
     <string name="failConnect">Failed to connect to network</string>
-    <string name="parkingin">Parking in success!</string>
-    <string name="parkingout">Parking out success!</string>
+    <string name="parkinginsuccess">Parking in success!</string>
+    <string name="parkinginfailed">Parking in failed!</string>
+    <string name="parkingoutsuccess">Parking out success!</string>
+    <string name="parkingoutfailed">Parking out failed!</string>
     <string name="shareSuccess">Share vehicle!</string>
     <string name="cannotshare">Can not share own vehicle!</string>
     <!--Notification-->
@@ -53,4 +61,16 @@
     <string name="message_error_borrow_vehicle">🔊 An error occurred while borrowing a vehicle at\u0020\u0020</string>
     <string name="message_signin_success">🔊 Sign in on the new device successfully.</string>
     <string name="message_signin_warning">⛔ Your account is signed in on another device at\u0020\u0020</string>
+    <!--permission-->
+    <string name="permission_camera_granted">Camera permission granted</string>
+    <string name="permission_camera_denied">Camera permission denied</string>
+    <!--admin-->
+    <!--sendnotification-->
+    <string name="title_sendnotification">Title</string>
+    <string name="imgsendnotification">Link image</string>
+    <string name="shortcontentsendnotification">Description</string>
+    <string name="contentsendnotification">Content</string>
+    <string name="button_send">Send</string>
+
+    <!---->
 </resources>

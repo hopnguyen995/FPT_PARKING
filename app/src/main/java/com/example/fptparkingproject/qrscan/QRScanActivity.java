@@ -50,7 +50,7 @@ public class QRScanActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Intent intent = new Intent();
-                        intent.putExtra("QRResult",result.getText());
+                        intent.putExtra(constant.INTENT_QRSCAN_RESULT,result.getText());
                         setResult(constant.QRSCAN_RESPONSE_CODE,intent);
                         finish();
                     }
@@ -70,10 +70,10 @@ public class QRScanActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == constant.PERMISSION_GRANTED_REQUEST_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Camera permission granted", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.permission_camera_granted, Toast.LENGTH_LONG).show();
                 startScanning();
             } else {
-                Toast.makeText(this, "Camera permission denied", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.permission_camera_denied, Toast.LENGTH_LONG).show();
             }
         }
     }
