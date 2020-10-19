@@ -66,10 +66,8 @@ public class MenuFragment extends Fragment {
                 new Until().connectDatabase().child(constant.TABLE_USERS).child(user.getUserid()).child(constant.TABLE_USERS_CHILD_TOKEN).setValue("");
                 mAuth.signOut();
                 FirebaseAuth.getInstance().signOut();
-                user = new User();
-                user.saveUser(prefs,user);
-                Toast.makeText(getContext(), R.string.signoutsuccess, Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getContext(), SignInWithGoogle.class));
+                Toast.makeText(getContext(), R.string.signoutsuccess, Toast.LENGTH_SHORT).show();
             }
         });
         final Button buttonQRScan = root.findViewById(R.id.buttonMenuQrCode);
