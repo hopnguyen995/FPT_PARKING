@@ -133,7 +133,7 @@ public class MenuFragment extends Fragment {
                     //Update database
 
                     //notification
-                    new SendNotif().sendMessage("", user.getUsername(), sToken, user.getToken(), constant.KEY_CONFIRM_SHARE, until.dateTimeToString(new Date()));
+                    new SendNotif().sendMessage("", user.getUsername(),"", sToken, user.getToken(), constant.KEY_CONFIRM_SHARE, until.dateTimeToString(new Date()));
 
                 } catch (IOException e) {
                     e.printStackTrace();

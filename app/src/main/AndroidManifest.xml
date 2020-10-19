@@ -16,7 +16,8 @@
         android:roundIcon="@drawable/ic_parking"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AdminActivity"></activity>
+        <activity android:name=".uiadmin.notification.SendNotificationActivity"></activity>
+        <activity android:name=".AdminActivity" />
         <activity android:name=".ui.notifications.NotificationDetailActivity" />
 
         <service

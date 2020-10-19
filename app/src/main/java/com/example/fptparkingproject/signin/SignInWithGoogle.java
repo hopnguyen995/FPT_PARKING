@@ -64,6 +64,7 @@ public class SignInWithGoogle extends AppCompatActivity {
     Until until = new Until();
     private SharedPreferences prefs;
     private String vehicleid;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +76,9 @@ public class SignInWithGoogle extends AppCompatActivity {
         //first we intialized the FirebaseAuth object
         mAuth = FirebaseAuth.getInstance();
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        User user = new User().getUser(prefs);
         //Check account signed in
         try {
+            user = new User().getUser(prefs);
             if (mAuth.getCurrentUser() != null) {
                 if (user.getRole()) {
                     startActivity(new Intent(getApplicationContext(), AdminActivity.class));
@@ -127,12 +128,6 @@ public class SignInWithGoogle extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
     }
 
     // sign in with button sign in
@@ -234,7 +229,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                                                 getVehicleIDByUserID(fuser);
                                             } else {
                                                 SendNotif sendNotif = new SendNotif();
-                                                sendNotif.sendMessage("", "" + until.dateTimeToString(new Date()) + ".", fuser.getToken(), newUser.getToken(), constant.KEY_SIGNOUT, until.dateTimeToString(new Date()));
+                                                sendNotif.sendMessage("", "" + until.dateTimeToString(new Date()) + ".","", fuser.getToken(), newUser.getToken(), constant.KEY_SIGNOUT, until.dateTimeToString(new Date()));
                                                 Timer = new CountDownTimer(new Constant().TIMEOUT_SIGNIN, new Constant().COUNTDOWN) {
                                                     public void onTick(long millisUntilFinished) {
                                                         timerStarted = true;

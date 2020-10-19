@@ -14,11 +14,14 @@ import android.widget.Toast;
 
 import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.User;
+import com.example.fptparkingproject.notification.SendNotif;
 import com.example.fptparkingproject.signin.SignInWithGoogle;
+import com.example.fptparkingproject.uiadmin.notification.SendNotificationActivity;
 import com.example.fptparkingproject.untils.Until;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class AdminActivity extends AppCompatActivity {
     Constant constant = new Constant();
@@ -26,6 +29,7 @@ public class AdminActivity extends AppCompatActivity {
     private SharedPreferences prefs;
     User user;
     private Button buttonSignOut;
+    private Button buttonNotif;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +48,13 @@ public class AdminActivity extends AppCompatActivity {
                 user.saveUser(prefs,user);
                 Toast.makeText(getApplicationContext(), R.string.signoutsuccess, Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(), SignInWithGoogle.class));
+            }
+        });
+        buttonNotif = findViewById(R.id.buttonNotif);
+        buttonNotif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent(getApplicationContext(), SendNotificationActivity.class),1);
             }
         });
     }

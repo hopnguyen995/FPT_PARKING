@@ -64,4 +64,11 @@
     <!--permission-->
     <string name="permission_camera_granted">Đã cấp quyền máy ảnh</string>
     <string name="permission_camera_denied">Quyền đối với máy ảnh bị từ chối</string>
+    <!--admin-->
+    <!--Sendnotification-->
+    <string name="title_sendnotification">Tiêu đề</string>
+    <string name="imgsendnotification">Địa chỉ ảnh</string>
+    <string name="shortcontentsendnotification">Mô tả</string>
+    <string name="contentsendnotification">Nội dung</string>
+    <string name="button_send">Gửi</string>
 </resources>
