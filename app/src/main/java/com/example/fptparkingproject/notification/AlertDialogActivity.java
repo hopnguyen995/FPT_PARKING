@@ -56,7 +56,7 @@ public class AlertDialogActivity extends Activity {
         builder.setPositiveButton(getResources().getString(R.string.button_Yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                new SendNotif().sendMessage("", "", sendtoken, token, new Constant().KEY_CONFIRM_SHARE_SUCCESS, new Until().dateTimeToString(new Date()));
+                new SendNotif().sendMessage("", "","", sendtoken, token, new Constant().KEY_CONFIRM_SHARE_SUCCESS, new Until().dateTimeToString(new Date()));
                 //update database: sharing
                 dialog.cancel();
                 finish();
@@ -65,7 +65,7 @@ public class AlertDialogActivity extends Activity {
         builder.setNegativeButton(getResources().getString(R.string.button_Cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                new SendNotif().sendMessage("", mAuth.getCurrentUser().getDisplayName(), sendtoken, token, new Constant().KEY_CONFIRM_SHARE_FAILED, new Until().dateTimeToString(new Date()));
+                new SendNotif().sendMessage("", mAuth.getCurrentUser().getDisplayName(),"", sendtoken, token, new Constant().KEY_CONFIRM_SHARE_FAILED, new Until().dateTimeToString(new Date()));
                 //update database: not sharing
                 dialog.cancel();
                 finish();

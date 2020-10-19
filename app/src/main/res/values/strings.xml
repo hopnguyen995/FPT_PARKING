@@ -64,4 +64,13 @@
     <!--permission-->
     <string name="permission_camera_granted">Camera permission granted</string>
     <string name="permission_camera_denied">Camera permission denied</string>
+    <!--admin-->
+    <!--sendnotification-->
+    <string name="title_sendnotification">Title</string>
+    <string name="imgsendnotification">Link image</string>
+    <string name="shortcontentsendnotification">Description</string>
+    <string name="contentsendnotification">Content</string>
+    <string name="button_send">Send</string>
+
+    <!---->
 </resources>

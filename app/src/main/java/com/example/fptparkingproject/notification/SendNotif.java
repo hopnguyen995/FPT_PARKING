@@ -17,7 +17,7 @@ import okhttp3.Response;
 public class SendNotif {
     Constant constant = new Constant();
 
-    public void sendMessage(final String title, final String body, final String token, final String sendToken, final String code, final String time) {
+    public void sendMessage(final String title, final String body,final String image, final String token, final String sendToken, final String code, final String time) {
         new AsyncTask<String, String, String>() {
             @Override
             protected String doInBackground(String... params) {
@@ -29,6 +29,7 @@ public class SendNotif {
                     data.put(constant.JSON_KEY_TOKEN, token);
                     data.put(constant.JSON_KEY_CODE, code);
                     data.put(constant.JSON_KEY_TIME, time);
+                    data.put(constant.JSON_KEY_IMAGE, image);
                     JSONObject root = new JSONObject();
                     root.put(constant.JSON_KEY_DATA, data);
                     root.put(constant.JSON_KEY_TO, token);

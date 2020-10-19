@@ -49,6 +49,7 @@ public class Constant {
     public final String JSON_KEY_TO = "to";
     public final String JSON_KEY_BODY = "body";
     public final String JSON_KEY_TITLE = "title";
+    public final String JSON_KEY_IMAGE = "image";
     public final String JSON_KEY_SENDTOKEN = "sendtoken";
     public final String JSON_KEY_TOKEN = "token";
     public final String JSON_KEY_CODE = "code";

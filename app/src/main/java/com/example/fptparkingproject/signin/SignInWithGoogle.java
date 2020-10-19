@@ -64,6 +64,7 @@ public class SignInWithGoogle extends AppCompatActivity {
     Until until = new Until();
     private SharedPreferences prefs;
     private String vehicleid;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +73,24 @@ public class SignInWithGoogle extends AppCompatActivity {
         getSupportActionBar().hide(); // hide the title bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN); //enable full screen
-        setContentView(R.layout.activity_sign_in_with_google);
+        //first we intialized the FirebaseAuth object
+        mAuth = FirebaseAuth.getInstance();
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        //Check account signed in
+        try {
+            user = new User().getUser(prefs);
+            if (mAuth.getCurrentUser() != null) {
+                if (user.getRole()) {
+                    startActivity(new Intent(getApplicationContext(), AdminActivity.class));
+                } else {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                }
+                return;
+            }
+        } catch (Exception e) {
+            mAuth.signOut();
+        }
+        setContentView(R.layout.activity_sign_in_with_google);
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
         buttonSignin = findViewById(R.id.sign_in_button);
@@ -81,8 +98,6 @@ public class SignInWithGoogle extends AppCompatActivity {
         password = findViewById(R.id.editTextPassword);
         btnSignIn = findViewById(R.id.sign_in_google_button);
         setGoogleButtonText(btnSignIn, R.string.button_signin_google);
-        //first we intialized the FirebaseAuth object
-        mAuth = FirebaseAuth.getInstance();
 
         //Then we need a GoogleSignInOptions object
         //And we need to build it as below
@@ -115,43 +130,30 @@ public class SignInWithGoogle extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        User user = new User().getUser(prefs);
-        try {
-            if (mAuth.getCurrentUser() != null) {
-                if (user.getRole()) {
-                    startActivity(new Intent(getApplicationContext(), AdminActivity.class));
-                } else {
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                }
-            }
-        } catch (Exception e) {
-            mAuth.signOut();
-        }
-    }
-
     // sign in with button sign in
     public void signIn(String email, String password) {
         progressBar.setVisibility(View.VISIBLE);
-        mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onSuccess(AuthResult authResult) {
-                FirebaseUser fuser = mAuth.getCurrentUser();
-                User user = new User();
-                user.setUserid(fuser.getUid());
-                user.setUsername(fuser.getDisplayName());
-                user.setEmail(fuser.getEmail());
-                user.setRole(true);
-                user.saveUser(prefs, user);
-                startActivity(new Intent(getApplicationContext(), AdminActivity.class));
-                Toast.makeText(SignInWithGoogle.this, R.string.signinsuccess,
-                        Toast.LENGTH_SHORT).show();
-                return;
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    FirebaseUser fuser = mAuth.getCurrentUser();
+                    User user = new User();
+                    user.setUserid(fuser.getUid());
+                    user.setUsername(fuser.getDisplayName());
+                    user.setEmail(fuser.getEmail());
+                    user.setRole(true);
+                    user.saveUser(prefs, user);
+                    startActivity(new Intent(getApplicationContext(), AdminActivity.class));
+                    Toast.makeText(SignInWithGoogle.this, R.string.signinsuccess,
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(SignInWithGoogle.this, R.string.signinfailed,
+                            Toast.LENGTH_SHORT).show();
+                }
+                progressBar.setVisibility(View.INVISIBLE);
             }
         });
-        progressBar.setVisibility(View.INVISIBLE);
     }
 
 
@@ -227,7 +229,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                                                 getVehicleIDByUserID(fuser);
                                             } else {
                                                 SendNotif sendNotif = new SendNotif();
-                                                sendNotif.sendMessage("", "" + until.dateTimeToString(new Date()) + ".", fuser.getToken(), newUser.getToken(), constant.KEY_SIGNOUT, until.dateTimeToString(new Date()));
+                                                sendNotif.sendMessage("", "" + until.dateTimeToString(new Date()) + ".","", fuser.getToken(), newUser.getToken(), constant.KEY_SIGNOUT, until.dateTimeToString(new Date()));
                                                 Timer = new CountDownTimer(new Constant().TIMEOUT_SIGNIN, new Constant().COUNTDOWN) {
                                                     public void onTick(long millisUntilFinished) {
                                                         timerStarted = true;
