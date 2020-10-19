@@ -22,6 +22,7 @@ import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.Notification;
 import com.example.fptparkingproject.ui.notifications.NotificationDetailActivity;
 import com.example.fptparkingproject.untils.Until;
+import com.google.gson.Gson;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -54,7 +55,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Notification notification = listNotification.get(position);
         if (holder instanceof HeaderViewHolder) {
-            ((HeaderViewHolder) holder).headerTitle.setText(R.string.title_notifications);
+            ((HeaderViewHolder) holder).headerTitle.setText("");
         } else if (holder instanceof ItemViewHolder) {
             ((ItemViewHolder) holder).txtTitle.setText(notification.getNotificationTitle());
             ((ItemViewHolder) holder).txtShortContent.setText(notification.getNotificationShortContent());
@@ -62,8 +63,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ItemViewHolder) holder).setItemClickListener(new ItemClickListener() {
                 @Override
                 public void onClick(View view, int position, boolean isLongClick) {
+                    Gson gson = new Gson();
                     Intent intent = new Intent(context, NotificationDetailActivity.class);
-                    intent.putExtra("notification",listNotification.get(position));
+                    intent.putExtra(constant.INTENT_NOTIFICATION_DETAIL_NOTIFICATION, gson.toJson(listNotification.get(position)));
                     view.getContext().startActivity(intent);
                 }
             });

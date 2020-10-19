@@ -1,5 +1,10 @@
 package com.example.fptparkingproject.model;
 
+import android.content.SharedPreferences;
+
+import com.example.fptparkingproject.constant.Constant;
+import com.google.gson.Gson;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
@@ -7,12 +12,23 @@ public class User implements Serializable {
     private String username;
     private String email;
     private String token;
+    private Boolean role;
+    Constant constant = new Constant();
 
-    public User(String userid, String username, String email, String token) {
+    public User(String userid, String username, String email, String token, Boolean role, Constant constant) {
         this.userid = userid;
         this.username = username;
         this.email = email;
         this.token = token;
+        this.role = role;
+    }
+
+    public Boolean getRole() {
+        return role;
+    }
+
+    public void setRole(Boolean role) {
+        this.role = role;
     }
 
     public String getToken() {
@@ -48,5 +64,21 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    //save user to sharedpreference
+    public void saveUser(SharedPreferences prefs, User user) {
+        SharedPreferences.Editor editor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(user);
+        editor.putString(constant.KEY_USER, json);
+        editor.commit();
+    }
+
+    //get user from sharedpreference
+    public User getUser(SharedPreferences prefs) {
+        Gson gson = new Gson();
+        String json = prefs.getString(constant.KEY_USER, null);
+        return gson.fromJson(json, User.class);
     }
 }

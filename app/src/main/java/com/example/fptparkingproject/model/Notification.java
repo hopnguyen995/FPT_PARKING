@@ -1,16 +1,24 @@
 package com.example.fptparkingproject.model;
 
+import android.content.SharedPreferences;
+
+import com.example.fptparkingproject.constant.Constant;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.Serializable;
-import java.util.Date;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Objects;
 
-public class Notification implements Serializable {
+public class Notification {
     private String notificationId;
     private String notificationTitle;
     private String notificationImage;
     private String notificationShortContent;
     private String notificationContent;
     private String notificationDateTime;
+    Constant constant = new Constant();
 
     public Notification() {
     }
@@ -87,5 +95,23 @@ public class Notification implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(notificationId);
+    }
+
+    //save list notifications to sharedpreference
+    public void saveListNotification(SharedPreferences prefs, ArrayList<Notification> listArray) {
+        SharedPreferences.Editor editor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(listArray);
+        editor.putString(constant.KEY_NOTIFICATION, json);
+        editor.commit();
+    }
+
+    //get list notifications sharedpreference
+    public ArrayList<Notification> getListNotification(SharedPreferences prefs) {
+        Gson gson = new Gson();
+        String json = prefs.getString(constant.KEY_NOTIFICATION, null);
+        Type listType = new TypeToken<ArrayList<Notification>>() {
+        }.getType();
+        return gson.fromJson(json, listType);
     }
 }

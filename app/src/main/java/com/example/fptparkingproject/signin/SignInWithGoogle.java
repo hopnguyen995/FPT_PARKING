@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -17,6 +18,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fptparkingproject.AdminActivity;
+import com.example.fptparkingproject.MainActivity;
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.User;
@@ -59,6 +62,9 @@ public class SignInWithGoogle extends AppCompatActivity {
     private DatabaseReference ref;
     Constant constant = new Constant();
     Until until = new Until();
+    private SharedPreferences prefs;
+    private String vehicleid;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +73,24 @@ public class SignInWithGoogle extends AppCompatActivity {
         getSupportActionBar().hide(); // hide the title bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN); //enable full screen
+        //first we intialized the FirebaseAuth object
+        mAuth = FirebaseAuth.getInstance();
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        //Check account signed in
+        try {
+            user = new User().getUser(prefs);
+            if (mAuth.getCurrentUser() != null) {
+                if (user.getRole()) {
+                    startActivity(new Intent(getApplicationContext(), AdminActivity.class));
+                } else {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                }
+                return;
+            }
+        } catch (Exception e) {
+            mAuth.signOut();
+        }
         setContentView(R.layout.activity_sign_in_with_google);
-
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
         buttonSignin = findViewById(R.id.sign_in_button);
@@ -76,8 +98,6 @@ public class SignInWithGoogle extends AppCompatActivity {
         password = findViewById(R.id.editTextPassword);
         btnSignIn = findViewById(R.id.sign_in_google_button);
         setGoogleButtonText(btnSignIn, R.string.button_signin_google);
-        //first we intialized the FirebaseAuth object
-        mAuth = FirebaseAuth.getInstance();
 
         //Then we need a GoogleSignInOptions object
         //And we need to build it as below
@@ -113,18 +133,27 @@ public class SignInWithGoogle extends AppCompatActivity {
     // sign in with button sign in
     public void signIn(String email, String password) {
         progressBar.setVisibility(View.VISIBLE);
-        mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onSuccess(AuthResult authResult) {
-                FirebaseUser user = mAuth.getCurrentUser();
-                Toast.makeText(SignInWithGoogle.this, R.string.signinsuccess,
-                        Toast.LENGTH_SHORT).show();
-                return;
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    FirebaseUser fuser = mAuth.getCurrentUser();
+                    User user = new User();
+                    user.setUserid(fuser.getUid());
+                    user.setUsername(fuser.getDisplayName());
+                    user.setEmail(fuser.getEmail());
+                    user.setRole(true);
+                    user.saveUser(prefs, user);
+                    startActivity(new Intent(getApplicationContext(), AdminActivity.class));
+                    Toast.makeText(SignInWithGoogle.this, R.string.signinsuccess,
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(SignInWithGoogle.this, R.string.signinfailed,
+                            Toast.LENGTH_SHORT).show();
+                }
+                progressBar.setVisibility(View.INVISIBLE);
             }
         });
-        Toast.makeText(SignInWithGoogle.this, R.string.signinfailed,
-                Toast.LENGTH_SHORT).show();
-        progressBar.setVisibility(View.INVISIBLE);
     }
 
 
@@ -149,7 +178,7 @@ public class SignInWithGoogle extends AppCompatActivity {
     //function authentication with google
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         //getting the auth credential
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        final AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         //Now using firebase we are signing in the user here
         final User newUser = new User();
         mAuth.signInWithCredential(credential)
@@ -158,7 +187,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         final FirebaseUser uAuth = mAuth.getCurrentUser();
                         if (task.isSuccessful()) {
-                            if (uAuth.getEmail().contains(new Constant().Mail)) {
+                            if (uAuth.getEmail().contains(new Constant().MAIL)) {
                                 FirebaseMessaging.getInstance().getToken()
                                         .addOnCompleteListener(new OnCompleteListener<String>() {
                                             @Override
@@ -171,7 +200,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                                             }
                                         });
                                 ref = until.connectDatabase();
-                                ref.child("Users").child(uAuth.getUid()).addValueEventListener(new ValueEventListener() {
+                                ref.child(constant.TABLE_USERS).child(uAuth.getUid()).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         User fuser = dataSnapshot.getValue(User.class);
@@ -180,16 +209,16 @@ public class SignInWithGoogle extends AppCompatActivity {
                                             newUser.setUserid(uAuth.getUid());
                                             newUser.setEmail(uAuth.getEmail());
                                             newUser.setUsername(uAuth.getDisplayName());
-                                            sharedReference(newUser);
+                                            newUser.setRole(false);
                                             ref.child("Users").child(uAuth.getUid()).setValue(newUser);
                                         }
                                         //get user exist
-                                        if(mAuth.getCurrentUser() != null){
-                                            if(fuser.getToken().equals("")){
-                                                ref.child("Users").child(mAuth.getUid()).child("token").setValue(newUser.getToken());
-                                            }else if (fuser.getToken().equals(newUser.getToken())) {
-                                                sharedReference(fuser);
-                                                setResult(constant.SIGNIN_RESPONSE_CODE, new Intent());
+                                        if (mAuth.getCurrentUser() != null) {
+                                            if (fuser.getToken().equals("")) {
+                                                ref.child(constant.TABLE_USERS).child(mAuth.getUid()).child(constant.TABLE_USERS_CHILD_TOKEN).setValue(newUser.getToken());
+                                            } else if (fuser.getToken().equals(newUser.getToken())) {
+                                                fuser.saveUser(prefs, fuser);
+                                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                                 finish();
                                                 if (timerStarted) {
                                                     Timer.cancel();
@@ -197,15 +226,17 @@ public class SignInWithGoogle extends AppCompatActivity {
                                                 }
                                                 Toast.makeText(SignInWithGoogle.this, R.string.signinsuccess,
                                                         Toast.LENGTH_SHORT).show();
+                                                getVehicleIDByUserID(fuser);
                                             } else {
                                                 SendNotif sendNotif = new SendNotif();
-                                                sendNotif.sendMessage("", "" + until.dateTimeToString(new Date()) + ".", fuser.getToken(), newUser.getToken(),constant.KEY_SIGNOUT,until.dateTimeToString(new Date()));
-                                                Timer = new CountDownTimer(new Constant().TIMEOUT, new Constant().COUNTDOWN) {
+                                                sendNotif.sendMessage("", "" + until.dateTimeToString(new Date()) + ".","", fuser.getToken(), newUser.getToken(), constant.KEY_SIGNOUT, until.dateTimeToString(new Date()));
+                                                Timer = new CountDownTimer(new Constant().TIMEOUT_SIGNIN, new Constant().COUNTDOWN) {
                                                     public void onTick(long millisUntilFinished) {
                                                         timerStarted = true;
                                                     }
+
                                                     public void onFinish() {
-                                                        ref.child("Users").child(mAuth.getUid()).child("token").setValue(newUser.getToken());
+                                                        ref.child(constant.TABLE_USERS).child(mAuth.getUid()).child(constant.TABLE_USERS_CHILD_TOKEN).setValue(newUser.getToken());
                                                         Timer.cancel();
                                                     }
                                                 }.start();
@@ -234,17 +265,6 @@ public class SignInWithGoogle extends AppCompatActivity {
                 });
     }
 
-    //write user information
-    private void sharedReference(User user) {
-        SharedPreferences prefRemember = getApplicationContext().getSharedPreferences("account", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefRemember.edit();
-        editor.putString("name", user.getUsername());
-        editor.putString("email", user.getEmail());
-        editor.putString("id", user.getUserid());
-        editor.putString("token", user.getToken());
-        editor.commit();
-    }
-
     //this method is called on click
     private void signInGoogle() {
         //getting the google signin intent
@@ -263,5 +283,25 @@ public class SignInWithGoogle extends AppCompatActivity {
                 return;
             }
         }
+    }
+
+    private void getVehicleIDByUserID(final User user) {
+        ref.child(constant.TABLE_VEHICLES_TEMP).child(user.getUserid()).child(constant.TABLE_VEHICLES_TEMP_CHILD_VEHICLEID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    vehicleid = (String) snapshot.getValue();
+                    SharedPreferences prefRemember = getSharedPreferences(constant.KEY_VEHICLEID, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefRemember.edit();
+                    editor.putString(constant.KEY_VEHICLEID, vehicleid);
+                    editor.commit();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                vehicleid = "";
+            }
+        });
     }
 }
