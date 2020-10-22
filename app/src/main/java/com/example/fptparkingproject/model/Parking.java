@@ -2,18 +2,18 @@ package com.example.fptparkingproject.model;
 
 public class Parking {
     private String parkingid;
-    private String userid;
-    private String vehicleid;
+    private String username;
+    private String plate;
     private boolean type;
     private String time;
 
     public Parking() {
     }
 
-    public Parking(String parkingid, String userid, String vehicleid, boolean type, String time) {
+    public Parking(String parkingid, String username, String plate, boolean type, String time) {
         this.parkingid = parkingid;
-        this.userid = userid;
-        this.vehicleid = vehicleid;
+        this.username = username;
+        this.plate = plate;
         this.type = type;
         this.time = time;
     }
@@ -26,20 +26,20 @@ public class Parking {
         this.parkingid = parkingid;
     }
 
-    public String getUserid() {
-        return userid;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getVehicleid() {
-        return vehicleid;
+    public String getPlate() {
+        return plate;
     }
 
-    public void setVehicleid(String vehicleid) {
-        this.vehicleid = vehicleid;
+    public void setPlate(String plate) {
+        this.plate = plate;
     }
 
     public boolean isType() {

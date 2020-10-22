@@ -23,6 +23,7 @@ import com.example.fptparkingproject.MainActivity;
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.User;
+import com.example.fptparkingproject.model.Vehicle;
 import com.example.fptparkingproject.notification.SendNotif;
 import com.example.fptparkingproject.untils.Until;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -45,7 +46,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class SignInWithGoogle extends AppCompatActivity {
     SignInButton btnSignIn;
@@ -63,7 +66,6 @@ public class SignInWithGoogle extends AppCompatActivity {
     Constant constant = new Constant();
     Until until = new Until();
     private SharedPreferences prefs;
-    private String vehicleid;
     User user;
 
     @Override
@@ -286,21 +288,32 @@ public class SignInWithGoogle extends AppCompatActivity {
     }
 
     private void getVehicleIDByUserID(final User user) {
-        ref.child(constant.TABLE_VEHICLES_TEMP).child(user.getUserid()).child(constant.TABLE_VEHICLES_TEMP_CHILD_VEHICLEID).addValueEventListener(new ValueEventListener() {
+        final List<Vehicle> vehicleList = new ArrayList<>();
+        ref.child(constant.TABLE_VEHICLES).child(user.getUserid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    vehicleid = (String) snapshot.getValue();
-                    SharedPreferences prefRemember = getSharedPreferences(constant.KEY_VEHICLEID, Context.MODE_PRIVATE);
+                    for (DataSnapshot dataSnapshot:snapshot.getChildren()
+                         ) {
+                        vehicleList.add(dataSnapshot.getValue(Vehicle.class));
+                    }
+                    SharedPreferences prefRemember = getSharedPreferences(constant.KEY_VEHICLEPLATE, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefRemember.edit();
-                    editor.putString(constant.KEY_VEHICLEID, vehicleid);
+                    editor.putString(constant.KEY_VEHICLEPLATE, "");
+                    for (Vehicle vehicle:vehicleList
+                         ) {
+                        if(vehicle.getStatus()){
+                            editor.putString(constant.KEY_VEHICLEPLATE, vehicle.getPlate());
+                            break;
+                        }
+                    }
                     editor.commit();
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                vehicleid = "";
+
             }
         });
     }
