@@ -31,23 +31,23 @@ public class ParkingIn extends AppCompatActivity {
     CountDownTimer timer;
 
     //save parking in information to database
-    public void parkingIn(User user, String vehicleid) {
-        parkingInSynchronously.addDataParkingSynchronous(user, vehicleid);
-        timer = new CountDownTimer(constant.TIMEOUT_PARKING, constant.COUNTDOWN) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                if (parkingInSynchronously.getResult()) {
-                    showAlertDialog(parkingInSynchronously.getResult());
-                    timer.cancel();
+    public void parkingIn(User user, String plate) {
+            parkingInSynchronously.checkShareVehicle(user, plate);
+            timer = new CountDownTimer(constant.TIMEOUT_PARKING, constant.COUNTDOWN) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    if (parkingInSynchronously.getResult()) {
+                        showAlertDialog(parkingInSynchronously.getResult());
+                        timer.cancel();
+                    }
                 }
-            }
 
-            @Override
-            public void onFinish() {
-                showAlertDialog(parkingInSynchronously.getResult());
-            }
-        };
-        timer.start();
+                @Override
+                public void onFinish() {
+                    showAlertDialog(parkingInSynchronously.getResult());
+                }
+            };
+            timer.start();
     }
 
     private void showAlertDialog(Boolean isSuccess) {

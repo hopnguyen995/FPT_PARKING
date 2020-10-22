@@ -17,23 +17,23 @@ public class ParkingOut {
     ParkingOutSynchronously parkingOutSynchronously = new ParkingOutSynchronously();
 
     //save parking in information to database
-    public void parkingOut(User user, String vehicleid) {
-        parkingOutSynchronously.addDataParkingSynchronous(user, vehicleid);
-        timer = new CountDownTimer(constant.TIMEOUT_PARKING, constant.COUNTDOWN) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                if (parkingOutSynchronously.getResult()) {
-                    showAlertDialog(parkingOutSynchronously.getResult());
-                    timer.cancel();
+    public void parkingOut(User user, String plate) {
+            parkingOutSynchronously.checkShareVehicle(user, plate);
+            timer = new CountDownTimer(constant.TIMEOUT_PARKING, constant.COUNTDOWN) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    if (parkingOutSynchronously.getResult()) {
+                        showAlertDialog(parkingOutSynchronously.getResult());
+                        timer.cancel();
+                    }
                 }
-            }
 
-            @Override
-            public void onFinish() {
-                showAlertDialog(parkingOutSynchronously.getResult());
-            }
-        };
-        timer.start();
+                @Override
+                public void onFinish() {
+                    showAlertDialog(parkingOutSynchronously.getResult());
+                }
+            };
+            timer.start();
     }
 
     private void showAlertDialog(Boolean isSuccess) {
