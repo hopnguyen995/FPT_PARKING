@@ -39,7 +39,7 @@
     <TextView
         android:id="@+id/txtInfo"
         android:layout_width="410dp"
-        android:layout_height="17dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="180dp"
         android:textAlignment="center"
         android:textSize="14sp"
