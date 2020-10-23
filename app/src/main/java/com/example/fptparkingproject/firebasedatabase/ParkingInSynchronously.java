@@ -43,6 +43,8 @@ public class ParkingInSynchronously {
                             shareVehicle.setCount(0);
                         }
                         addDataParkingSynchronous(user, shareVehicle.getPlate(), shareVehicle);
+                    } else if (!plate.isEmpty()) {
+                        addDataParkingSynchronous(user, plate, null);
                     }
                 } else if (!plate.isEmpty()) {
                     addDataParkingSynchronous(user, plate, null);
@@ -98,7 +100,9 @@ public class ParkingInSynchronously {
             });
             if (shareVehicle != null) {
                 ref.child(constant.TABLE_SHARES).child(shareVehicle.getUserborrowid()).setValue(shareVehicle);
-                ref.child(constant.TABLE_SHARES_TEMP).child(shareVehicle.getUserid()).child(constant.TABLE_SHARES_TEMP_CHILD_STATUS).setValue(false);
+                if (shareVehicle.getCount() == 0) {
+                    ref.child(constant.TABLE_SHARES_TEMP).child(shareVehicle.getUserid()).child(constant.TABLE_SHARES_TEMP_CHILD_STATUS).setValue(false);
+                }
             }
         } else {
             isAddParkingSuccess = false;

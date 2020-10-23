@@ -88,7 +88,7 @@ public class ShareActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     progressBar.setVisibility(View.INVISIBLE);
-                    if (snapshot != null) {
+                    if (snapshot.exists()) {
                         shareTemp = snapshot.getValue(ShareTemp.class);
                         if (shareTemp.getStatus()) {
                             imageView.setVisibility(View.INVISIBLE);
@@ -101,6 +101,11 @@ public class ShareActivity extends AppCompatActivity {
                             imageView.setVisibility(View.VISIBLE);
                             txtShareInfo.setVisibility(View.VISIBLE);
                         }
+                    }else {
+                        txtShareNotif.setVisibility(View.INVISIBLE);
+                        buttonClickHere.setVisibility(View.INVISIBLE);
+                        imageView.setVisibility(View.VISIBLE);
+                        txtShareInfo.setVisibility(View.VISIBLE);
                     }
                 }
 

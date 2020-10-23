@@ -30,13 +30,15 @@ public class ParkingOutSynchronously {
                     ShareVehicle shareVehicle = snapshot.getValue(ShareVehicle.class);
                     if (shareVehicle.getStatus()) {
                         user.setUserid(shareVehicle.getUserid());
-                        if (shareVehicle.getCount() < 2) {
+                        if (shareVehicle.getCount() < 1) {
                             shareVehicle.setCount(shareVehicle.getCount() + 1);
                         } else {
                             shareVehicle.setStatus(false);
                             shareVehicle.setCount(0);
                         }
                         addDataParkingSynchronous(user, shareVehicle.getPlate(), shareVehicle);
+                    } else if (!plate.isEmpty()) {
+                        addDataParkingSynchronous(user, plate, null);
                     }
                 } else if (!plate.isEmpty()) {
                     addDataParkingSynchronous(user, plate, null);
@@ -92,7 +94,9 @@ public class ParkingOutSynchronously {
             });
             if (shareVehicle != null) {
                 ref.child(constant.TABLE_SHARES).child(shareVehicle.getUserborrowid()).setValue(shareVehicle);
-                ref.child(constant.TABLE_SHARES_TEMP).child(shareVehicle.getUserid()).child(constant.TABLE_SHARES_TEMP_CHILD_STATUS).setValue(false);
+                if (shareVehicle.getCount() == 0) {
+                    ref.child(constant.TABLE_SHARES_TEMP).child(shareVehicle.getUserid()).child(constant.TABLE_SHARES_TEMP_CHILD_STATUS).setValue(false);
+                }
             }
         } else {
             isAddParkingSuccess = false;
