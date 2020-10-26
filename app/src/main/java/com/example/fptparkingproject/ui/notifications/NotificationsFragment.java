@@ -25,6 +25,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 public class NotificationsFragment extends Fragment {
@@ -44,7 +45,6 @@ public class NotificationsFragment extends Fragment {
         listNotification = new Notification().getListNotification(prefs);
         if (listNotification == null) {
             listNotification = new ArrayList<>();
-            listNotification.add(new Notification("1"));
         }
         notificationAdapter = new NotificationAdapter(getContext(), listNotification);
         recyclerView.setAdapter(notificationAdapter);
@@ -70,6 +70,8 @@ public class NotificationsFragment extends Fragment {
                             listNotification.add(notifDb);
                         }
                     }
+                    Collections.sort(listNotification,Collections.<Notification>reverseOrder());
+                    System.out.println(listNotification);
                 }
                 notificationAdapter = new NotificationAdapter(getContext(), listNotification);
                 recyclerView.setAdapter(notificationAdapter);

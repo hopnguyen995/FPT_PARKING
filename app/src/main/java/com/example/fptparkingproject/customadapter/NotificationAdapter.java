@@ -41,22 +41,13 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (constant.TYPE_HEADER == viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notification_header_layout, parent, false);
-            return new HeaderViewHolder(view);
-        } else if (constant.TYPE_ITEM == viewType) {
             View view = LayoutInflater.from(context).inflate(R.layout.notification_layout, parent, false);
             return new ItemViewHolder(view);
-        }
-        throw new RuntimeException("No match for " + viewType + ".");
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Notification notification = listNotification.get(position);
-        if (holder instanceof HeaderViewHolder) {
-            ((HeaderViewHolder) holder).headerTitle.setText("");
-        } else if (holder instanceof ItemViewHolder) {
             ((ItemViewHolder) holder).txtTitle.setText(notification.getNotificationTitle());
             ((ItemViewHolder) holder).txtShortContent.setText(notification.getNotificationShortContent());
             if (notification.getNotificationImage() != null && !notification.getNotificationImage().isEmpty()) {
@@ -71,22 +62,10 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     view.getContext().startActivity(intent);
                 }
             });
-        }
     }
 
     @Override
     public int getItemCount() {
         return listNotification.size();
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if (isPositionHeader(position))
-            return constant.TYPE_HEADER;
-        return constant.TYPE_ITEM;
-    }
-
-    private boolean isPositionHeader(int position) {
-        return position == 0;
     }
 }
