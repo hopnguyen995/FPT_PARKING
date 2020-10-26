@@ -112,4 +112,12 @@ public class Newfeed {
     public int hashCode() {
         return Objects.hash(getNewfeedid());
     }
+
+    @Override
+    public String toString() {
+        return "Newfeed{" +
+                "newfeedTitle='" + newfeedTitle + '\'' +
+                ", newfeedDateTime=" + newfeedDateTime +
+                '}';
+    }
 }

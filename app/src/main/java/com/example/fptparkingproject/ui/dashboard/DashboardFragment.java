@@ -46,7 +46,7 @@ public class DashboardFragment extends Fragment {
         listNewfeed = new Newfeed().getListNewfeed(prefs);
         if (listNewfeed == null) {
             listNewfeed = new ArrayList<>();
-            listNewfeed.add(new Newfeed("1"));
+            //listNewfeed.add(new Newfeed("1"));
         }
         newfeedAdapter = new NewfeedAdapter(getContext(), listNewfeed);
         recyclerView.setAdapter(newfeedAdapter);
