@@ -9,15 +9,17 @@ import com.google.gson.reflect.TypeToken;
 import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 import java.util.Objects;
 
-public class Notification {
+public class Notification implements Comparable<Notification> {
     private String notificationId;
     private String notificationTitle;
     private String notificationImage;
     private String notificationShortContent;
     private String notificationContent;
-    private String notificationDateTime;
+    private Date notificationDateTime;
     Constant constant = new Constant();
 
     public Notification() {
@@ -27,7 +29,7 @@ public class Notification {
         this.notificationId = notificationId;
     }
 
-    public Notification(String notificationId, String notificationTitle, String notificationImage, String notificationShortContent, String notificationContent, String notificationDateTime) {
+    public Notification(String notificationId, String notificationTitle, String notificationImage, String notificationShortContent, String notificationContent, Date notificationDateTime) {
         this.notificationId = notificationId;
         this.notificationTitle = notificationTitle;
         this.notificationImage = notificationImage;
@@ -76,11 +78,11 @@ public class Notification {
         this.notificationContent = notificationContent;
     }
 
-    public String getNotificationDateTime() {
+    public Date getNotificationDateTime() {
         return notificationDateTime;
     }
 
-    public void setNotificationDateTime(String notificationDateTime) {
+    public void setNotificationDateTime(Date notificationDateTime) {
         this.notificationDateTime = notificationDateTime;
     }
 
@@ -95,6 +97,11 @@ public class Notification {
     @Override
     public int hashCode() {
         return Objects.hash(notificationId);
+    }
+
+    @Override
+    public int compareTo(Notification o) {
+        return this.getNotificationDateTime().compareTo(o.notificationDateTime);
     }
 
     //save list notifications to sharedpreference
@@ -113,5 +120,13 @@ public class Notification {
         Type listType = new TypeToken<ArrayList<Notification>>() {
         }.getType();
         return gson.fromJson(json, listType);
+    }
+
+    @Override
+    public String toString() {
+        return "Notification{" +
+                "notificationTitle='" + notificationTitle + '\'' +
+                ", notificationDateTime=" + notificationDateTime +
+                '}';
     }
 }
