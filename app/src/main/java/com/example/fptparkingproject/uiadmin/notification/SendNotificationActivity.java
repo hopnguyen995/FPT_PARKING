@@ -50,8 +50,8 @@ public class SendNotificationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!editTextTitle.getText().toString().isEmpty() && !editTextShortContent.getText().toString().isEmpty() && !editTextContent.getText().toString().isEmpty()) {
-                    Notification notification = new Notification(until.randomID(),editTextTitle.getText().toString(), editTextImage.getText().toString(),editTextShortContent.getText().toString(),editTextContent.getText().toString(),until.nomalizeDateTime(new Date()));
-                    new SendNotif().sendMessage(notification.getNotificationTitle(), notification.getNotificationShortContent(), notification.getNotificationImage(), "/topics/all", "", "", notification.getNotificationDateTime());
+                    Notification notification = new Notification(until.randomID(),editTextTitle.getText().toString(), editTextImage.getText().toString(),editTextShortContent.getText().toString(),editTextContent.getText().toString(),new Date());
+                    new SendNotif().sendMessage(notification.getNotificationTitle(), notification.getNotificationShortContent(), notification.getNotificationImage(), "/topics/all", "", "", until.nomalizeDateTime(notification.getNotificationDateTime()));
                     ref.child(constant.TABLE_NOTIFICATIONS).child(notification.getNotificationId()).setValue(notification);
                     Toast.makeText(SendNotificationActivity.this, "Send success", Toast.LENGTH_SHORT).show();
                     finish();
