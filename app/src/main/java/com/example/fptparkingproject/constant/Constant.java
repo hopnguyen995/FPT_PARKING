@@ -14,12 +14,14 @@ public class Constant {
     public final String INTENT_ALERTDIALOG_SENDTOKEN = "sendtoken";
     public final String INTENT_ALERTDIALOG_TOKEN = "token";
     public final String INTENT_NOTIFICATION_DETAIL_NOTIFICATION = "notification";
+    public final String INTENT_NEWFEED_DETAIL_NEWFEED = "newfeed";
     //Qrcode
     public final int QRCODE_WIDTH = 350;
     //SharedPreferences
     public final String KEY_NOTIFICATION = "notifications";
     public final String KEY_USER = "user";
     public final String KEY_VEHICLEID = "vehicleid";
+    public final String KEY_NEWFEED = "newfeeds";
     //mail
     public final String MAIL = "@fpt.edu.vn";
     //parking
@@ -63,4 +65,5 @@ public class Constant {
     public final String TABLE_PARKINGS_TEMP_CHILD_PARKING_STATUS = "parking_status";
     public final String TABLE_VEHICLES_TEMP = "Vehicles_temp";
     public final String TABLE_VEHICLES_TEMP_CHILD_VEHICLEID = "vehicleid";
+    public final String TABLE_NEWFEEDS = "Newfeeds";
 }

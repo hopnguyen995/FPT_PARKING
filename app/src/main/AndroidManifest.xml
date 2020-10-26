@@ -16,7 +16,8 @@
         android:roundIcon="@drawable/ic_parking"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".uiadmin.notification.SendNotificationActivity"></activity>
+        <activity android:name=".ui.dashboard.DashboardDetailActivity"></activity>
+        <activity android:name=".uiadmin.notification.SendNotificationActivity" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".ui.notifications.NotificationDetailActivity" />
 
@@ -38,7 +39,6 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <activity android:name=".newfeed.newfeedHeaderActivity"></activity>
 
         <activity android:name=".qrscan.ParkingIn" />
         <activity android:name=".notification.AlertDialogActivity" />
