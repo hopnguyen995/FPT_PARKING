@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.fptparkingproject.R;
+
 public class DashboardDetailActivity extends AppCompatActivity {
 
     @Override
