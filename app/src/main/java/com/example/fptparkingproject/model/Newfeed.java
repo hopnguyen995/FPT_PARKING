@@ -9,6 +9,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 public class Newfeed {
     private String newfeedid;
@@ -97,5 +98,18 @@ public class Newfeed {
         String json = gson.toJson(listArray);
         editor.putString(constant.KEY_NEWFEED, json);
         editor.commit();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Newfeed)) return false;
+        Newfeed newfeed = (Newfeed) o;
+        return getNewfeedid().equals(newfeed.getNewfeedid());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getNewfeedid());
     }
 }
