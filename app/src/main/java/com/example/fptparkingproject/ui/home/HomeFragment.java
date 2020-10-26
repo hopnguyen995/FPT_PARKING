@@ -93,12 +93,12 @@ public class HomeFragment extends Fragment {
             //get result qr scan
             String QRresult = data.getStringExtra(constant.INTENT_QRSCAN_RESULT);
             //process
-            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(constant.KEY_VEHICLEID, Context.MODE_PRIVATE);
-            String vehicleid = sharedPreferences.getString(constant.KEY_VEHICLEID, "");
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(constant.KEY_VEHICLEPLATE, Context.MODE_PRIVATE);
+            String plate = sharedPreferences.getString(constant.KEY_VEHICLEPLATE, "");
             if (constant.PARKING_IN.equals(QRresult)) {
-                new ParkingIn().parkingIn(user, vehicleid);
+                new ParkingIn().parkingIn(user, plate);
             } else if (constant.PARKING_OUT.equals(QRresult)) {
-                new ParkingOut().parkingOut(user, vehicleid);
+                new ParkingOut().parkingOut(user, plate);
             } else if (QRresult.contains(constant.SHARE_VEHICLE)) {
                 Gson gson = new Gson();
                 Share shareVehicle = gson.fromJson(QRresult, Share.class);
@@ -106,7 +106,7 @@ public class HomeFragment extends Fragment {
                 //Update database
                 if (!shareVehicle.getShare_vehicle().equals(mAuth.getUid())) {
                     //notification
-                    new SendNotif().sendMessage("", user.getUsername(),"", sToken, user.getToken(), constant.KEY_CONFIRM_SHARE, until.dateTimeToString(new Date()));
+                    new SendNotif().sendMessage(mAuth.getUid(), user.getUsername(),"", sToken, user.getToken(), constant.KEY_CONFIRM_SHARE, until.dateTimeToString(new Date()));
                 } else {
                     Toast.makeText(getContext(), R.string.cannotshare, Toast.LENGTH_LONG).show();
                 }

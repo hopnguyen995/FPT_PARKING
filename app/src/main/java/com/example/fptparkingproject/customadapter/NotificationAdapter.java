@@ -59,7 +59,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         } else if (holder instanceof ItemViewHolder) {
             ((ItemViewHolder) holder).txtTitle.setText(notification.getNotificationTitle());
             ((ItemViewHolder) holder).txtShortContent.setText(notification.getNotificationShortContent());
-            new Until().circleTransformAvatar(context, ((ItemViewHolder) holder).imgImage, notification.getNotificationImage(), R.drawable.ic_image);
+            if (notification.getNotificationImage() != null && !notification.getNotificationImage().isEmpty()) {
+                new Until().circleTransformAvatar(context, ((ItemViewHolder) holder).imgImage, notification.getNotificationImage(), R.drawable.ic_image);
+            }
             ((ItemViewHolder) holder).setItemClickListener(new ItemClickListener() {
                 @Override
                 public void onClick(View view, int position, boolean isLongClick) {

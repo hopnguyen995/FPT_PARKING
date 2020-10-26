@@ -32,10 +32,13 @@
     <string name="button_SendNotif">Send Notification</string>
     <string name="button_PostStatus">Post Status</string>
     <string name="button_ViewFeedback">Feedback</string>
+    <string name="button_ClickHere">Click here to cancel</string>
     <!--TextView-->
     <string name="txtProfile">Profile</string>
     <string name="txtHistory">History</string>
     <string name="txtHelp">Help</string>
+    <string name="txtNotif">You have shared your vehicle.</string>
+    <string name="txtNotifNotHaveVehicle">You have not registered vehicle information.</string>
     <!--QRCode-->
     <string name="not_support">The QR Code is not support</string>
     <!--Title-->
@@ -66,10 +69,10 @@
     <string name="permission_camera_denied">Camera permission denied</string>
     <!--admin-->
     <!--sendnotification-->
-    <string name="title_sendnotification">Title</string>
-    <string name="imgsendnotification">Link image</string>
-    <string name="shortcontentsendnotification">Description</string>
-    <string name="contentsendnotification">Content</string>
+    <string name="title_sendnotification">Title:</string>
+    <string name="imgsendnotification">Link image:</string>
+    <string name="shortcontentsendnotification">Description:</string>
+    <string name="contentsendnotification">Content:</string>
     <string name="button_send">Send</string>
 
     <!---->

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="imgSendNotification" type="id" />
+    <item name="titleSendNotification" type="id" />
+    <item name="shortContent" type="id" />
+    <item name="contentNotification" type="id" />
+</resources>

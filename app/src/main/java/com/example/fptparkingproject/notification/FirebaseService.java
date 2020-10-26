@@ -109,11 +109,17 @@ public class FirebaseService extends FirebaseMessagingService {
                     } else if (constant.KEY_CONFIRM_SHARE.equals(code)) {
                         //confirm share vehicle
                         if (isRuning() && subtime < constant.TIMEOUT_SIGNIN) {
+                            String userborrowid = messageTitle;
+                            String userborrowname = messageBody;
                             messageTitle = getResources().getString(R.string.title_confirm);
                             messageBody = messageBody + getResources().getString(R.string.message_borrow_vehicle);
                             Intent dialogIntent = new Intent(getApplicationContext(), AlertDialogActivity.class);
                             dialogIntent.putExtra(constant.INTENT_ALERTDIALOG_TITLE, messageTitle);
                             dialogIntent.putExtra(constant.INTENT_ALERTDIALOG_MESSAGE, messageBody);
+                            dialogIntent.putExtra(constant.INTENT_ALERTDIALOG_USERNAME, user.getUsername());
+                            dialogIntent.putExtra(constant.INTENT_ALERTDIALOG_USERBORROWNAME, userborrowname);
+                            dialogIntent.putExtra(constant.INTENT_ALERTDIALOG_USERID, user.getUserid());
+                            dialogIntent.putExtra(constant.INTENT_ALERTDIALOG_USERBORROWID, userborrowid);
                             dialogIntent.putExtra(constant.INTENT_ALERTDIALOG_TOKEN, token);
                             dialogIntent.putExtra(constant.INTENT_ALERTDIALOG_SENDTOKEN, sendToken);
                             dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

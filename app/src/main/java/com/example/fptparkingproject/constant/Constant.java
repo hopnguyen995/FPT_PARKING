@@ -11,6 +11,10 @@ public class Constant {
     public final String INTENT_QRSCAN_RESULT = "QRResult";
     public final String INTENT_ALERTDIALOG_TITLE = "title";
     public final String INTENT_ALERTDIALOG_MESSAGE = "message";
+    public final String INTENT_ALERTDIALOG_USERNAME = "username";
+    public final String INTENT_ALERTDIALOG_USERBORROWNAME = "userborrowname";
+    public final String INTENT_ALERTDIALOG_USERID = "userid";
+    public final String INTENT_ALERTDIALOG_USERBORROWID = "userborrowid";
     public final String INTENT_ALERTDIALOG_SENDTOKEN = "sendtoken";
     public final String INTENT_ALERTDIALOG_TOKEN = "token";
     public final String INTENT_NOTIFICATION_DETAIL_NOTIFICATION = "notification";
@@ -22,6 +26,7 @@ public class Constant {
     public final String KEY_USER = "user";
     public final String KEY_VEHICLEID = "vehicleid";
     public final String KEY_NEWFEED = "newfeeds";
+    public final String KEY_VEHICLEPLATE = "plate";
     //mail
     public final String MAIL = "@fpt.edu.vn";
     //parking
@@ -66,4 +71,10 @@ public class Constant {
     public final String TABLE_VEHICLES_TEMP = "Vehicles_temp";
     public final String TABLE_VEHICLES_TEMP_CHILD_VEHICLEID = "vehicleid";
     public final String TABLE_NEWFEEDS = "Newfeeds";
+    public final String TABLE_VEHICLES = "Vehicles";
+    public final String TABLE_VEHICLES_TEMP_CHILD_PLATE = "plate";
+    public final String TABLE_SHARES = "Shares";
+    public final String TABLE_SHARES_TEMP = "Share_temp";
+    public final String TABLE_SHARES_TEMP_CHILD_STATUS = "status";
+    public final String TABLE_SHARES_STATUS = "status";
 }
