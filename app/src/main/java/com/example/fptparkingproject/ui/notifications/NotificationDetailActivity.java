@@ -39,7 +39,7 @@ public class NotificationDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Notification notification = gson.fromJson(intent.getStringExtra(constant.INTENT_NOTIFICATION_DETAIL_NOTIFICATION),Notification.class);
         textViewTitle.setText(notification.getNotificationTitle());
-        textViewDateTime.setText(notification.getNotificationDateTime());
+        textViewDateTime.setText(new Until().nomalizeDateTime(notification.getNotificationDateTime()));
         textViewContent.setText(notification.getNotificationContent());
     }
 
