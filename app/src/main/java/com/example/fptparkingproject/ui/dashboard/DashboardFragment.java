@@ -10,10 +10,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
 
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
@@ -41,12 +43,12 @@ public class DashboardFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
         recyclerView = root.findViewById(R.id.recyclerView);
+        //((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         final ArrayList<Newfeed> listNewfeedDb = new ArrayList<>();
         listNewfeed = new Newfeed().getListNewfeed(prefs);
         if (listNewfeed == null) {
             listNewfeed = new ArrayList<>();
-            //listNewfeed.add(new Newfeed("1"));
         }
         newfeedAdapter = new NewfeedAdapter(getContext(), listNewfeed);
         recyclerView.setAdapter(newfeedAdapter);
@@ -84,6 +86,8 @@ public class DashboardFragment extends Fragment {
 
             }
         });
+        ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
+        recyclerView.setHasFixedSize(true);
         newfeedAdapter = new NewfeedAdapter(getContext(), listNewfeed);
         recyclerView.setAdapter(newfeedAdapter);
         return root;

@@ -10,31 +10,30 @@
     <ImageView
         android:id="@+id/imgImage"
         android:layout_width="0dp"
-        android:layout_height="280dp"
+        android:layout_height="250dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="30dp"
         android:scaleType="fitXY"
         android:src="@drawable/ic_image"
-        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtShortContent" />
+        app:layout_constraintTop_toBottomOf="@id/txtLongContent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="359dp"
-        android:layout_height="1dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="21dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginBottom="204dp"
         android:layout_toEndOf="@id/imgImage"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/txtTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/imgImage"
+        app:layout_constraintEnd_toStartOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toTopOf="parent">
 
     </LinearLayout>
@@ -44,14 +43,15 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_below="@id/imgImage"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="29dp"
         android:background="#E6E6E6"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/txtTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgImage" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtShortContent"
@@ -59,10 +59,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="13dp"
+        android:layout_marginBottom="12dp"
         android:textColor="#676767"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/imgImage"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtSeeMore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDateTime" />
@@ -73,22 +73,44 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="12dp"
         android:textColor="#ed7129"
-        android:textSize="24sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txtDateTime"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <TextView
         android:id="@+id/txtDateTime"
-        android:layout_width="183dp"
+        android:layout_width="153dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:textSize="10sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="17dp"
         app:layout_constraintBottom_toTopOf="@+id/txtShortContent"
-        app:layout_constraintStart_toStartOf="@+id/txtShortContent"
+        app:layout_constraintStart_toStartOf="@+id/txtTitle"
         app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
+    <TextView
+        android:id="@+id/txtSeeMore"
+        android:layout_width="114dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="13dp"
+        android:text="See more"
+        app:layout_constraintBottom_toTopOf="@+id/txtLongContent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtShortContent" />
+
+    <TextView
+        android:id="@+id/txtLongContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:layout_marginEnd="21dp"
+        app:layout_constraintBottom_toTopOf="@+id/imgImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSeeMore" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,6 +20,8 @@ public class Newfeed {
     private String newfeedDateTime;
     Constant constant = new Constant();
 
+    private boolean expanded;
+
     public Newfeed() {
     }
 
@@ -82,6 +84,14 @@ public class Newfeed {
 
     public void setNewfeedDateTime(String newfeedDateTime) {
         this.newfeedDateTime = newfeedDateTime;
+    }
+
+    public boolean isExpanded() {
+        return expanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
     }
 
     public ArrayList<Newfeed> getListNewfeed(SharedPreferences prefs) {
