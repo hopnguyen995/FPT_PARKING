@@ -12,7 +12,6 @@ import java.util.Objects;
 
 public class History {
     private String historyId;
-    private String historyTitle;
     private String historyImage;
     private String historyContent;
     private String historyDateTime;
@@ -25,9 +24,8 @@ public class History {
         this.historyId = historyId;
     }
 
-    public History(String historyId, String historyTitle, String historyImage, String historyContent, String historyDateTime) {
+    public History(String historyId, String historyImage, String historyContent, String historyDateTime) {
         this.historyId = historyId;
-        this.historyTitle = historyTitle;
         this.historyImage = historyImage;
         this.historyContent = historyContent;
         this.historyDateTime = historyDateTime;
@@ -39,14 +37,6 @@ public class History {
 
     public void setHistoryId(String historyId) {
         this.historyId = historyId;
-    }
-
-    public String getHistoryTitle() {
-        return historyTitle;
-    }
-
-    public void setHistoryTitle(String historyTitle) {
-        this.historyTitle = historyTitle;
     }
 
     public String getHistoryImage() {
@@ -84,5 +74,8 @@ public class History {
     @Override
     public int hashCode() {
         return Objects.hash(historyId);
+    }
+
+    public void getHistoryContent(String s) {
     }
 }

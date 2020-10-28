@@ -28,6 +28,7 @@ import com.example.fptparkingproject.qrscan.ParkingOut;
 import com.example.fptparkingproject.qrscan.QRScanActivity;
 import com.example.fptparkingproject.qrshare.ShareActivity;
 import com.example.fptparkingproject.signin.SignInWithGoogle;
+import com.example.fptparkingproject.ui.history.HistoryDetailActivity;
 import com.example.fptparkingproject.untils.Until;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
@@ -45,10 +46,10 @@ public class HomeFragment extends Fragment {
     Until until = new Until();
     private SharedPreferences prefs;
     User user;
-
+    Button btnHistory;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        final View root = inflater.inflate(R.layout.fragment_home, container, false);
         prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         final Button buttonQRScan = root.findViewById(R.id.buttonQR);
         context = getContext();
@@ -65,6 +66,16 @@ public class HomeFragment extends Fragment {
                 startActivity(new Intent(getContext(), ShareActivity.class));
             }
         });
+
+        btnHistory = root.findViewById(R.id.buttonHistory);
+        btnHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), HistoryDetailActivity.class));
+            }
+        });
+
+
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new
                     StrictMode.ThreadPolicy.Builder().permitAll().build();

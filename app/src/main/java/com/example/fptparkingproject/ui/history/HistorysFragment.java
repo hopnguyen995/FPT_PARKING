@@ -27,7 +27,6 @@ import java.util.ArrayList;
 
 public class HistorysFragment extends Fragment {
     RecyclerView recyclerView;
-    ArrayList<History> listHistory;
     HistoryAdapter HistoryAdapter;
     private DatabaseReference ref;
     private SharedPreferences prefs;
@@ -40,9 +39,6 @@ public class HistorysFragment extends Fragment {
         recyclerView = root.findViewById(R.id.recyclerView);
         prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         final ArrayList<History> listHistoryDb = new ArrayList<>();
-        listHistory = new History().getListHistory(prefs);
-        HistoryAdapter = new HistoryAdapter(getContext(), listHistory);
-        recyclerView.setAdapter(HistoryAdapter);
         ref = new Until().connectDatabase();
         user = new User().getUser(prefs);
         ref.child(constant.TABLE_PARKINGS).child(user.getUserid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -51,12 +47,16 @@ public class HistorysFragment extends Fragment {
                 if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         Parking parking = ds.getValue(Parking.class);
-                        listHistory.add(parking);
+                        History history = new History();
+                        history.setHistoryId(parking.getParkingid());
+                        history.setHistoryDateTime(parking.getTime());
+                        history.setHistoryContent(parking.isType() ? "Bạn đã cho xe vào" : "Bạn đã lấy xe ra");
+                        history.setHistoryImage(parking.isType() ? "InCome" : "GetOut");
+                        listHistoryDb.add(history);
                     }
                 }
-                HistoryAdapter = new HistoryAdapter(getContext(), listHistory);
+                HistoryAdapter = new HistoryAdapter(getContext(), listHistoryDb);
                 recyclerView.setAdapter(HistoryAdapter);
-                new Parking().saveListHistory(prefs,listHistory);
             }
 
             @Override
@@ -64,7 +64,7 @@ public class HistorysFragment extends Fragment {
 
             }
         });
-        HistoryAdapter = new HistoryAdapter(getContext(), listHistory);
+        HistoryAdapter = new HistoryAdapter(getContext(), listHistoryDb);
         recyclerView.setAdapter(HistoryAdapter);
         return root;
     }
