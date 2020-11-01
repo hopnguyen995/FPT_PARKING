@@ -7,11 +7,14 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
@@ -34,6 +37,9 @@ public class HistoryDetailActivity extends AppCompatActivity {
     private TextView textViewContent;
     private DatabaseReference ref;
     private SharedPreferences prefs;
+    private ListView listView;
+    ArrayAdapter<History> historyArrayAdapter;
+    ArrayList<History> listHistoryDb = new ArrayList<>();
     User user;
     Constant constant = new Constant();
 
@@ -41,6 +47,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setTitle("History");
         //Drawable drawable = getResources().getDrawable(R.drawable.ic_baseline_arrow_back_24);
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -49,6 +56,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
         //textViewTitle = findViewById(R.id.textViewTitle);
         textViewDateTime = findViewById(R.id.textViewDateTime);
         textViewContent = findViewById(R.id.textViewContent);
+        listView = findViewById(R.id.listView);
         Gson gson = new Gson();
         Intent intent = getIntent();
         History history = gson.fromJson(intent.getStringExtra(constant.INTENT_HISTORY_DETAIL_HISTORY),History.class);
@@ -61,7 +69,6 @@ public class HistoryDetailActivity extends AppCompatActivity {
 
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        final ArrayList<History> listHistoryDb = new ArrayList<>();
         ref = new Until().connectDatabase();
         user = new User().getUser(prefs);
         ref.child(constant.TABLE_PARKINGS).child("XmkLAcmx9UgGMMUr7lRacCaByTT2").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -73,12 +80,11 @@ public class HistoryDetailActivity extends AppCompatActivity {
                         History history = new History();
                         history.setHistoryId(parking.getParkingid());
                         history.setHistoryDateTime(parking.getTime());
-                        history.setHistoryContent(parking.isType() ? "Bạn đã cho xe vào" : "Bạn đã lấy xe ra");
+                        history.setHistoryContent(parking.getUsername() + (parking.isType() ? "đã cho xe vào" : "đã lấy xe ra"));
                         history.setHistoryImage(parking.isType() ? "InCome" : "GetOut");
                         listHistoryDb.add(history);
-                       // textViewDateTime.setText(listHistoryDb.get(0).getHistoryDateTime());
-                       // textViewContent.setText(listHistoryDb.get(0).getHistoryContent());
                     }
+                    showListView();
                 }
             }
 
@@ -87,8 +93,13 @@ public class HistoryDetailActivity extends AppCompatActivity {
 
             }
         });
+    }
 
-
+    public void showListView(){
+        if(!listHistoryDb.isEmpty()){
+            historyArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listHistoryDb);
+            listView.setAdapter(historyArrayAdapter);
+        }
     }
 
     @Override

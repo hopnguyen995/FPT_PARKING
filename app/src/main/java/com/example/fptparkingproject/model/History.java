@@ -78,4 +78,9 @@ public class History {
 
     public void getHistoryContent(String s) {
     }
+
+    @Override
+    public String toString() {
+        return historyContent;
+    }
 }
