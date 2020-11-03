@@ -8,6 +8,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 public class History {
@@ -76,11 +77,20 @@ public class History {
         return Objects.hash(historyId);
     }
 
-    public void getHistoryContent(String s) {
-    }
 
     @Override
     public String toString() {
         return historyContent;
+    }
+
+    int compareDate(Date date1, Date date2) {
+        if (date1 == null && date2 == null) {
+            return 0;
+        } else if (date1 == null) {
+            return -1;
+        } else if (date2 == null) {
+            return 1;
+        }
+        return date1.compareTo(date2);
     }
 }

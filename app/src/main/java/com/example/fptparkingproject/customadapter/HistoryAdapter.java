@@ -1,10 +1,15 @@
 package com.example.fptparkingproject.customadapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,17 +26,76 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
-public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private Context context;
+public class HistoryAdapter extends BaseAdapter {
+    private Activity activity;
+    private ArrayList<History> historyList;
+    private int layout;
+
+
+    public HistoryAdapter(Activity activity, int layout, ArrayList<History> historyList) {
+        this.activity = activity;
+        this.historyList = historyList;
+        this.layout = layout;
+    }
+
+    @Override
+    public int getCount() {
+        return historyList.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return historyList.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        TextView txtViewDateTime;
+        TextView txtContent;
+        ImageView imgImage = null;
+        ViewHolder viewHolder = null;
+        if(convertView == null){
+            viewHolder = new ViewHolder();
+            convertView = activity.getLayoutInflater().inflate(layout, null);
+            viewHolder.txtViewDateTime = convertView.findViewById(R.id.txtViewDateTimeHistory);
+            viewHolder.txtContent = convertView.findViewById(R.id.txtContentHistory);
+            viewHolder.imgImage = convertView.findViewById(R.id.imgImageHistory);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+        History history = historyList.get(position);
+        viewHolder.txtViewDateTime.setText(history.getHistoryDateTime());
+        viewHolder.txtContent.setText(history.getHistoryContent());
+        if("InCome".equals(history.getHistoryImage())){
+            viewHolder.imgImage.setImageResource(R.drawable.ic_history_in);
+        }else{
+            viewHolder.imgImage.setImageResource(R.drawable.ic_history_out);
+        }
+        return convertView;
+    }
+
+    public class ViewHolder {
+        TextView txtViewDateTime;
+        TextView txtContent;
+        ImageView imgImage;
+
+    }
+    /*private Context context;
     private ArrayList<History> listHistory;
     Constant constant = new Constant();
 
     public HistoryAdapter(Context context, ArrayList<History> listHistory) {
         this.context = context;
         this.listHistory = listHistory;
-    }
+    }*/
 
-    @NonNull
+    /*@NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.notification_layout, parent, false);
@@ -59,5 +123,5 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public int getItemCount() {
         return listHistory.size();
-    }
+    }*/
 }
