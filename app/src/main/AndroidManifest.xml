@@ -16,7 +16,7 @@
         android:roundIcon="@drawable/ic_parking"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".ui.history.HistoryActivity"></activity>
         <activity android:name=".uiadmin.notification.SendNotificationActivity" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".ui.notifications.NotificationDetailActivity" />
@@ -45,7 +45,6 @@
         <activity android:name=".notification.AlertDialogActivity" />
         <activity android:name=".qrshare.ShareActivity" />
         <activity android:name=".qrscan.QRScanActivity" />
-        <activity android:name=".ui.history.HistoryDetailActivity" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".signin.SignInWithGoogle"
