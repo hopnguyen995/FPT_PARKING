@@ -1,16 +1,18 @@
 package com.example.fptparkingproject.model;
 
+import java.util.Date;
+
 public class Parking {
     private String parkingid;
     private String username;
     private String plate;
     private boolean type;
-    private String time;
+    private Date time;
 
     public Parking() {
     }
 
-    public Parking(String parkingid, String username, String plate, boolean type, String time) {
+    public Parking(String parkingid, String username, String plate, boolean type, Date time) {
         this.parkingid = parkingid;
         this.username = username;
         this.plate = plate;
@@ -50,11 +52,11 @@ public class Parking {
         this.type = type;
     }
 
-    public String getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Date time) {
         this.time = time;
     }
 }

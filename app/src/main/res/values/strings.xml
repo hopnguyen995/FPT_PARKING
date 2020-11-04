@@ -39,6 +39,11 @@
     <string name="txtHelp">Help</string>
     <string name="txtNotif">You have shared your vehicle.</string>
     <string name="txtNotifNotHaveVehicle">You have not registered vehicle information.</string>
+    <string name="txtHistoryName">NAME</string>
+    <string name="txtHistoryDatetime">TIME</string>
+    <string name="txtHistoryParkingIn">Parking in</string>
+    <string name="txtHistoryParkingOut">Parking out</string>
+
     <!--QRCode-->
     <string name="not_support">The QR Code is not support</string>
     <!--Title-->

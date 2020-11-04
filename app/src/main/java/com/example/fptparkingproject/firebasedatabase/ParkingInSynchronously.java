@@ -77,7 +77,7 @@ public class ParkingInSynchronously {
 
     private void addParking(User user, String plate, ShareVehicle shareVehicle) {
         if (!status) {
-            Parking parking = new Parking(parkingID, user.getUsername(), plate, true, new Until().nomalizeDateTime(new Date()));
+            Parking parking = new Parking(parkingID, user.getUsername(), plate, true, new Date());
             ref.child(constant.TABLE_PARKINGS).child(user.getUserid()).child(parking.getParkingid()).setValue(parking, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {

@@ -3,6 +3,7 @@ package com.example.fptparkingproject.model;
 import android.content.SharedPreferences;
 
 import com.example.fptparkingproject.constant.Constant;
+import com.example.fptparkingproject.ui.history.HistoryActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -11,11 +12,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
-public class History {
+public class History implements Comparable<History> {
     private String historyId;
     private String historyImage;
     private String historyContent;
-    private String historyDateTime;
+    private Date historyDateTime;
     Constant constant = new Constant();
 
     public History() {
@@ -25,7 +26,7 @@ public class History {
         this.historyId = historyId;
     }
 
-    public History(String historyId, String historyImage, String historyContent, String historyDateTime) {
+    public History(String historyId, String historyImage, String historyContent, Date historyDateTime) {
         this.historyId = historyId;
         this.historyImage = historyImage;
         this.historyContent = historyContent;
@@ -56,11 +57,11 @@ public class History {
         this.historyContent = historyContent;
     }
 
-    public String getHistoryDateTime() {
+    public Date getHistoryDateTime() {
         return historyDateTime;
     }
 
-    public void setHistoryDateTime(String historyDateTime) {
+    public void setHistoryDateTime(Date historyDateTime) {
         this.historyDateTime = historyDateTime;
     }
 
@@ -83,14 +84,8 @@ public class History {
         return historyContent;
     }
 
-    int compareDate(Date date1, Date date2) {
-        if (date1 == null && date2 == null) {
-            return 0;
-        } else if (date1 == null) {
-            return -1;
-        } else if (date2 == null) {
-            return 1;
-        }
-        return date1.compareTo(date2);
+    @Override
+    public int compareTo(History o) {
+        return this.getHistoryDateTime().compareTo(o.getHistoryDateTime());
     }
 }

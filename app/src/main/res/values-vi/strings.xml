@@ -39,6 +39,10 @@
     <string name="txtHelp">Trợ giúp</string>
     <string name="txtNotif">Bạn đã cho mượn xe.</string>
     <string name="txtNotifNotHaveVehicle">Bạn chưa đăng ký thông tin xe.</string>
+    <string name="txtHistoryName">HỌ TÊN</string>
+    <string name="txtHistoryDatetime">THỜI GIAN</string>
+    <string name="txtHistoryParkingIn">Gửi xe</string>
+    <string name="txtHistoryParkingOut">Lấy xe</string>
     <!--QRCode-->
     <string name="not_support">Mã QR không hỗ trợ</string>
     <!--Title-->
