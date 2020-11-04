@@ -18,6 +18,7 @@ public class Constant {
     public final String INTENT_ALERTDIALOG_SENDTOKEN = "sendtoken";
     public final String INTENT_ALERTDIALOG_TOKEN = "token";
     public final String INTENT_NOTIFICATION_DETAIL_NOTIFICATION = "notification";
+    public final String INTENT_NEWFEED_DETAIL_NEWFEED = "newfeed";
     public final String INTENT_HISTORY_DETAIL_HISTORY = "history";
     //Qrcode
     public final int QRCODE_WIDTH = 350;
@@ -25,6 +26,7 @@ public class Constant {
     public final String KEY_NOTIFICATION = "notifications";
     public final String KEY_USER = "user";
     public final String KEY_VEHICLEID = "vehicleid";
+    public final String KEY_NEWFEED = "newfeeds";
     public final String KEY_VEHICLEPLATE = "plate";
     public final String KEY_PARKING = "Parkings";
     //mail
@@ -68,6 +70,9 @@ public class Constant {
     public final String TABLE_NOTIFICATIONS = "Notifications";
     public final String TABLE_PARKINGS_TEMP = "Parkings_temp";
     public final String TABLE_PARKINGS_TEMP_CHILD_PARKING_STATUS = "parking_status";
+    public final String TABLE_VEHICLES_TEMP = "Vehicles_temp";
+    public final String TABLE_VEHICLES_TEMP_CHILD_VEHICLEID = "vehicleid";
+    public final String TABLE_NEWFEEDS = "Newfeeds";
     public final String TABLE_VEHICLES = "Vehicles";
     public final String TABLE_VEHICLES_TEMP_CHILD_PLATE = "plate";
     public final String TABLE_SHARES = "Shares";
