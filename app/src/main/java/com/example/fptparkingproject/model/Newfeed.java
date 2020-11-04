@@ -1,72 +1,133 @@
 package com.example.fptparkingproject.model;
 
+import android.content.SharedPreferences;
+
+import com.example.fptparkingproject.constant.Constant;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 public class Newfeed {
-    private String newId;
-    private String newTitle;
-    private String newImage;
-    private String newShortContent;
-    private String newLongContent;
-    private Date newDateTime;
+    private String newfeedid;
+    private String newfeedTitle;
+    private String newfeedImage;
+    private String newfeedShortContent;
+    private String newfeedLongContent;
+    private String newfeedDateTime;
+    Constant constant = new Constant();
+
+    private boolean expanded;
 
     public Newfeed() {
     }
 
-    public Newfeed(String newId, String newTitle, String newImage, String newShortContent, String newLongContent, Date newDateTime) {
-        this.newId = newId;
-        this.newTitle = newTitle;
-        this.newImage = newImage;
-        this.newShortContent = newShortContent;
-        this.newLongContent = newLongContent;
-        this.newDateTime = newDateTime;
+    public Newfeed(String newfeedid) {
+        this.newfeedid = newfeedid;
     }
 
-    public String getNewId() {
-        return newId;
+    public Newfeed(String newfeedid, String newfeedTitle, String newfeedImage, String newfeedShortContent, String newfeedLongContent, String newfeedDateTime) {
+        this.newfeedid = newfeedid;
+        this.newfeedTitle = newfeedTitle;
+        this.newfeedImage = newfeedImage;
+        this.newfeedShortContent = newfeedShortContent;
+        this.newfeedLongContent = newfeedLongContent;
+        this.newfeedDateTime = newfeedDateTime;
     }
 
-    public void setNewId(String newId) {
-        this.newId = newId;
+    public String getNewfeedid() {
+        return newfeedid;
     }
 
-    public String getNewTitle() {
-        return newTitle;
+    public void setNewfeedid(String newfeedid) {
+        this.newfeedid = newfeedid;
     }
 
-    public void setNewTitle(String newTitle) {
-        this.newTitle = newTitle;
+    public String getNewfeedTitle() {
+        return newfeedTitle;
     }
 
-    public String getNewImage() {
-        return newImage;
+    public void setNewfeedTitle(String newfeedTitle) {
+        this.newfeedTitle = newfeedTitle;
     }
 
-    public void setNewImage(String newImage) {
-        this.newImage = newImage;
+    public String getNewfeedImage() {
+        return newfeedImage;
     }
 
-    public String getNewShortContent() {
-        return newShortContent;
+    public void setNewfeedImage(String newfeedImage) {
+        this.newfeedImage = newfeedImage;
     }
 
-    public void setNewShortContent(String newShortContent) {
-        this.newShortContent = newShortContent;
+    public String getNewfeedShortContent() {
+        return newfeedShortContent;
     }
 
-    public String getNewLongContent() {
-        return newLongContent;
+    public void setNewShortContent(String newfeedShortContent) {
+        this.newfeedShortContent = newfeedShortContent;
     }
 
-    public void setNewLongContent(String newLongContent) {
-        this.newLongContent = newLongContent;
+    public String getNewfeedLongContent() {
+        return newfeedLongContent;
     }
 
-    public Date getNewDateTime() {
-        return newDateTime;
+    public void setNewfeedLongContent(String newfeedLongContent) {
+        this.newfeedLongContent = newfeedLongContent;
     }
 
-    public void setNewDateTime(Date newDateTime) {
-        this.newDateTime = newDateTime;
+    public String getNewfeedDateTime() {
+        return newfeedDateTime;
+    }
+
+    public void setNewfeedDateTime(String newfeedDateTime) {
+        this.newfeedDateTime = newfeedDateTime;
+    }
+
+    public boolean isExpanded() {
+        return expanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
+    }
+
+    public ArrayList<Newfeed> getListNewfeed(SharedPreferences prefs) {
+        Gson gson = new Gson();
+        String json = prefs.getString(constant.KEY_NEWFEED, null);
+        Type listType = new TypeToken<ArrayList<Newfeed>>() {
+        }.getType();
+        return gson.fromJson(json, listType);
+    }
+
+    public void saveListNewfeed(SharedPreferences prefs, ArrayList<Newfeed> listArray) {
+        SharedPreferences.Editor editor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(listArray);
+        editor.putString(constant.KEY_NEWFEED, json);
+        editor.commit();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Newfeed)) return false;
+        Newfeed newfeed = (Newfeed) o;
+        return getNewfeedid().equals(newfeed.getNewfeedid());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getNewfeedid());
+    }
+
+    @Override
+    public String toString() {
+        return "Newfeed{" +
+                "newfeedTitle='" + newfeedTitle + '\'' +
+                ", newfeedDateTime=" + newfeedDateTime +
+                '}';
     }
 }
