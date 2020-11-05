@@ -8,8 +8,8 @@
     tools:context="com.example.fptparkingproject.ui.notifications.NotificationsFragment">
 
     <RelativeLayout
-        android:id="@+id/header"
-        android:layout_width="0dp"
+        android:id="@+id/headerNewFeed"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
         android:orientation="vertical"
@@ -18,11 +18,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/recyclerView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/notification_layout" />
+            tools:listitem="@layout/newfeed_layout" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -36,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:layout_weight="1"
-                android:text="News"
+                android:text="@string/txtNewFeedNew"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 

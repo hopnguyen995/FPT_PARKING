@@ -21,6 +21,7 @@ import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.customadapter.NewfeedAdapter;
 import com.example.fptparkingproject.customadapter.NotificationAdapter;
+import com.example.fptparkingproject.model.History;
 import com.example.fptparkingproject.model.Newfeed;
 import com.example.fptparkingproject.model.Notification;
 import com.example.fptparkingproject.untils.Until;
@@ -30,6 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class DashboardFragment extends Fragment {
     RecyclerView recyclerView;
@@ -42,8 +44,8 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        recyclerView = root.findViewById(R.id.recyclerView);
-        //((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
+        recyclerView = root.findViewById(R.id.recyclerView1);
+        ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         final ArrayList<Newfeed> listNewfeedDb = new ArrayList<>();
         listNewfeed = new Newfeed().getListNewfeed(prefs);
@@ -74,6 +76,7 @@ public class DashboardFragment extends Fragment {
                             listNewfeed.add(newfDb);
                         }
                     }
+                    Collections.sort(listNewfeed, Collections.<Newfeed>reverseOrder());
                 }
                 newfeedAdapter = new NewfeedAdapter(getContext(), listNewfeed);
                 recyclerView.setAdapter(newfeedAdapter);

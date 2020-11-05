@@ -43,6 +43,8 @@
     <string name="txtHistoryDatetime">TIME</string>
     <string name="txtHistoryParkingIn">Parking in</string>
     <string name="txtHistoryParkingOut">Parking out</string>
+    <string name="txtNewFeedSeeMore">See More</string>
+    <string name="txtNewFeedNew">News</string>
 
     <!--QRCode-->
     <string name="not_support">The QR Code is not support</string>
