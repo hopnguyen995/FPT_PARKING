@@ -17,7 +17,7 @@ public class Newfeed {
     private String newfeedImage;
     private String newfeedShortContent;
     private String newfeedLongContent;
-    private String newfeedDateTime;
+    private Date newfeedDateTime;
     Constant constant = new Constant();
 
     private boolean expanded;
@@ -29,7 +29,7 @@ public class Newfeed {
         this.newfeedid = newfeedid;
     }
 
-    public Newfeed(String newfeedid, String newfeedTitle, String newfeedImage, String newfeedShortContent, String newfeedLongContent, String newfeedDateTime) {
+    public Newfeed(String newfeedid, String newfeedTitle, String newfeedImage, String newfeedShortContent, String newfeedLongContent, Date newfeedDateTime) {
         this.newfeedid = newfeedid;
         this.newfeedTitle = newfeedTitle;
         this.newfeedImage = newfeedImage;
@@ -78,11 +78,11 @@ public class Newfeed {
         this.newfeedLongContent = newfeedLongContent;
     }
 
-    public String getNewfeedDateTime() {
+    public Date getNewfeedDateTime() {
         return newfeedDateTime;
     }
 
-    public void setNewfeedDateTime(String newfeedDateTime) {
+    public void setNewfeedDateTime(Date newfeedDateTime) {
         this.newfeedDateTime = newfeedDateTime;
     }
 
@@ -101,6 +101,7 @@ public class Newfeed {
         }.getType();
         return gson.fromJson(json, listType);
     }
+
 
     public void saveListNewfeed(SharedPreferences prefs, ArrayList<Newfeed> listArray) {
         SharedPreferences.Editor editor = prefs.edit();

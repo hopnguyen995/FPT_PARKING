@@ -35,7 +35,7 @@ public class NewfeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
         final Newfeed newfeed = listNewfeed.get(position);
         ((NewfeedViewHolder) holder).txtTitle.setText(newfeed.getNewfeedTitle());
-        ((NewfeedViewHolder) holder).txtDateTime.setText(newfeed.getNewfeedDateTime());
+        ((NewfeedViewHolder) holder).txtDateTime.setText(new Until().nomalizeDateTime(newfeed.getNewfeedDateTime()));
         ((NewfeedViewHolder) holder).txtShortContent.setText(newfeed.getNewfeedShortContent());
         ((NewfeedViewHolder) holder).txtSeeMore.setText("See more");
         if (newfeed.getNewfeedImage() != null && !newfeed.getNewfeedImage().isEmpty()) {
