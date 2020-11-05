@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/table_list_layout" />
+            tools:listitem="@layout/history_layout" />
     </HorizontalScrollView>
 
     <ImageView

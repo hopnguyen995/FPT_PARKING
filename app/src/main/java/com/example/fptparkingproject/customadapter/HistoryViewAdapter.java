@@ -15,11 +15,11 @@ import com.example.fptparkingproject.untils.Until;
 
 import java.util.ArrayList;
 
-public class TableViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class HistoryViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private ArrayList<History> listHistories;
 
-    public TableViewAdapter(Context context, ArrayList<History> listHistories) {
+    public HistoryViewAdapter(Context context, ArrayList<History> listHistories) {
         this.context = context;
         this.listHistories = listHistories;
     }
@@ -27,7 +27,7 @@ public class TableViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(context).inflate(R.layout.table_list_layout, parent, false);
+        View itemView = LayoutInflater.from(context).inflate(R.layout.history_layout, parent, false);
         return new RowViewHolder(itemView);
     }
 
