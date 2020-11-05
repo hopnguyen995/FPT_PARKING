@@ -71,7 +71,6 @@ public class NotificationsFragment extends Fragment {
                         }
                     }
                     Collections.sort(listNotification,Collections.<Notification>reverseOrder());
-                    System.out.println(listNotification);
                 }
                 notificationAdapter = new NotificationAdapter(getContext(), listNotification);
                 recyclerView.setAdapter(notificationAdapter);
