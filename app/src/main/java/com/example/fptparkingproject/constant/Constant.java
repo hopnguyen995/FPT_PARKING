@@ -19,6 +19,7 @@ public class Constant {
     public final String INTENT_ALERTDIALOG_TOKEN = "token";
     public final String INTENT_NOTIFICATION_DETAIL_NOTIFICATION = "notification";
     public final String INTENT_NEWFEED_DETAIL_NEWFEED = "newfeed";
+    public final String INTENT_HISTORY_DETAIL_HISTORY = "history";
     //Qrcode
     public final int QRCODE_WIDTH = 350;
     //SharedPreferences
@@ -27,6 +28,7 @@ public class Constant {
     public final String KEY_VEHICLEID = "vehicleid";
     public final String KEY_NEWFEED = "newfeeds";
     public final String KEY_VEHICLEPLATE = "plate";
+    public final String KEY_PARKING = "Parkings";
     //mail
     public final String MAIL = "@fpt.edu.vn";
     //parking
