@@ -1,4 +1,4 @@
-package com.example.fptparkingproject.qrshare;
+package com.example.fptparkingproject.ui.qrshare;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;

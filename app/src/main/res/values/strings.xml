@@ -20,7 +20,7 @@
     <string name="signoutsuccess">Signed out!</string>
     <!-- Button -->
     <string name="button_qr">QR Scan</string>
-    <string name="button_feedback">Feedback</string>
+    <string name="button_feedback">Application</string>
     <string name="button_share">Share</string>
     <string name="button_history">History</string>
     <string name="signin">Sign in</string>
