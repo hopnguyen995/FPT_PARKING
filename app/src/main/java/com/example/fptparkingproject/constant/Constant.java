@@ -79,4 +79,6 @@ public class Constant {
     public final String TABLE_SHARES_TEMP = "Share_temp";
     public final String TABLE_SHARES_TEMP_CHILD_STATUS = "status";
     public final String TABLE_SHARES_STATUS = "status";
+    //phone number
+    public  final String PHONENUMBER = "02473081313";
 }
