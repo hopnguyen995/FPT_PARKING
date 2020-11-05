@@ -44,6 +44,7 @@
         <activity android:name=".notification.AlertDialogActivity" />
         <activity android:name=".qrshare.ShareActivity" />
         <activity android:name=".qrscan.QRScanActivity" />
+        <activity android:name=".ui.history.HistoryDetailActivity" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".signin.SignInWithGoogle"
