@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
-public class Newfeed {
+public class Newfeed implements Comparable<Newfeed>{
     private String newfeedid;
     private String newfeedTitle;
     private String newfeedImage;
     private String newfeedShortContent;
     private String newfeedLongContent;
-    private String newfeedDateTime;
+    private Date newfeedDateTime;
     Constant constant = new Constant();
 
     private boolean expanded;
@@ -29,13 +29,14 @@ public class Newfeed {
         this.newfeedid = newfeedid;
     }
 
-    public Newfeed(String newfeedid, String newfeedTitle, String newfeedImage, String newfeedShortContent, String newfeedLongContent, String newfeedDateTime) {
+    public Newfeed(String newfeedid, String newfeedTitle, String newfeedImage, String newfeedShortContent, String newfeedLongContent, Date newfeedDateTime, boolean expanded) {
         this.newfeedid = newfeedid;
         this.newfeedTitle = newfeedTitle;
         this.newfeedImage = newfeedImage;
         this.newfeedShortContent = newfeedShortContent;
         this.newfeedLongContent = newfeedLongContent;
         this.newfeedDateTime = newfeedDateTime;
+        this.expanded = expanded;
     }
 
     public String getNewfeedid() {
@@ -78,11 +79,11 @@ public class Newfeed {
         this.newfeedLongContent = newfeedLongContent;
     }
 
-    public String getNewfeedDateTime() {
+    public Date getNewfeedDateTime() {
         return newfeedDateTime;
     }
 
-    public void setNewfeedDateTime(String newfeedDateTime) {
+    public void setNewfeedDateTime(Date newfeedDateTime) {
         this.newfeedDateTime = newfeedDateTime;
     }
 
@@ -129,5 +130,10 @@ public class Newfeed {
                 "newfeedTitle='" + newfeedTitle + '\'' +
                 ", newfeedDateTime=" + newfeedDateTime +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Newfeed o) {
+        return this.getNewfeedDateTime().compareTo(o.getNewfeedDateTime());
     }
 }
