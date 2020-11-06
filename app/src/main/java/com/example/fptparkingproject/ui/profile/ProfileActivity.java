@@ -1,4 +1,4 @@
-package com.example.fptparkingproject.profile;
+package com.example.fptparkingproject.ui.profile;
 
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;

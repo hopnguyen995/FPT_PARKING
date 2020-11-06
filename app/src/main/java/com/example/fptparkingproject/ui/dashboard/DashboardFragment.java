@@ -6,24 +6,16 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.customadapter.NewfeedAdapter;
-import com.example.fptparkingproject.customadapter.NotificationAdapter;
-import com.example.fptparkingproject.model.History;
 import com.example.fptparkingproject.model.Newfeed;
-import com.example.fptparkingproject.model.Notification;
 import com.example.fptparkingproject.untils.Until;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

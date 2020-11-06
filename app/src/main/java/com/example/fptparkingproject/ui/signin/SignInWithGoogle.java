@@ -215,6 +215,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                                         }
                                         //get user exist
                                         if (mAuth.getCurrentUser() != null) {
+                                            fuser.saveUser(prefs,fuser);
                                             if (fuser.getToken().equals("")) {
                                                 ref.child(constant.TABLE_USERS).child(mAuth.getUid()).child(constant.TABLE_USERS_CHILD_TOKEN).setValue(newUser.getToken());
                                             } else if (fuser.getToken().equals(newUser.getToken())) {
