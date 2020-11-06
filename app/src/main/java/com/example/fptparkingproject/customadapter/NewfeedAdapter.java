@@ -20,6 +20,7 @@ public class NewfeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private Context context;
     private ArrayList<Newfeed> listNewfeed;
     Constant constant = new Constant();
+
     public NewfeedAdapter(Context context, ArrayList<Newfeed> listNewfeed) {
         this.context = context;
         this.listNewfeed = listNewfeed;
@@ -38,10 +39,10 @@ public class NewfeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         final Newfeed newfeed = listNewfeed.get(position);
         ((NewfeedViewHolder) holder).txtTitle.setText(newfeed.getNewfeedTitle());
         ((NewfeedViewHolder) holder).txtDateTime.setText(new Until().nomalizeDateTime(newfeed.getNewfeedDateTime()));
-        if(!newfeed.getNewfeedShortContent().isEmpty()){
+        if (!newfeed.getNewfeedShortContent().isEmpty() && !newfeed.isExpanded()) {
             ((NewfeedViewHolder) holder).txtShortContent.setText(newfeed.getNewfeedShortContent());
             ((NewfeedViewHolder) holder).txtSeeMore.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             ((NewfeedViewHolder) holder).txtShortContent.setText(newfeed.getNewfeedLongContent());
         }
         if (newfeed.getNewfeedImage() != null && !newfeed.getNewfeedImage().isEmpty()) {
@@ -58,7 +59,7 @@ public class NewfeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 // Notify the adapter that item has changed
                 notifyItemChanged(position);
                 ((NewfeedViewHolder) holder).bind(newfeed);
-                ((NewfeedViewHolder) holder).txtSeeMore.setVisibility(View.GONE);
+                ((NewfeedViewHolder) holder).txtSeeMore.setVisibility(View.INVISIBLE);
             }
         });
     }
