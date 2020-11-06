@@ -3,6 +3,7 @@ package com.example.fptparkingproject.ui.history;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -11,11 +12,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.customadapter.HistoryViewAdapter;
-import com.example.fptparkingproject.model.History;
 import com.example.fptparkingproject.model.Parking;
 import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.untils.Until;
@@ -33,9 +34,11 @@ public class HistoryActivity extends AppCompatActivity {
     private SharedPreferences prefs;
     RecyclerView recyclerView;
     HistoryViewAdapter historyViewAdapter;
-    ArrayList<History> listHistoryDb = new ArrayList<>();
+    ArrayList<Parking> listParkingHistoryDb = new ArrayList<>();
     User user;
     Constant constant = new Constant();
+    ConstraintLayout constraintLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,32 +48,34 @@ public class HistoryActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorToolbar)));
         setContentView(R.layout.activity_history);
+        constraintLayout = findViewById(R.id.layoutNoVehicle);
         recyclerView = findViewById(R.id.recyclerViewHistoryList);
-        Gson gson = new Gson();
-        Intent intent = getIntent();
-        History history = gson.fromJson(intent.getStringExtra(constant.INTENT_HISTORY_DETAIL_HISTORY),History.class);
-        if(history == null) {
-            history = new History();
-        }
-
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         ref = new Until().connectDatabase();
         user = new User().getUser(prefs);
-        ref.child(constant.TABLE_PARKINGS).child(user.getUserid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        ref.child(constant.TABLE_PARKINGS).child(user.getUserid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
                     for (DataSnapshot ds : snapshot.getChildren()) {
+                        boolean isDuplicate = false;
                         Parking parking = ds.getValue(Parking.class);
-                        History history = new History();
-                        history.setHistoryId(parking.getParkingid());
-                        history.setHistoryDateTime(parking.getTime());
-                        history.setHistoryContent(parking.getUsername());
-                        history.setHistoryImage(parking.isType() ? constant.PARKING_IN : constant.PARKING_OUT);
-                        listHistoryDb.add(history);
+                        for (Parking p: listParkingHistoryDb
+                             ) {
+                            if(parking.getParkingid().equals(p.getParkingid())){
+                                isDuplicate = true;
+                                break;
+                            }
+                        }
+                        if(!isDuplicate){
+                            listParkingHistoryDb.add(parking);
+                        }
                     }
-                    Collections.sort(listHistoryDb, Collections.<History>reverseOrder());
+                    Collections.sort(listParkingHistoryDb, Collections.<Parking>reverseOrder());
                     showListView();
+                }
+                else{
+                    constraintLayout.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -81,9 +86,10 @@ public class HistoryActivity extends AppCompatActivity {
         });
     }
 
-    public void showListView(){
-        if(!listHistoryDb.isEmpty()){
-            historyViewAdapter = new HistoryViewAdapter(getApplicationContext(),listHistoryDb);
+    public void showListView() {
+        if (!listParkingHistoryDb.isEmpty()) {
+            constraintLayout.setVisibility(View.INVISIBLE);
+            historyViewAdapter = new HistoryViewAdapter(getApplicationContext(), listParkingHistoryDb);
             recyclerView.setAdapter(historyViewAdapter);
         }
     }

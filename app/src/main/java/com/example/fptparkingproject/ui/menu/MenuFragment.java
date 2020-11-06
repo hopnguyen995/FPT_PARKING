@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
-import com.example.fptparkingproject.profile.ProfileActivity;
+import com.example.fptparkingproject.ui.profile.ProfileActivity;
 import com.example.fptparkingproject.model.Share;
 import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.notification.SendNotif;
