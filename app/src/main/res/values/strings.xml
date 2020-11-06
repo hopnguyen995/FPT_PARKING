@@ -31,7 +31,7 @@
     <string name="button_CheckInfo">Check Information</string>
     <string name="button_SendNotif">Send Notification</string>
     <string name="button_PostStatus">Post Status</string>
-    <string name="button_ViewFeedback">Feedback</string>
+    <string name="button_ViewFeedback">View Application</string>
     <string name="button_ClickHere">Click here to cancel</string>
     <!--TextView-->
     <string name="txtProfile">Profile</string>
@@ -45,7 +45,15 @@
     <string name="txtHistoryParkingOut">Parking out</string>
     <string name="txtNewFeedSeeMore">See More</string>
     <string name="txtNewFeedNew">News</string>
-
+    <string name="txtStatusActive">Active</string>
+    <string name="txtStatusNotActive">Not active</string>
+    <string name="txtNotLicense">You have not registered to park your vehicle</string>
+    <string name="txtNo">NO.</string>
+    <string name="txtNumberPlate">Plate Number</string>
+    <string name="txtStatus">Status</string>
+    <string name="txtname">Name:</string>
+    <string name="txtEmail">Email:</string>
+    <string name="txtlistVehicle">List vehicle(s):</string>
     <!--QRCode-->
     <string name="not_support">The QR Code is not support</string>
     <!--Title-->

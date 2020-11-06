@@ -1,4 +1,4 @@
-package com.example.fptparkingproject;
+package com.example.fptparkingproject.profile;
 
 import android.os.Bundle;
 import android.view.View;

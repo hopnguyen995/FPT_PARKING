@@ -15,7 +15,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,7 @@ import android.widget.Toast;
 
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
-import com.example.fptparkingproject.ProfileActivity;
+import com.example.fptparkingproject.profile.ProfileActivity;
 import com.example.fptparkingproject.model.Share;
 import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.notification.SendNotif;

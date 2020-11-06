@@ -35,13 +35,10 @@ public class NewfeedViewHolder extends RecyclerView.ViewHolder implements View.O
         boolean expanded = newfeed.isExpanded();
         // Set the visibility based on state
         txtSeeMore.setVisibility(expanded ? View.VISIBLE : View.GONE);
-
         txtTitle.setText(newfeed.getNewfeedTitle());
         txtDateTime.setText(new Until().nomalizeDateTime(newfeed.getNewfeedDateTime()));
         txtShortContent.setText(newfeed.getNewfeedShortContent());
         txtLongContent.setText(newfeed.getNewfeedLongContent());
-
-
     }
 
     @Override

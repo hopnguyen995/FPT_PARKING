@@ -34,12 +34,18 @@ public class NewfeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
+        ((NewfeedViewHolder) holder).txtSeeMore.setVisibility(View.INVISIBLE);
         final Newfeed newfeed = listNewfeed.get(position);
         ((NewfeedViewHolder) holder).txtTitle.setText(newfeed.getNewfeedTitle());
         ((NewfeedViewHolder) holder).txtDateTime.setText(new Until().nomalizeDateTime(newfeed.getNewfeedDateTime()));
-        ((NewfeedViewHolder) holder).txtShortContent.setText(newfeed.getNewfeedShortContent());
+        if(!newfeed.getNewfeedShortContent().isEmpty()){
+            ((NewfeedViewHolder) holder).txtShortContent.setText(newfeed.getNewfeedShortContent());
+            ((NewfeedViewHolder) holder).txtSeeMore.setVisibility(View.VISIBLE);
+        }else{
+            ((NewfeedViewHolder) holder).txtShortContent.setText(newfeed.getNewfeedLongContent());
+        }
         if (newfeed.getNewfeedImage() != null && !newfeed.getNewfeedImage().isEmpty()) {
-            new Until().circleTransformAvatar(context, ((NewfeedViewHolder) holder).imgImage, newfeed.getNewfeedImage(), R.drawable.ic_image);
+            Picasso.with(context).load(newfeed.getNewfeedImage()).into(((NewfeedViewHolder) holder).imgImage);
         }
 
         ((NewfeedViewHolder) holder).txtSeeMore.setOnClickListener(new View.OnClickListener() {

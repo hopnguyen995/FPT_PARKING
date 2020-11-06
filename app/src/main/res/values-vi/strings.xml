@@ -31,7 +31,7 @@
     <string name="button_CheckInfo">Kiểm tra thông tin</string>
     <string name="button_SendNotif">Gửi thông báo</string>
     <string name="button_PostStatus">Đăng tin</string>
-    <string name="button_ViewFeedback">Góp ý</string>
+    <string name="button_ViewFeedback">Xem đơn</string>
     <string name="button_ClickHere">Nhấn vào đây để hủy</string>
     <!--TextView-->
     <string name="txtProfile">Thông tin tài khoản</string>
@@ -45,6 +45,15 @@
     <string name="txtHistoryParkingOut">Lấy xe</string>
     <string name="txtNewFeedSeeMore">Xem thêm</string>
     <string name="txtNewFeedNew">Bảng tin</string>
+    <string name="txtStatusActive">Hoạt động</string>
+    <string name="txtStatusNotActive">Không hoạt động</string>
+    <string name="txtNotLicense">Bạn chưa đăng ký gửi xe tại nhà xe</string>
+    <string name="txtNo">STT</string>
+    <string name="txtNumberPlate">Biển số xe</string>
+    <string name="txtStatus">Trạng thái</string>
+    <string name="txtname">Họ Tên:</string>
+    <string name="txtEmail">Email:</string>
+    <string name="txtlistVehicle">Danh sách xe:</string>
     <!--QRCode-->
     <string name="not_support">Mã QR không hỗ trợ</string>
     <!--Title-->
