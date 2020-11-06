@@ -8,13 +8,14 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 public class Feedback implements Comparable<Feedback> {
     private String feedbackId;
     private String feedbackTitle;
     private String feedbackContent;
-    private String feedbackDateTime;
+    private Date feedbackDateTime;
     private String userMail;
     private String feedbackStatus;
     Constant constant = new Constant();
@@ -22,7 +23,7 @@ public class Feedback implements Comparable<Feedback> {
     public Feedback() {
     }
 
-    public Feedback(String feedbackId, String feedbackTitle, String feedbackContent, String feedbackDateTime, String userMail, String feedbackStatus) {
+    public Feedback(String feedbackId, String feedbackTitle, String feedbackContent, Date feedbackDateTime, String userMail, String feedbackStatus) {
         this.feedbackId = feedbackId;
         this.feedbackTitle = feedbackTitle;
         this.feedbackContent = feedbackContent;
@@ -55,11 +56,11 @@ public class Feedback implements Comparable<Feedback> {
         this.feedbackContent = feedbackContent;
     }
 
-    public String getFeedbackDateTime() {
+    public Date getFeedbackDateTime() {
         return feedbackDateTime;
     }
 
-    public void setFeedbackDateTime(String feedbackDateTime) {
+    public void setFeedbackDateTime(Date feedbackDateTime) {
         this.feedbackDateTime = feedbackDateTime;
     }
 
