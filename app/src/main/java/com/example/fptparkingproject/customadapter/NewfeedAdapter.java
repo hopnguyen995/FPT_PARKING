@@ -12,6 +12,7 @@ import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.Newfeed;
 import com.example.fptparkingproject.untils.Until;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -37,14 +38,14 @@ public class NewfeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         ((NewfeedViewHolder) holder).txtTitle.setText(newfeed.getNewfeedTitle());
         ((NewfeedViewHolder) holder).txtDateTime.setText(new Until().nomalizeDateTime(newfeed.getNewfeedDateTime()));
         ((NewfeedViewHolder) holder).txtShortContent.setText(newfeed.getNewfeedShortContent());
-        ((NewfeedViewHolder) holder).txtSeeMore.setText("See more");
         if (newfeed.getNewfeedImage() != null && !newfeed.getNewfeedImage().isEmpty()) {
-            new Until().circleTransformAvatar(context, ((NewfeedViewHolder) holder).imgImage, newfeed.getNewfeedImage(), R.drawable.ic_image);
+            Picasso.with(context).load(newfeed.getNewfeedImage()).placeholder(R.drawable.ic_image).into(((NewfeedViewHolder) holder).imgImage);
         }
 
         ((NewfeedViewHolder) holder).txtSeeMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((NewfeedViewHolder) holder).txtShortContent.setVisibility(View.INVISIBLE);
                 boolean expanded = newfeed.isExpanded();
                 // Change the state
                 newfeed.setExpanded(!expanded);
@@ -59,15 +60,5 @@ public class NewfeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public int getItemCount() {
         return listNewfeed.size();
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if (isPositionHeader(position))
-            return constant.TYPE_HEADER;
-        return constant.TYPE_ITEM;
-    }
-    private boolean isPositionHeader(int position) {
-        return position == 0;
     }
 }

@@ -1,36 +1,37 @@
-package com.example.fptparkingproject.qrscan;
+package com.example.fptparkingproject.ui.qrscan;
 
 import android.os.CountDownTimer;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.firebasedatabase.ParkingInSynchronously;
-import com.example.fptparkingproject.firebasedatabase.ParkingOutSynchronously;
 import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.ui.home.HomeFragment;
 import com.example.fptparkingproject.untils.Until;
 
-public class ParkingOut {
-    CountDownTimer timer;
+public class ParkingIn extends AppCompatActivity {
     Constant constant = new Constant();
     Until until = new Until();
-    ParkingOutSynchronously parkingOutSynchronously = new ParkingOutSynchronously();
+    ParkingInSynchronously parkingInSynchronously = new ParkingInSynchronously();
+    CountDownTimer timer;
 
     //save parking in information to database
-    public void parkingOut(User user, String plate) {
-            parkingOutSynchronously.checkShareVehicle(user, plate);
+    public void parkingIn(User user, String plate) {
+            parkingInSynchronously.checkShareVehicle(user, plate);
             timer = new CountDownTimer(constant.TIMEOUT_PARKING, constant.COUNTDOWN) {
                 @Override
                 public void onTick(long millisUntilFinished) {
-                    if (parkingOutSynchronously.getResult()) {
-                        showAlertDialog(parkingOutSynchronously.getResult());
+                    if (parkingInSynchronously.getResult()) {
+                        showAlertDialog(parkingInSynchronously.getResult());
                         timer.cancel();
                     }
                 }
 
                 @Override
                 public void onFinish() {
-                    showAlertDialog(parkingOutSynchronously.getResult());
+                    showAlertDialog(parkingInSynchronously.getResult());
                 }
             };
             timer.start();
@@ -38,9 +39,9 @@ public class ParkingOut {
 
     private void showAlertDialog(Boolean isSuccess) {
         if (isSuccess) {
-            until.showAlertDialog(R.string.information, R.string.parkingoutsuccess, HomeFragment.getAppContext());
+            until.showAlertDialog(R.string.information, R.string.parkinginsuccess, HomeFragment.getAppContext());
         } else {
-            until.showAlertDialog(R.string.title_warning, R.string.parkingoutfailed, HomeFragment.getAppContext());
+            until.showAlertDialog(R.string.title_warning, R.string.parkinginfailed, HomeFragment.getAppContext());
         }
     }
 }

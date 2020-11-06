@@ -20,7 +20,7 @@
     <string name="signoutsuccess">Signed out!</string>
     <!-- Button -->
     <string name="button_qr">QR Scan</string>
-    <string name="button_feedback">Feedback</string>
+    <string name="button_feedback">Application</string>
     <string name="button_share">Share</string>
     <string name="button_history">History</string>
     <string name="signin">Sign in</string>
@@ -43,6 +43,8 @@
     <string name="txtHistoryDatetime">TIME</string>
     <string name="txtHistoryParkingIn">Parking in</string>
     <string name="txtHistoryParkingOut">Parking out</string>
+    <string name="txtNewFeedSeeMore">See More</string>
+    <string name="txtNewFeedNew">News</string>
 
     <!--QRCode-->
     <string name="not_support">The QR Code is not support</string>

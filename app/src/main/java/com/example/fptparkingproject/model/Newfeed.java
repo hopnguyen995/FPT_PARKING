@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
-public class Newfeed {
+public class Newfeed implements Comparable<Newfeed>{
     private String newfeedid;
     private String newfeedTitle;
     private String newfeedImage;
@@ -29,13 +29,14 @@ public class Newfeed {
         this.newfeedid = newfeedid;
     }
 
-    public Newfeed(String newfeedid, String newfeedTitle, String newfeedImage, String newfeedShortContent, String newfeedLongContent, Date newfeedDateTime) {
+    public Newfeed(String newfeedid, String newfeedTitle, String newfeedImage, String newfeedShortContent, String newfeedLongContent, Date newfeedDateTime, boolean expanded) {
         this.newfeedid = newfeedid;
         this.newfeedTitle = newfeedTitle;
         this.newfeedImage = newfeedImage;
         this.newfeedShortContent = newfeedShortContent;
         this.newfeedLongContent = newfeedLongContent;
         this.newfeedDateTime = newfeedDateTime;
+        this.expanded = expanded;
     }
 
     public String getNewfeedid() {
@@ -102,7 +103,6 @@ public class Newfeed {
         return gson.fromJson(json, listType);
     }
 
-
     public void saveListNewfeed(SharedPreferences prefs, ArrayList<Newfeed> listArray) {
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
@@ -130,5 +130,10 @@ public class Newfeed {
                 "newfeedTitle='" + newfeedTitle + '\'' +
                 ", newfeedDateTime=" + newfeedDateTime +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Newfeed o) {
+        return this.getNewfeedDateTime().compareTo(o.getNewfeedDateTime());
     }
 }
