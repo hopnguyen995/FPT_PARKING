@@ -1,4 +1,4 @@
-package com.example.fptparkingproject.qrscan;
+package com.example.fptparkingproject.ui.qrscan;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

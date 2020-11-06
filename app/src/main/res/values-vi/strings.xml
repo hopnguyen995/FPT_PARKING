@@ -20,7 +20,7 @@
     <string name="signoutsuccess">Đăng xuất!</string>
     <!-- Button -->
     <string name="button_qr">Quét QR</string>
-    <string name="button_feedback">Góp ý</string>
+    <string name="button_feedback">Đơn từ</string>
     <string name="button_share">Mượn xe</string>
     <string name="button_history">Nhật ký</string>
     <string name="signin">Đăng nhập</string>
@@ -43,6 +43,8 @@
     <string name="txtHistoryDatetime">THỜI GIAN</string>
     <string name="txtHistoryParkingIn">Gửi xe</string>
     <string name="txtHistoryParkingOut">Lấy xe</string>
+    <string name="txtNewFeedSeeMore">Xem thêm</string>
+    <string name="txtNewFeedNew">Bảng tin</string>
     <!--QRCode-->
     <string name="not_support">Mã QR không hỗ trợ</string>
     <!--Title-->

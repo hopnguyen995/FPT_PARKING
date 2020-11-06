@@ -37,7 +37,7 @@ public class NewfeedViewHolder extends RecyclerView.ViewHolder implements View.O
         txtSeeMore.setVisibility(expanded ? View.VISIBLE : View.GONE);
 
         txtTitle.setText(newfeed.getNewfeedTitle());
-        txtDateTime.setText(newfeed.getNewfeedDateTime());
+        txtDateTime.setText(new Until().nomalizeDateTime(newfeed.getNewfeedDateTime()));
         txtShortContent.setText(newfeed.getNewfeedShortContent());
         txtLongContent.setText(newfeed.getNewfeedLongContent());
 

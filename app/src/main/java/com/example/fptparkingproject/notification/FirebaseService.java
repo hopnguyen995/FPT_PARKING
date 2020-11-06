@@ -17,16 +17,12 @@ import android.provider.MediaStore;
 
 import androidx.core.app.NotificationCompat;
 
-import com.example.fptparkingproject.AdminActivity;
 import com.example.fptparkingproject.MainActivity;
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.User;
-import com.example.fptparkingproject.signin.SignInWithGoogle;
+import com.example.fptparkingproject.ui.signin.SignInWithGoogle;
 import com.example.fptparkingproject.untils.Until;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;

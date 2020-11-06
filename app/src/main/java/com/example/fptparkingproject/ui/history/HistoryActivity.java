@@ -14,7 +14,7 @@ import android.view.MenuItem;
 
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
-import com.example.fptparkingproject.customadapter.TableViewAdapter;
+import com.example.fptparkingproject.customadapter.HistoryViewAdapter;
 import com.example.fptparkingproject.model.History;
 import com.example.fptparkingproject.model.Parking;
 import com.example.fptparkingproject.model.User;
@@ -25,18 +25,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 
 public class HistoryActivity extends AppCompatActivity {
     private DatabaseReference ref;
     private SharedPreferences prefs;
     RecyclerView recyclerView;
-    TableViewAdapter tableViewAdapter;
+    HistoryViewAdapter historyViewAdapter;
     ArrayList<History> listHistoryDb = new ArrayList<>();
     User user;
     Constant constant = new Constant();
@@ -87,8 +83,8 @@ public class HistoryActivity extends AppCompatActivity {
 
     public void showListView(){
         if(!listHistoryDb.isEmpty()){
-            tableViewAdapter = new TableViewAdapter(getApplicationContext(),listHistoryDb);
-            recyclerView.setAdapter(tableViewAdapter);
+            historyViewAdapter = new HistoryViewAdapter(getApplicationContext(),listHistoryDb);
+            recyclerView.setAdapter(historyViewAdapter);
         }
     }
 

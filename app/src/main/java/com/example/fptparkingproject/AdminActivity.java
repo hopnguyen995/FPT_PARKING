@@ -2,7 +2,6 @@ package com.example.fptparkingproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,14 +13,9 @@ import android.widget.Toast;
 
 import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.User;
-import com.example.fptparkingproject.notification.SendNotif;
-import com.example.fptparkingproject.signin.SignInWithGoogle;
+import com.example.fptparkingproject.ui.signin.SignInWithGoogle;
 import com.example.fptparkingproject.uiadmin.notification.SendNotificationActivity;
-import com.example.fptparkingproject.untils.Until;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 public class AdminActivity extends AppCompatActivity {
     Constant constant = new Constant();
