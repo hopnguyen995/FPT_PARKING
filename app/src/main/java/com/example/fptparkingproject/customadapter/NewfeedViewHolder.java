@@ -44,8 +44,6 @@ public class NewfeedViewHolder extends RecyclerView.ViewHolder implements View.O
 
     }
 
-
-
     @Override
     public void onClick(View v) {
        txtSeeMore.setOnClickListener(this);
