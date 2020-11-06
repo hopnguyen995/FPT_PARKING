@@ -41,7 +41,6 @@
 
         <activity android:name=".ProfileActivity" />
         <activity android:name=".EditProfileActivity"/>
-        <activity android:name=".qrscan.ParkingIn" />
         <activity android:name=".uiadmin.notification.SendNotificationActivity" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".ui.notifications.NotificationDetailActivity" />
