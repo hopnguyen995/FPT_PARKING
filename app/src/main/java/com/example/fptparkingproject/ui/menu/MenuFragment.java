@@ -30,11 +30,12 @@ import com.example.fptparkingproject.ProfileActivity;
 import com.example.fptparkingproject.model.Share;
 import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.notification.SendNotif;
-import com.example.fptparkingproject.qrscan.ParkingIn;
-import com.example.fptparkingproject.qrscan.ParkingOut;
-import com.example.fptparkingproject.qrscan.QRScanActivity;
-import com.example.fptparkingproject.qrshare.ShareActivity;
-import com.example.fptparkingproject.signin.SignInWithGoogle;
+import com.example.fptparkingproject.ui.qrscan.ParkingIn;
+import com.example.fptparkingproject.ui.qrscan.ParkingOut;
+import com.example.fptparkingproject.ui.qrscan.QRScanActivity;
+import com.example.fptparkingproject.ui.qrshare.ShareActivity;
+import com.example.fptparkingproject.ui.signin.SignInWithGoogle;
+import com.example.fptparkingproject.ui.history.HistoryActivity;
 import com.example.fptparkingproject.untils.Until;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -84,11 +85,18 @@ public class MenuFragment extends Fragment {
                 startActivity(new Intent(getContext(), ShareActivity.class));
             }
         });
+        final Button buttonHistory = root.findViewById(R.id.buttonMenuHistory);
+        buttonHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), HistoryActivity.class));
+            }
+        });
         final Button buttonHelp = root.findViewById(R.id.buttonMenuHelp);
         buttonHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialNumber("02473081313");
+                dialNumber(constant.PHONENUMBER);
             }
         });
 

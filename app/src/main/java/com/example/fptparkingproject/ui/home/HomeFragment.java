@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,19 +22,16 @@ import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.Share;
 import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.notification.SendNotif;
-import com.example.fptparkingproject.qrscan.ParkingIn;
-import com.example.fptparkingproject.qrscan.ParkingOut;
-import com.example.fptparkingproject.qrscan.QRScanActivity;
-import com.example.fptparkingproject.qrshare.ShareActivity;
-import com.example.fptparkingproject.signin.SignInWithGoogle;
-import com.example.fptparkingproject.ui.history.HistoryDetailActivity;
+import com.example.fptparkingproject.ui.qrscan.ParkingIn;
+import com.example.fptparkingproject.ui.qrscan.ParkingOut;
+import com.example.fptparkingproject.ui.qrscan.QRScanActivity;
+import com.example.fptparkingproject.ui.qrshare.ShareActivity;
+import com.example.fptparkingproject.ui.signin.SignInWithGoogle;
+import com.example.fptparkingproject.ui.history.HistoryActivity;
 import com.example.fptparkingproject.untils.Until;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 
-import org.codehaus.jackson.map.ObjectMapper;
-
-import java.io.IOException;
 import java.util.Date;
 
 public class HomeFragment extends Fragment {
@@ -71,7 +67,7 @@ public class HomeFragment extends Fragment {
         btnHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), HistoryDetailActivity.class));
+                startActivity(new Intent(getContext(), HistoryActivity.class));
             }
         });
 

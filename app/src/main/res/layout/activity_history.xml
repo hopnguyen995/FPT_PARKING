@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context=".ui.history.HistoryActivity">
+
+    <!-- Table View-->
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="113dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/txtType"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="@drawable/table_header_cell_bg"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="@drawable/table_header_cell_bg"
+            android:text="@string/txtHistoryName"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtDatetime"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:background="@drawable/table_header_cell_bg"
+            android:text="@string/txtHistoryDatetime"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewHistoryList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/history_layout" />
+    </HorizontalScrollView>
+
+    <ImageView
+        android:id="@+id/imageViewIn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="285dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="34dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewOut"
+        app:layout_constraintEnd_toStartOf="@+id/textViewparkingin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_history_in"
+        tools:src="@drawable/ic_history_in"
+        tools:srcCompat="@drawable/ic_history_in" />
+
+    <TextView
+        android:id="@+id/textViewparkingin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/txtHistoryParkingIn"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewparkingout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageViewIn" />
+
+    <TextView
+        android:id="@+id/textViewparkingout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="11dp"
+        android:text="@string/txtHistoryParkingOut"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageViewOut" />
+
+    <ImageView
+        android:id="@+id/imageViewOut"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="285dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="11dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewparkingout"
+        app:layout_constraintEnd_toStartOf="@+id/textViewparkingout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewparkingin"
+        app:srcCompat="@drawable/ic_history_out"
+        tools:src="@drawable/ic_history_out"
+        tools:srcCompat="@drawable/ic_history_out" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
