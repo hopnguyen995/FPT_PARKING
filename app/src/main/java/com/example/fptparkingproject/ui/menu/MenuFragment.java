@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
+import com.example.fptparkingproject.ProfileActivity;
 import com.example.fptparkingproject.model.Share;
 import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.notification.SendNotif;
@@ -97,6 +99,16 @@ public class MenuFragment extends Fragment {
                 dialNumber(constant.PHONENUMBER);
             }
         });
+
+        final Button buttonProfile = root.findViewById(R.id.buttonProfile);
+        buttonProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // startActivity(new Intent(getContext(), ShareActivity.class));
+                startActivity(new Intent(getContext(), ProfileActivity.class));
+            }
+        });
+
         imgAvatar = root.findViewById(R.id.imgAvatar);
         txtUsername = root.findViewById(R.id.txtusername);
         return root;
