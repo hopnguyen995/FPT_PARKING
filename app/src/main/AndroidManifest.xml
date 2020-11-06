@@ -16,9 +16,7 @@
         android:roundIcon="@drawable/ic_parking"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".uiadmin.notification.SendNotificationActivity" />
-        <activity android:name=".AdminActivity" />
-        <activity android:name=".ui.notifications.NotificationDetailActivity" />
+        <activity android:name=".uiAdminNewfeed.NewfeedAdminActivity"></activity>
 
         <service
             android:name=".notification.FirebaseService"
@@ -40,7 +38,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".EditProfileActivity"/>
+        <activity android:name=".EditProfileActivity" />
         <activity android:name=".uiadmin.notification.SendNotificationActivity" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".ui.notifications.NotificationDetailActivity" />

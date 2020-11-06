@@ -39,7 +39,7 @@ public class NewfeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         ((NewfeedViewHolder) holder).txtDateTime.setText(new Until().nomalizeDateTime(newfeed.getNewfeedDateTime()));
         ((NewfeedViewHolder) holder).txtShortContent.setText(newfeed.getNewfeedShortContent());
         if (newfeed.getNewfeedImage() != null && !newfeed.getNewfeedImage().isEmpty()) {
-            Picasso.with(context).load(newfeed.getNewfeedImage()).placeholder(R.drawable.ic_image).into(((NewfeedViewHolder) holder).imgImage);
+            new Until().circleTransformAvatar(context, ((NewfeedViewHolder) holder).imgImage, newfeed.getNewfeedImage(), R.drawable.ic_image);
         }
 
         ((NewfeedViewHolder) holder).txtSeeMore.setOnClickListener(new View.OnClickListener() {
