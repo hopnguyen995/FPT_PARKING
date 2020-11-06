@@ -23,6 +23,8 @@ import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.ui.signin.SignInWithGoogle;
 import com.example.fptparkingproject.untils.Until;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -85,8 +87,7 @@ public class FirebaseService extends FirebaseMessagingService {
                         if (mAuth.getCurrentUser() != null) {
                             mAuth.signOut();
                             FirebaseAuth.getInstance().signOut();
-                            User user = new User();
-                            user.saveUser(prefs, user);
+                            user.saveUser(prefs, new User());
                             if (subtime < constant.TIMEOUT_SIGNIN) {
                                 new SendNotif().sendMessage("", "", "", sendToken, sendToken, constant.KEY_SUCCESS, until.dateTimeToString(new Date()));
                             }
