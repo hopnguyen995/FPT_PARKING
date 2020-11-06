@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.ui.signin.SignInWithGoogle;
+import com.example.fptparkingproject.uiAdminNewfeed.NewfeedAdminActivity;
 import com.example.fptparkingproject.uiadmin.notification.SendNotificationActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -24,6 +25,8 @@ public class AdminActivity extends AppCompatActivity {
     User user;
     private Button buttonSignOut;
     private Button buttonNotif;
+    private Button buttonNewFeed;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,14 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivityForResult(new Intent(getApplicationContext(), SendNotificationActivity.class),1);
+            }
+        });
+
+        buttonNewFeed = findViewById(R.id.buttonNewFeed);
+        buttonNewFeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), NewfeedAdminActivity.class));
             }
         });
     }
