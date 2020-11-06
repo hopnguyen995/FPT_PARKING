@@ -1,4 +1,4 @@
-package com.example.fptparkingproject.uiAdminNewfeed;
+package com.example.fptparkingproject.uiadmin.newfeed;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -16,9 +16,6 @@ import android.widget.Toast;
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.Newfeed;
-import com.example.fptparkingproject.model.Notification;
-import com.example.fptparkingproject.notification.SendNotif;
-import com.example.fptparkingproject.uiadmin.notification.SendNotificationActivity;
 import com.example.fptparkingproject.untils.Until;
 import com.google.firebase.database.DatabaseReference;
 

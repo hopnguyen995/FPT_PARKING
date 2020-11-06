@@ -45,7 +45,6 @@ public class DashboardFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
         recyclerView = root.findViewById(R.id.recyclerView1);
-        ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         final ArrayList<Newfeed> listNewfeedDb = new ArrayList<>();
         listNewfeed = new Newfeed().getListNewfeed(prefs);

@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="15dp"
         android:paddingTop="20dp">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_edit"
-            android:backgroundTint="#FF9800"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
+            android:backgroundTint="#FF9800"
             android:src="@drawable/ic_edit" />
 
         <LinearLayout
@@ -24,13 +25,15 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingVertical="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:weightSum="10">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="Họ tên"
+                android:text="@string/txtname"
                 android:textSize="18dp" />
 
             <TextView
@@ -47,17 +50,19 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingVertical="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:weightSum="10">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="Mã sinh viên"
+                android:text="@string/txtEmail"
                 android:textSize="18dp" />
 
             <TextView
-                android:id="@+id/txt_id"
+                android:id="@+id/txt_email"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="7"
@@ -70,22 +75,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingVertical="10dp"
-            android:weightSum="10">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:text="Số điên thoại"
-                android:textSize="18dp" />
-
-            <TextView
-                android:id="@+id/txt_phoneNumber"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="7"
-                android:textSize="18dp" />
-        </LinearLayout>
+            android:weightSum="10" />
 
 
         <LinearLayout
@@ -93,47 +83,82 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingVertical="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:weightSum="10">
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:text="Số lượng xe đăng ký"
-                android:textSize="18dp" />
-
-            <TextView
-                android:id="@+id/txt_amount"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="7"
-                android:textSize="18dp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingVertical="10dp"
-            android:weightSum="10">
-
-            <TextView
-                android:layout_width="0dp"
+                android:id="@+id/txtDanhSach"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="Danh sách xe"
+                android:text="@string/txtlistVehicle"
                 android:textSize="18dp" />
         </LinearLayout>
-
-        <ListView
-            android:id="@+id/list_vehicle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </ListView>
-
-
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linearLayoutvehicle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutheader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_No"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="@drawable/table_header_cell_bg"
+                android:text="@string/txtNo"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="@drawable/table_header_cell_bg"
+                android:text="@string/txtNumberPlate"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtDatetime"
+                android:layout_width="160dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="top"
+                android:background="@drawable/table_header_cell_bg"
+                android:text="@string/txtStatus"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewVehicleList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/vehicle_layout" />
+        </HorizontalScrollView>
+    </LinearLayout>
 </LinearLayout>

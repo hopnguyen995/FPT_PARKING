@@ -1,5 +1,7 @@
 package com.example.fptparkingproject.model;
 
+import java.util.Objects;
+
 public class Vehicle {
     private String vehicleid;
     private String userid;
@@ -66,5 +68,18 @@ public class Vehicle {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Vehicle)) return false;
+        Vehicle vehicle = (Vehicle) o;
+        return vehicleid.equals(vehicle.vehicleid);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(vehicleid);
     }
 }

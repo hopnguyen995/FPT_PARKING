@@ -28,27 +28,19 @@ public class HistoryViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(context).inflate(R.layout.history_layout, parent, false);
-        return new RowViewHolder(itemView);
+        return new HistoryViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         History history = listHistories.get(position);
         if(new Constant().PARKING_IN.equals(history.getHistoryImage())){
-            ((RowViewHolder) holder).imgImage.setImageResource(R.drawable.ic_history_in);
+            ((HistoryViewHolder) holder).imgImage.setImageResource(R.drawable.ic_history_in);
         }else{
-            ((RowViewHolder) holder).imgImage.setImageResource(R.drawable.ic_history_out);
+            ((HistoryViewHolder) holder).imgImage.setImageResource(R.drawable.ic_history_out);
         }
-        ((RowViewHolder) holder).txtDatetime.setText(new Until().nomalizeDateTime(history.getHistoryDateTime()));
-        ((RowViewHolder) holder).txtName.setText(history.getHistoryContent());
-    }
-
-    private void setHeaderBg(View view) {
-        view.setBackgroundResource(R.drawable.table_header_cell_bg);
-    }
-
-    private void setContentBg(View view) {
-        view.setBackgroundResource(R.drawable.table_content_cell_bg);
+        ((HistoryViewHolder) holder).txtDatetime.setText(new Until().nomalizeDateTime(history.getHistoryDateTime()));
+        ((HistoryViewHolder) holder).txtName.setText(history.getHistoryContent());
     }
 
     @Override
