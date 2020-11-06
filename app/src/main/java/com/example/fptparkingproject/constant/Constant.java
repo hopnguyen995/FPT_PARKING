@@ -29,6 +29,7 @@ public class Constant {
     public final String KEY_NEWFEED = "newfeeds";
     public final String KEY_VEHICLEPLATE = "plate";
     public final String KEY_PARKING = "Parkings";
+    public final String KEY_FEEDBACK = "Feedbacks";
     //mail
     public final String MAIL = "@fpt.edu.vn";
     //parking
