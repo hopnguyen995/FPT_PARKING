@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.ui.signin.SignInWithGoogle;
-import com.example.fptparkingproject.uiAdminNewfeed.NewfeedAdminActivity;
+import com.example.fptparkingproject.uiadmin.newfeed.NewfeedAdminActivity;
 import com.example.fptparkingproject.uiadmin.notification.SendNotificationActivity;
 import com.google.firebase.auth.FirebaseAuth;
 

@@ -20,6 +20,7 @@ public class NewfeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private Context context;
     private ArrayList<Newfeed> listNewfeed;
     Constant constant = new Constant();
+
     public NewfeedAdapter(Context context, ArrayList<Newfeed> listNewfeed) {
         this.context = context;
         this.listNewfeed = listNewfeed;
@@ -34,12 +35,18 @@ public class NewfeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
+        ((NewfeedViewHolder) holder).txtSeeMore.setVisibility(View.INVISIBLE);
         final Newfeed newfeed = listNewfeed.get(position);
         ((NewfeedViewHolder) holder).txtTitle.setText(newfeed.getNewfeedTitle());
         ((NewfeedViewHolder) holder).txtDateTime.setText(new Until().nomalizeDateTime(newfeed.getNewfeedDateTime()));
-        ((NewfeedViewHolder) holder).txtShortContent.setText(newfeed.getNewfeedShortContent());
+        if (!newfeed.getNewfeedShortContent().isEmpty() && !newfeed.isExpanded()) {
+            ((NewfeedViewHolder) holder).txtShortContent.setText(newfeed.getNewfeedShortContent());
+            ((NewfeedViewHolder) holder).txtSeeMore.setVisibility(View.VISIBLE);
+        } else {
+            ((NewfeedViewHolder) holder).txtShortContent.setText(newfeed.getNewfeedLongContent());
+        }
         if (newfeed.getNewfeedImage() != null && !newfeed.getNewfeedImage().isEmpty()) {
-            new Until().circleTransformAvatar(context, ((NewfeedViewHolder) holder).imgImage, newfeed.getNewfeedImage(), R.drawable.ic_image);
+            Picasso.with(context).load(newfeed.getNewfeedImage()).into(((NewfeedViewHolder) holder).imgImage);
         }
 
         ((NewfeedViewHolder) holder).txtSeeMore.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +59,7 @@ public class NewfeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 // Notify the adapter that item has changed
                 notifyItemChanged(position);
                 ((NewfeedViewHolder) holder).bind(newfeed);
-                ((NewfeedViewHolder) holder).txtSeeMore.setVisibility(View.GONE);
+                ((NewfeedViewHolder) holder).txtSeeMore.setVisibility(View.INVISIBLE);
             }
         });
     }

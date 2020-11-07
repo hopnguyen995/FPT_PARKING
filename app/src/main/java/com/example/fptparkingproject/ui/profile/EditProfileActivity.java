@@ -1,12 +1,10 @@
-package com.example.fptparkingproject;
+package com.example.fptparkingproject.ui.profile;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fptparkingproject.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class EditProfileActivity extends AppCompatActivity {
 

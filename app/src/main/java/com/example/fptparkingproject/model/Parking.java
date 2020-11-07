@@ -1,8 +1,9 @@
 package com.example.fptparkingproject.model;
 
 import java.util.Date;
+import java.util.Objects;
 
-public class Parking {
+public class Parking implements Comparable<Parking>{
     private String parkingid;
     private String username;
     private String plate;
@@ -58,5 +59,23 @@ public class Parking {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    @Override
+    public int compareTo(Parking o) {
+        return this.getTime().compareTo(o.getTime());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Parking)) return false;
+        Parking parking = (Parking) o;
+        return parkingid.equals(parking.parkingid);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(parkingid);
     }
 }
