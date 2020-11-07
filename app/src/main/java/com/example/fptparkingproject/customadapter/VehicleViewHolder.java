@@ -17,6 +17,6 @@ public class VehicleViewHolder extends RecyclerView.ViewHolder  {
         super(itemView);
         txt_No = itemView.findViewById(R.id.txtNo);
         txt_number_plate = itemView.findViewById(R.id.txtPlate);
-        txt_status = itemView.findViewById(R.id.txtStatus);
+        txt_status = itemView.findViewById(R.id.txtFeedBackStatusAdmin);
     }
 }

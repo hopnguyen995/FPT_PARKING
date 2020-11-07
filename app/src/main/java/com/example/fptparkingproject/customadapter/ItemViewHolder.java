@@ -1,7 +1,6 @@
 package com.example.fptparkingproject.customadapter;
 
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -16,7 +15,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     public ItemViewHolder(@NonNull View itemView) {
         super(itemView);
         imgImage = itemView.findViewById(R.id.imgImage);
-        txtTitle = itemView.findViewById(R.id.txtTitle);
+        txtTitle = itemView.findViewById(R.id.txtFeedBackTitleAdmin);
         txtShortContent = itemView.findViewById(R.id.txtShortContent);
         itemView.setOnClickListener(this);
     }

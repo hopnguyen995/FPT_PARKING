@@ -6,6 +6,7 @@
     <string name="title_menu">Menu</string>
     <string name="title_toolbar_share">Share</string>
     <string name="title_toolbar_notification">Notification</string>
+    <string name="title_toolbar_feedback">FeedBacks</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_blank">Hello!</string>
@@ -33,6 +34,7 @@
     <string name="button_PostStatus">Post Status</string>
     <string name="button_ViewFeedback">View Application</string>
     <string name="button_ClickHere">Click here to cancel</string>
+    <string name="button_SendFeedBack">Send Application</string>
     <!--TextView-->
     <string name="txtProfile">Profile</string>
     <string name="txtHistory">History</string>
@@ -98,6 +100,6 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-
+    <!--Feedbacks-->
     <!---->
 </resources>

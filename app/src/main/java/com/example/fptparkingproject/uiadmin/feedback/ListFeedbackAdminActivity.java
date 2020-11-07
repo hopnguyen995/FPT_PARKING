@@ -1,9 +1,8 @@
-package com.example.fptparkingproject.ui.feedbacks;
+package com.example.fptparkingproject.uiadmin.feedback;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.SharedPreferences;
@@ -11,14 +10,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
-import com.example.fptparkingproject.customadapter.HistoryViewAdapter;
 import com.example.fptparkingproject.customadapter.ViewFeedbackUserAdapter;
 import com.example.fptparkingproject.model.Feedback;
-import com.example.fptparkingproject.model.Parking;
 import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.untils.Until;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ViewFeedbackActivity extends AppCompatActivity {
+public class ListFeedbackAdminActivity extends AppCompatActivity {
     private DatabaseReference ref;
     private SharedPreferences prefs;
     RecyclerView recyclerView;
@@ -41,7 +37,7 @@ public class ViewFeedbackActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_feedback);
+        setContentView(R.layout.activity_list_feedback_admin);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setTitle(R.string.button_ViewFeedback);

@@ -18,6 +18,7 @@ public class Feedback implements Comparable<Feedback> {
     private Date feedbackDateTime;
     private String userMail;
     private String feedbackStatus;
+    private String feedback;
     Constant constant = new Constant();
 
     public Feedback() {
@@ -30,6 +31,17 @@ public class Feedback implements Comparable<Feedback> {
         this.feedbackDateTime = feedbackDateTime;
         this.userMail = userMail;
         this.feedbackStatus = feedbackStatus;
+    }
+
+    public Feedback(String feedbackId, String feedbackTitle, String feedbackContent, Date feedbackDateTime, String userMail, String feedbackStatus, String feedback, Constant constant) {
+        this.feedbackId = feedbackId;
+        this.feedbackTitle = feedbackTitle;
+        this.feedbackContent = feedbackContent;
+        this.feedbackDateTime = feedbackDateTime;
+        this.userMail = userMail;
+        this.feedbackStatus = feedbackStatus;
+        this.feedback = feedback;
+        this.constant = constant;
     }
 
     public String getFeedbackId() {
@@ -78,6 +90,14 @@ public class Feedback implements Comparable<Feedback> {
 
     public void setFeedbackStatus(String feedbackStatus) {
         this.feedbackStatus = feedbackStatus;
+    }
+
+    public String getFeedback() {
+        return feedback;
+    }
+
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
     }
 
     @Override

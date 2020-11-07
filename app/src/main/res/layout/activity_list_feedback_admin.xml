@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    tools:context=".ui.feedbacks.ViewFeedbackActivity">
+    tools:context=".uiadmin.feedback.ListFeedbackAdminActivity">
 
     <!-- Table View-->
 
@@ -21,7 +20,7 @@
 
         <TextView
             android:id="@+id/txtFeedBackTitleAdmin"
-            android:layout_width="120dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
             android:background="@drawable/table_header_cell_bg"
@@ -44,17 +43,6 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/txtContent"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="@drawable/table_header_cell_bg"
-            android:textColor="#ffffff"
-            android:textAlignment="center"
-            android:textSize="13sp"
-            android:text="Content"/>
-
-        <TextView
             android:id="@+id/txtFeedBackStatusAdmin"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
@@ -63,6 +51,16 @@
             android:text="@string/txtStatus"
             android:textColor="#ffffff"
             android:textSize="13sp" />
+        <TextView
+            android:id="@+id/txtButtonShow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="@drawable/table_header_cell_bg"
+            android:textColor="#ffffff"
+            android:textAlignment="center"
+            android:textSize="13sp"
+            android:text="Detail"/>
     </LinearLayout>
 
     <HorizontalScrollView
@@ -75,12 +73,12 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewFeedbackList"
+            android:id="@+id/recyclerViewFeedbackListAdmin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/view_feedback_layout" />
+            tools:listitem="@layout/feedback_list_admin_layout" />
     </HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

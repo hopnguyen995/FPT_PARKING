@@ -1,6 +1,5 @@
 package com.example.fptparkingproject.customadapter;
 
-import android.app.Application;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,7 +21,7 @@ public class NewfeedViewHolder extends RecyclerView.ViewHolder implements View.O
     public NewfeedViewHolder(@NonNull View itemView) {
         super(itemView);
         imgImage = itemView.findViewById(R.id.imgImage);
-        txtTitle = itemView.findViewById(R.id.txtTitle);
+        txtTitle = itemView.findViewById(R.id.txtFeedBackTitleAdmin);
         txtShortContent = itemView.findViewById(R.id.txtShortContent);
         txtDateTime = itemView.findViewById(R.id.txtDateTime);
         txtSeeMore = itemView.findViewById(R.id.txtSeeMore);

@@ -16,13 +16,15 @@
         android:roundIcon="@drawable/ic_parking"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.feedbacks.ViewFeedbackActivity"></activity>
+        <activity android:name=".uiadmin.feedback.ListFeedbackAdminActivity"></activity>
+        <activity android:name=".uiadmin.feedback.ViewFeedbackAdminActivity" />
+        <activity android:name=".ui.feedbacks.ViewFeedbackActivity" />
         <activity android:name=".ui.feedbacks.SendFeedbackActivity" />
         <activity android:name=".ui.feedbacks.FeedbackActivity" />
         <activity android:name=".uiadmin.notification.SendNotificationActivity" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".ui.notifications.NotificationDetailActivity" />
-        <activity android:name=".uiAdminNewfeed.NewfeedAdminActivity"></activity>
+        <activity android:name=".uiAdminNewfeed.NewfeedAdminActivity" />
 
         <service
             android:name=".notification.FirebaseService"

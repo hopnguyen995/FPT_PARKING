@@ -9,17 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fptparkingproject.R;
-import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.Feedback;
 import com.example.fptparkingproject.untils.Until;
 
 import java.util.ArrayList;
 
-public class ViewFeedbackUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ViewFeedBackAdminAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private ArrayList<Feedback> listFeedbacks;
 
-    public ViewFeedbackUserAdapter(Context context, ArrayList<Feedback> listFeedbacks) {
+    public ViewFeedBackAdminAdapter(Context context, ArrayList<Feedback> listFeedbacks) {
         this.context = context;
         this.listFeedbacks = listFeedbacks;
     }
@@ -27,17 +26,16 @@ public class ViewFeedbackUserAdapter extends RecyclerView.Adapter<RecyclerView.V
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(context).inflate(R.layout.view_feedback_layout, parent, false);
+        View itemView = LayoutInflater.from(context).inflate(R.layout.feedback_list_admin_layout, parent, false);
         return new FeedBackRowViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Feedback feedback = listFeedbacks.get(position);
-        ((FeedBackRowViewHolder) holder).txtTitle.setText(feedback.getFeedbackTitle());
-        ((FeedBackRowViewHolder) holder).txtDatetime.setText(new Until().nomalizeDateTime(feedback.getFeedbackDateTime()));
-        ((FeedBackRowViewHolder) holder).txtContent.setText(feedback.getFeedbackContent());
-        ((FeedBackRowViewHolder) holder).txtStatus.setText("1".equals(feedback.getFeedbackStatus()) ? "Sended" : "Approved");
+        ((FeedBackRowAdminViewHolder) holder).txtTitle.setText(feedback.getFeedbackTitle());
+        ((FeedBackRowAdminViewHolder) holder).txtDatetime.setText(new Until().nomalizeDateTime(feedback.getFeedbackDateTime()));
+        ((FeedBackRowAdminViewHolder) holder).txtStatus.setText("1".equals(feedback.getFeedbackStatus()) ? "Sended" : "Approved");
     }
 
     private void setHeaderBg(View view) {
