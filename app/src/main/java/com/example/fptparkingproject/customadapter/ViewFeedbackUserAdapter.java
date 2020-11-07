@@ -35,9 +35,10 @@ public class ViewFeedbackUserAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Feedback feedback = listFeedbacks.get(position);
-        ((RowViewHolder) holder).txtName.setText(feedback.getFeedbackTitle());
-        ((RowViewHolder) holder).txtDatetime.setText(new Until().nomalizeDateTime(feedback.getFeedbackDateTime()));
-        ((RowViewHolder) holder).txtName.setText(feedback.getFeedbackContent());
+        ((FeedBackRowViewHolder) holder).txtTitle.setText(feedback.getFeedbackTitle());
+        ((FeedBackRowViewHolder) holder).txtDatetime.setText(new Until().nomalizeDateTime(feedback.getFeedbackDateTime()));
+        ((FeedBackRowViewHolder) holder).txtContent.setText(feedback.getFeedbackContent());
+        ((FeedBackRowViewHolder) holder).txtStatus.setText(feedback.getFeedbackStatus());
     }
 
     private void setHeaderBg(View view) {
@@ -50,6 +51,6 @@ public class ViewFeedbackUserAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public int getItemCount() {
-        return listHistories.size();
+        return listFeedbacks.size();
     }
 }
