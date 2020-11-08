@@ -9,19 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fptparkingproject.R;
-import com.example.fptparkingproject.constant.Constant;
-import com.example.fptparkingproject.model.History;
+import com.example.fptparkingproject.model.Parking;
 import com.example.fptparkingproject.untils.Until;
 
 import java.util.ArrayList;
 
 public class HistoryViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
-    private ArrayList<History> listHistories;
+    private ArrayList<Parking> listParkingHistoryDb;
 
-    public HistoryViewAdapter(Context context, ArrayList<History> listHistories) {
+    public HistoryViewAdapter(Context context, ArrayList<Parking> listParkingHistoryDb) {
         this.context = context;
-        this.listHistories = listHistories;
+        this.listParkingHistoryDb = listParkingHistoryDb;
     }
 
     @NonNull
@@ -33,18 +32,18 @@ public class HistoryViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        History history = listHistories.get(position);
-        if(new Constant().PARKING_IN.equals(history.getHistoryImage())){
+        Parking parking = listParkingHistoryDb.get(position);
+        if (parking.isType()) {
             ((HistoryViewHolder) holder).imgImage.setImageResource(R.drawable.ic_history_in);
-        }else{
+        } else {
             ((HistoryViewHolder) holder).imgImage.setImageResource(R.drawable.ic_history_out);
         }
-        ((HistoryViewHolder) holder).txtDatetime.setText(new Until().nomalizeDateTime(history.getHistoryDateTime()));
-        ((HistoryViewHolder) holder).txtName.setText(history.getHistoryContent());
+        ((HistoryViewHolder) holder).txtDatetime.setText(new Until().nomalizeDateTime(parking.getTime()));
+        ((HistoryViewHolder) holder).txtName.setText(parking.getUsername());
     }
 
     @Override
     public int getItemCount() {
-        return listHistories.size();
+        return listParkingHistoryDb.size();
     }
 }

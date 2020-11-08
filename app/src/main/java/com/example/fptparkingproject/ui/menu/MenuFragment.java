@@ -25,7 +25,7 @@ import android.widget.Toast;
 
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
-import com.example.fptparkingproject.profile.ProfileActivity;
+import com.example.fptparkingproject.ui.profile.ProfileActivity;
 import com.example.fptparkingproject.model.Share;
 import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.notification.SendNotif;
@@ -36,6 +36,8 @@ import com.example.fptparkingproject.ui.qrshare.ShareActivity;
 import com.example.fptparkingproject.ui.signin.SignInWithGoogle;
 import com.example.fptparkingproject.ui.history.HistoryActivity;
 import com.example.fptparkingproject.untils.Until;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.codehaus.jackson.map.ObjectMapper;
@@ -66,7 +68,13 @@ public class MenuFragment extends Fragment {
                 new Until().connectDatabase().child(constant.TABLE_USERS).child(user.getUserid()).child(constant.TABLE_USERS_CHILD_TOKEN).setValue("");
                 mAuth.signOut();
                 FirebaseAuth.getInstance().signOut();
+                GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken(getString(R.string.default_web_client_id))
+                        .requestEmail()
+                        .build();
+                GoogleSignIn.getClient(getActivity(), gso).signOut();
                 startActivity(new Intent(getContext(), SignInWithGoogle.class));
+                user.saveUser(prefs,new User());
                 Toast.makeText(getContext(), R.string.signoutsuccess, Toast.LENGTH_SHORT).show();
             }
         });
