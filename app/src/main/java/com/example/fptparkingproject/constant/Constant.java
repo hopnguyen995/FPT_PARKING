@@ -21,6 +21,7 @@ public class Constant {
     public final String INTENT_NEWFEED_DETAIL_NEWFEED = "newfeed";
     public final String INTENT_HISTORY_DETAIL_HISTORY = "history";
     public final String INTENT_DETAIL_FEEDBACK = "feedback";
+    public final String INTENT_CASE = "case";
     //Qrcode
     public final int QRCODE_WIDTH = 350;
     //SharedPreferences

@@ -24,7 +24,9 @@
         <activity android:name=".uiadmin.notification.SendNotificationActivity" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".ui.notifications.NotificationDetailActivity" />
-        <activity android:name=".uiAdminNewfeed.NewfeedAdminActivity" />
+        <activity android:name=".uiadmin.search.SearchActivity"></activity>
+        <activity android:name=".uiadmin.search.Search" />
+        <activity android:name=".uiadmin.newfeed.NewfeedAdminActivity" />
 
         <service
             android:name=".notification.FirebaseService"

@@ -1,5 +1,6 @@
 package com.example.fptparkingproject.ui.profile;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -21,6 +22,8 @@ import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.model.Vehicle;
 import com.example.fptparkingproject.untils.Until;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,6 +42,7 @@ public class ProfileActivity extends AppCompatActivity {
     private ArrayList<Vehicle> listVehicles;
     User user;
     Constant constant = new Constant();
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +57,24 @@ public class ProfileActivity extends AppCompatActivity {
         TextView txtUsername = findViewById(R.id.txt_userName);
         TextView txtEmail = findViewById(R.id.txt_email);
         txtDanhsach = findViewById(R.id.txtDanhSach);
-        fab.setVisibility(View.INVISIBLE);
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        user = new User().getUser(prefs);
+        mAuth = FirebaseAuth.getInstance();
+        if(getIntent().getIntExtra(constant.INTENT_CASE,0) == 1){
+            fab.setVisibility(View.VISIBLE);
+            FirebaseUser fuser = mAuth.getCurrentUser();
+            User user = new User();
+            user.setUserid(fuser.getUid());
+            user.setUsername(fuser.getDisplayName());
+            user.setEmail(fuser.getEmail());
+            user.setRole(true);
+            user.saveUser(prefs, user);
+        }else{
+            fab.setVisibility(View.INVISIBLE);
+        }
         txtDanhsach.setVisibility(View.INVISIBLE);
         linearLayout = findViewById(R.id.linearLayoutvehicle);
         linearLayout.setVisibility(View.INVISIBLE);
-        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        user = new User().getUser(prefs);
         txtUsername.setText(user.getUsername());
         txtEmail.setText(user.getEmail());
         listVehicles = new ArrayList<>();
