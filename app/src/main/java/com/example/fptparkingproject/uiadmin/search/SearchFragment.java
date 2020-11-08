@@ -1,14 +1,31 @@
 package com.example.fptparkingproject.uiadmin.search;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.example.fptparkingproject.R;
+import com.example.fptparkingproject.constant.Constant;
+import com.example.fptparkingproject.customadapter.SearchAdapter;
+import com.example.fptparkingproject.model.User;
+import com.example.fptparkingproject.untils.Until;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +33,16 @@ import com.example.fptparkingproject.R;
  * create an instance of this fragment.
  */
 public class SearchFragment extends Fragment {
+
+    private EditText inputSearch;
+    private ListView list_view;
+    private ArrayAdapter<String> adapter;
+
+    ArrayList<User> listUser;
+    SearchAdapter searchAdapter;
+    private DatabaseReference ref;
+    private SharedPreferences prefs;
+    Constant constant = new Constant();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +88,54 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        View root = inflater.inflate(R.layout.search, container, false);
+        list_view = root.findViewById(R.id.list_view);
+        prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        final ArrayList<User> listUserDb = new ArrayList<>();
+        listUser = new User().getListUser(prefs);
+        if (listUser == null) {
+            listUser = new ArrayList<>();
+        }
+        searchAdapter = new SearchAdapter(getContext(), listUser);
+        list_view.setAdapter((ListAdapter) searchAdapter);
+        ref = new Until().connectDatabase();
+        ref.child(constant.TABLE_USERS).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        User user = ds.getValue(User.class);
+                        listUserDb.add(user);
+                    }
+                    for (User uDb : listUserDb
+                    ) {
+                        boolean isExist = false;
+                        for (User u : listUser
+                        ) {
+                            if (u.equals(uDb)) {
+                                isExist = true;
+                            }
+                        }
+                        if (!isExist) {
+                            listUser.add(uDb);
+                        }
+                    }
+
+                }
+                searchAdapter = new SearchAdapter(getContext(), listUser);
+                list_view.setAdapter((ListAdapter) searchAdapter);
+                new User().saveListUser(prefs, listUser);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
+
+        searchAdapter = new SearchAdapter(getContext(), listUser);
+        list_view.setAdapter((ListAdapter) searchAdapter);
+        return root;
     }
 }

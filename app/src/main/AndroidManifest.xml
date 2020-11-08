@@ -16,7 +16,9 @@
         android:roundIcon="@drawable/ic_parking"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".uiadmin.newfeed.NewfeedAdminActivity"></activity>
+        <activity android:name=".uiadmin.search.SearchActivity"></activity>
+        <activity android:name=".uiadmin.search.Search" />
+        <activity android:name=".uiadmin.newfeed.NewfeedAdminActivity" />
 
         <service
             android:name=".notification.FirebaseService"

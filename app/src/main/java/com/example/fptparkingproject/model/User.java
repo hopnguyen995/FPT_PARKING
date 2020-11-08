@@ -4,8 +4,11 @@ import android.content.SharedPreferences;
 
 import com.example.fptparkingproject.constant.Constant;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.Serializable;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 public class User implements Serializable {
     private String userid;
@@ -81,4 +84,24 @@ public class User implements Serializable {
         String json = prefs.getString(constant.KEY_USER, null);
         return gson.fromJson(json, User.class);
     }
+
+
+
+
+    public ArrayList<User> getListUser(SharedPreferences prefs) {
+        Gson gson = new Gson();
+        String json = prefs.getString(constant.KEY_USER, null);
+        Type listType = new TypeToken<ArrayList<Newfeed>>() {
+        }.getType();
+        return gson.fromJson(json, listType);
+    }
+
+    public void saveListUser(SharedPreferences prefs, ArrayList<User> listArray) {
+        SharedPreferences.Editor editor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(listArray);
+        editor.putString(constant.KEY_USER, json);
+        editor.commit();
+    }
+
 }

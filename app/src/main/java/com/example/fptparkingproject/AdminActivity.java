@@ -16,6 +16,7 @@ import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.ui.signin.SignInWithGoogle;
 import com.example.fptparkingproject.uiadmin.newfeed.NewfeedAdminActivity;
 import com.example.fptparkingproject.uiadmin.notification.SendNotificationActivity;
+import com.example.fptparkingproject.uiadmin.search.SearchActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class AdminActivity extends AppCompatActivity {
@@ -26,6 +27,7 @@ public class AdminActivity extends AppCompatActivity {
     private Button buttonSignOut;
     private Button buttonNotif;
     private Button buttonNewFeed;
+    private Button buttonInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,14 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), NewfeedAdminActivity.class));
+            }
+        });
+
+        buttonInfo = findViewById(R.id.buttonInfo);
+        buttonInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), SearchActivity.class));
             }
         });
     }
