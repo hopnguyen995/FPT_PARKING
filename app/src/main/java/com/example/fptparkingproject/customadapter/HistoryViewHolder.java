@@ -17,7 +17,7 @@ public class HistoryViewHolder extends RecyclerView.ViewHolder {
     public HistoryViewHolder(@NonNull View itemView) {
         super(itemView);
         txtName = itemView.findViewById(R.id.txtName);
-        txtDatetime = itemView.findViewById(R.id.txtDatetime);
+        txtDatetime = itemView.findViewById(R.id.txtFeedBackDatetimeAdmin);
         imgImage = itemView.findViewById(R.id.imageViewType);
     }
 }

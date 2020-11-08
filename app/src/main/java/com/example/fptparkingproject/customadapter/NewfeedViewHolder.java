@@ -1,6 +1,5 @@
 package com.example.fptparkingproject.customadapter;
 
-import android.app.Application;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;

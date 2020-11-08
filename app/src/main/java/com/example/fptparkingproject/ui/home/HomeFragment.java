@@ -22,6 +22,7 @@ import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.Share;
 import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.notification.SendNotif;
+import com.example.fptparkingproject.ui.feedbacks.FeedbackActivity;
 import com.example.fptparkingproject.ui.qrscan.ParkingIn;
 import com.example.fptparkingproject.ui.qrscan.ParkingOut;
 import com.example.fptparkingproject.ui.qrscan.QRScanActivity;
@@ -77,6 +78,15 @@ public class HomeFragment extends Fragment {
                     StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+
+
+        final Button buttonFeedback = root.findViewById(R.id.buttonFeedback);
+        buttonFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), FeedbackActivity.class));
+            }
+        });
         txtUsername = root.findViewById(R.id.user);
         mAuth = FirebaseAuth.getInstance();
         return root;
