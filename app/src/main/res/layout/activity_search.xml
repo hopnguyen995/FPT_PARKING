@@ -8,9 +8,13 @@
         android:layout_height="wrap_content"
         android:hint="Search student code.."
         android:inputType="textVisiblePassword"/>
-    <ListView
-        android:id="@+id/list_view"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/buttonSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Search" />
 
 </LinearLayout>
