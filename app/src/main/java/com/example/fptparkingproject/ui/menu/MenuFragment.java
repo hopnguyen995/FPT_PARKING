@@ -25,7 +25,6 @@ import android.widget.Toast;
 
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
-import com.example.fptparkingproject.ui.feedbacks.FeedbackActivity;
 import com.example.fptparkingproject.ui.profile.ProfileActivity;
 import com.example.fptparkingproject.model.Share;
 import com.example.fptparkingproject.model.User;
@@ -116,13 +115,7 @@ public class MenuFragment extends Fragment {
                 startActivity(new Intent(getContext(), ProfileActivity.class));
             }
         });
-        final Button buttonFeedback = root.findViewById(R.id.buttonMenuFeedback);
-        buttonFeedback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), FeedbackActivity.class));
-            }
-        });
+
         imgAvatar = root.findViewById(R.id.imgAvatar);
         txtUsername = root.findViewById(R.id.txtusername);
         return root;

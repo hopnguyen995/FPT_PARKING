@@ -16,14 +16,6 @@
         android:roundIcon="@drawable/ic_parking"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".uiadmin.feedback.ListFeedbackAdminActivity"></activity>
-        <activity android:name=".uiadmin.feedback.FeedbackReplyAdminActivity" />
-        <activity android:name=".ui.feedbacks.ViewFeedbackActivity" />
-        <activity android:name=".ui.feedbacks.SendFeedbackActivity" />
-        <activity android:name=".ui.feedbacks.FeedbackActivity" />
-        <activity android:name=".uiadmin.notification.SendNotificationActivity" />
-        <activity android:name=".AdminActivity" />
-        <activity android:name=".ui.notifications.NotificationDetailActivity" />
         <activity android:name=".uiadmin.search.SearchActivity"></activity>
         <activity android:name=".uiadmin.search.Search" />
         <activity android:name=".uiadmin.newfeed.NewfeedAdminActivity" />
@@ -47,9 +39,8 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".EditProfileActivity" />
-        <activity android:name=".qrscan.ParkingIn" />
+        <activity android:name=".ui.profile.ProfileActivity" />
+        <activity android:name=".ui.profile.EditProfileActivity" />
         <activity android:name=".uiadmin.notification.SendNotificationActivity" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".ui.notifications.NotificationDetailActivity" />
