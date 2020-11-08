@@ -11,15 +11,16 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.User;
+import com.example.fptparkingproject.model.Vehicle;
 import com.example.fptparkingproject.ui.profile.ProfileActivity;
 import com.example.fptparkingproject.untils.Until;
 import com.google.firebase.database.DataSnapshot;
@@ -36,6 +37,9 @@ public class SearchActivity extends AppCompatActivity {
     private DatabaseReference ref;
     private SharedPreferences prefs;
     Constant constant = new Constant();
+    User user;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +93,16 @@ public class SearchActivity extends AppCompatActivity {
                 });
             }
         });
+        buttonSearch = findViewById(R.id.buttonSearch);
+        buttonSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), List_item.class));
+            }
+        });
+
+
+
     }
 
     @Override
