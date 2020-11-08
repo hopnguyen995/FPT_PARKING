@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
+import com.example.fptparkingproject.customadapter.ViewFeedBackAdminAdapter;
 import com.example.fptparkingproject.customadapter.ViewFeedbackUserAdapter;
 import com.example.fptparkingproject.model.Feedback;
 import com.example.fptparkingproject.model.User;
@@ -29,7 +30,7 @@ public class ListFeedbackAdminActivity extends AppCompatActivity {
     private DatabaseReference ref;
     private SharedPreferences prefs;
     RecyclerView recyclerView;
-    ViewFeedbackUserAdapter feedbackUserAdapter;
+    ViewFeedBackAdminAdapter feedbackUserAdapter;
     ArrayList<Feedback> feedbackArrayListDb = new ArrayList<>();
     User user;
     Constant constant = new Constant();
@@ -43,7 +44,7 @@ public class ListFeedbackAdminActivity extends AppCompatActivity {
         actionBar.setTitle(R.string.button_ViewFeedback);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorToolbar)));
-        recyclerView = findViewById(R.id.recyclerViewFeedbackList);
+        recyclerView = findViewById(R.id.recyclerViewFeedbackListAdmin);
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         ref = new Until().connectDatabase();
         user = new User().getUser(prefs);
@@ -79,7 +80,7 @@ public class ListFeedbackAdminActivity extends AppCompatActivity {
 
     public void showListView() {
         if (!feedbackArrayListDb.isEmpty()) {
-            feedbackUserAdapter = new ViewFeedbackUserAdapter(getApplicationContext(), feedbackArrayListDb);
+            feedbackUserAdapter = new ViewFeedBackAdminAdapter(getApplicationContext(), feedbackArrayListDb);
             recyclerView.setAdapter(feedbackUserAdapter);
         }
     }

@@ -20,7 +20,7 @@
 
         <TextView
             android:id="@+id/txtFeedBackTitleAdmin"
-            android:layout_width="150dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
             android:background="@drawable/table_header_cell_bg"
@@ -43,24 +43,25 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/txtFeedBackStatusAdmin"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="@drawable/table_header_cell_bg"
-            android:text="@string/txtStatus"
-            android:textColor="#ffffff"
-            android:textSize="13sp" />
-        <TextView
-            android:id="@+id/txtButtonShow"
-            android:layout_width="match_parent"
+            android:id="@+id/txtContentAdmin"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
             android:background="@drawable/table_header_cell_bg"
             android:textColor="#ffffff"
             android:textAlignment="center"
             android:textSize="13sp"
-            android:text="Detail"/>
+            android:text="Content"/>
+
+        <TextView
+            android:id="@+id/txtFeedBackStatusAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="@drawable/table_header_cell_bg"
+            android:text="@string/txtStatus"
+            android:textColor="#ffffff"
+            android:textSize="13sp" />
     </LinearLayout>
 
     <HorizontalScrollView

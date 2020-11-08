@@ -37,7 +37,7 @@ public class ViewFeedbackUserAdapter extends RecyclerView.Adapter<RecyclerView.V
         ((FeedBackRowViewHolder) holder).txtTitle.setText(feedback.getFeedbackTitle());
         ((FeedBackRowViewHolder) holder).txtDatetime.setText(new Until().nomalizeDateTime(feedback.getFeedbackDateTime()));
         ((FeedBackRowViewHolder) holder).txtContent.setText(feedback.getFeedbackContent());
-        ((FeedBackRowViewHolder) holder).txtStatus.setText("1".equals(feedback.getFeedbackStatus()) ? "Sended" : "Approved");
+        ((FeedBackRowViewHolder) holder).txtStatus.setText("1".equals(feedback.getFeedbackStatus()) ? "Not Approve" : "Approved");
     }
 
     private void setHeaderBg(View view) {

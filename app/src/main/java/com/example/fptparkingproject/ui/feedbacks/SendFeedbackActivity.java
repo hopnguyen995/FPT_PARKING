@@ -46,8 +46,8 @@ public class SendFeedbackActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorToolbar)));
         ref = new Until().connectDatabase();
-        user = new User().getUser(prefs);
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        user = new User().getUser(prefs);
         editTextTitle = findViewById(R.id.etTitle);
         editTextContent = findViewById(R.id.etContent);
         buttonSend = findViewById(R.id.btnSend);

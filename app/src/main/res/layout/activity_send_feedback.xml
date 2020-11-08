@@ -10,10 +10,11 @@
         android:id="@+id/etTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="82dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="32dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/etContent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -31,12 +32,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="221dp"
-        android:layout_marginBottom="217dp"
         android:text="Title"
-        app:layout_constraintBottom_toBottomOf="@+id/etContent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/etTitle"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/etContent"
@@ -54,9 +52,9 @@
         android:id="@+id/btnSend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="46dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginBottom="59dp"
         android:text="Send"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etContent" />
+        app:layout_constraintBottom_toTopOf="@+id/etTitle"
+        app:layout_constraintStart_toStartOf="@+id/etTitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

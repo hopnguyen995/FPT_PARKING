@@ -9,17 +9,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fptparkingproject.R;
 
-public class FeedBackRowAdminViewHolder extends RecyclerView.ViewHolder {
+public class FeedBackRowAdminViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     public TextView txtTitle;
     public TextView txtStatus;
     public TextView txtDatetime;
-    public Button btnShow;
+    public TextView txtContent;
+    private ItemClickListener itemClickListener;
 
     public FeedBackRowAdminViewHolder(@NonNull View itemView) {
         super(itemView);
         txtTitle = itemView.findViewById(R.id.txtFeedBackTitleAdmin);
         txtDatetime = itemView.findViewById(R.id.txtFeedBackDatetimeAdmin);
         txtStatus = itemView.findViewById(R.id.txtFeedBackStatusAdmin);
-        btnShow = itemView.findViewById(R.id.btnFeedBackShowAdmin);
+        txtContent = itemView.findViewById(R.id.txtContentAdmin);
+    }
+
+    public void setItemClickListener(ItemClickListener itemClickListener)
+    {
+        this.itemClickListener = itemClickListener;
+    }
+    @Override
+    public void onClick(View v) {
+        itemClickListener.onClick(v,getAdapterPosition(),false);
     }
 }
