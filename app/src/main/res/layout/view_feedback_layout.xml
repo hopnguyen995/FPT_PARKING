@@ -10,7 +10,7 @@
 
 
     <TextView
-        android:id="@+id/txtFeedBackTitleAdmin"
+        android:id="@+id/txtTitle"
         android:layout_width="120dp"
         android:layout_height="70dp"
         android:layout_gravity="top"
@@ -20,11 +20,11 @@
 
     <TextView
         android:id="@+id/txtFeedBackDatetimeAdmin"
-        android:layout_width="120dp"
+        android:layout_width="100dp"
         android:layout_height="70dp"
         android:layout_gravity="top"
-        android:textColor="#676767"
         android:background="@drawable/table_content_cell_bg"
+        android:textColor="#676767"
         android:textSize="16sp" />
 
     <TextView
@@ -37,7 +37,7 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/txtFeedBackStatusAdmin"
+        android:id="@+id/txtStatus"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_gravity="top"

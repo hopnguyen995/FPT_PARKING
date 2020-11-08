@@ -67,7 +67,7 @@ public class FeedbackReplyAdminActivity extends AppCompatActivity {
                     feedback.setFeedback(txtReply.getText().toString());
                     feedback.setFeedbackStatus("2");
                     ref.child(constant.TABLE_FEEDBACKS).child(feedback.getFeedbackId()).setValue(feedback);
-                    Toast.makeText(FeedbackReplyAdminActivity.this, "Approved success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FeedbackReplyAdminActivity.this, R.string.feedback_approve_success, Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
@@ -78,7 +78,7 @@ public class FeedbackReplyAdminActivity extends AppCompatActivity {
                 feedback.setFeedback(txtReply.getText().toString());
                 feedback.setFeedbackStatus("1");
                 ref.child(constant.TABLE_FEEDBACKS).child(feedback.getFeedbackId()).setValue(feedback);
-                Toast.makeText(FeedbackReplyAdminActivity.this, "Not Approve", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FeedbackReplyAdminActivity.this, R.string.feedback_approve_not_success, Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

@@ -93,4 +93,14 @@
     <string name="contentsendnotification">Nội dung:</string>
     <string name="button_send">Gửi</string>
     <!--Feedbacks-->
+    <string name="feedback_not_approve">Không phản hồi</string>
+    <string name="feedback_approve">Đã phản hồi</string>
+    <string name="feedback_title">TIÊU ĐỀ</string>
+    <string name="feedback_content">MỤC ĐÍCH</string>
+    <string name="feedback_user_mail">MAIL</string>
+    <string name="feedback_date_time">NGÀY TẠO</string>
+    <string name="feedback_reply">TRẢ LỜI</string>
+    <string name="feedback_status">TRẠNG THÁI</string>
+    <string name="feedback_approve_success">Đã chấp nhận phản hồi</string>
+    <string name="feedback_approve_not_success">Chưa phản hồi</string>
 </resources>

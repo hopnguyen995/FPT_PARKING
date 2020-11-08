@@ -51,7 +51,7 @@ public class ViewFeedbackActivity extends AppCompatActivity {
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         ref = new Until().connectDatabase();
         user = new User().getUser(prefs);
-        ref.child(constant.TABLE_FEEDBACKS).addValueEventListener(new ValueEventListener() {
+        ref.child(constant.TABLE_FEEDBACKS).equalTo("userMail", user.getEmail()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists() && snapshot.getChildrenCount() > 0) {

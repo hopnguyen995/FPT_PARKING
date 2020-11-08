@@ -23,7 +23,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="#ed7129"
-            android:id="@+id/txtFeedBackTitleAdmin"
+            android:id="@+id/txtTitle"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginLeft="10dp"/>

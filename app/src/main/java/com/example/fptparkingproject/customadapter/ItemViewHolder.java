@@ -15,7 +15,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     public ItemViewHolder(@NonNull View itemView) {
         super(itemView);
         imgImage = itemView.findViewById(R.id.imgImage);
-        txtTitle = itemView.findViewById(R.id.txtFeedBackTitleAdmin);
+        txtTitle = itemView.findViewById(R.id.txtTitle);
         txtShortContent = itemView.findViewById(R.id.txtShortContent);
         itemView.setOnClickListener(this);
     }

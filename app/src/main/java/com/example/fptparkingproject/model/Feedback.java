@@ -117,23 +117,4 @@ public class Feedback implements Comparable<Feedback> {
     public int compareTo(Feedback o) {
         return this.getFeedbackDateTime().compareTo(o.feedbackDateTime);
     }
-
-    //save list feedback to sharedpreference
-    public void saveListFeedBack(SharedPreferences prefs, ArrayList<Feedback> listArray) {
-        SharedPreferences.Editor editor = prefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(listArray);
-        editor.putString(constant.KEY_FEEDBACK, json);
-        editor.commit();
-    }
-
-    //get list feedback sharedpreference
-    public ArrayList<Feedback> getListFeedBack(SharedPreferences prefs) {
-        Gson gson = new Gson();
-        String json = prefs.getString(constant.KEY_NOTIFICATION, null);
-        Type listType = new TypeToken<ArrayList<Feedback>>() {
-        }.getType();
-        return gson.fromJson(json, listType);
-    }
-
 }

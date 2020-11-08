@@ -49,7 +49,7 @@ public class ViewFeedBackAdminAdapter extends RecyclerView.Adapter<RecyclerView.
         ((FeedBackRowAdminViewHolder) holder).txtTitle.setText(feedback.getFeedbackTitle());
         ((FeedBackRowAdminViewHolder) holder).txtDatetime.setText(new Until().nomalizeDateTime(feedback.getFeedbackDateTime()));
         ((FeedBackRowAdminViewHolder) holder).txtContent.setText(feedback.getFeedbackContent());
-        ((FeedBackRowAdminViewHolder) holder).txtStatus.setText("1".equals(feedback.getFeedbackStatus()) ? "Not Approve" : "Approved");
+        ((FeedBackRowAdminViewHolder) holder).txtStatus.setText("1".equals(feedback.getFeedbackStatus()) ? R.string.feedback_not_approve : R.string.feedback_approve);
 
         ((FeedBackRowAdminViewHolder) holder).setItemClickListener(new ItemClickListener() {
             @Override

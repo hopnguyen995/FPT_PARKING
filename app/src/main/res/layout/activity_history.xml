@@ -41,7 +41,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/txtFeedBackDatetimeAdmin"
+            android:id="@+id/txtDatetime"
             android:layout_width="120dp"
             android:layout_height="match_parent"
             android:layout_gravity="top"
