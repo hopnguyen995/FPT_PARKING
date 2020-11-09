@@ -1,8 +1,9 @@
 package com.example.fptparkingproject.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Vehicle {
+public class Vehicle implements Serializable {
     private String vehicleid;
     private String userid;
     private String username;

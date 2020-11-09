@@ -16,21 +16,21 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingVertical="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:weightSum="10">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="Họ tên"
+                android:text="@string/txtname"
                 android:textSize="18dp" />
 
-            <EditText
-                android:layout_height="40dp"
-                android:background="@drawable/edittext_border"
+            <TextView
                 android:id="@+id/txt_userName"
                 android:layout_width="0dp"
-
+                android:layout_height="wrap_content"
                 android:layout_weight="7"
                 android:textSize="18dp" />
         </LinearLayout>
@@ -41,24 +41,24 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingVertical="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:weightSum="10">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="Mã sinh viên"
+                android:text="@string/txtEmail"
                 android:textSize="18dp" />
 
-            <EditText
-                android:layout_height="40dp"
-                android:background="@drawable/edittext_border"
+            <TextView
                 android:id="@+id/txt_email"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="7"
                 android:textSize="18dp" />
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -71,13 +71,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="Số điên thoại"
+                android:text="Plate number"
                 android:textSize="18dp" />
 
             <EditText
                 android:layout_height="40dp"
                 android:background="@drawable/edittext_border"
-                android:id="@+id/txt_phoneNumber"
+                android:id="@+id/txt_plateNumber"
                 android:layout_width="0dp"
                 android:layout_weight="7"
                 android:textSize="18dp" />
@@ -95,38 +95,42 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
-                android:text="Số lượng xe đăng ký"
-                android:textSize="18dp" />
-
-            <EditText
-                android:layout_height="40dp"
-                android:background="@drawable/edittext_border"
-                android:id="@+id/txt_amount"
-                android:layout_width="0dp"
-                android:layout_weight="5"
+                android:text="License information"
                 android:textSize="18dp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal"
             android:paddingVertical="10dp"
             android:weightSum="10">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:text="Danh sách xe"
+            <EditText
+                android:id="@+id/txt_license"
+                android:layout_width="221dp"
+                android:layout_height="204dp"
+                android:layout_weight="5"
+                android:background="@drawable/edittext_border"
+                android:inputType="textMultiLine"
                 android:textSize="18dp" />
         </LinearLayout>
-
-        <ListView
-            android:id="@+id/list_vehicle"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp"
+            android:weightSum="10">
 
-        </ListView>
+            <Button
+                android:id="@+id/buttonSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_border"
+                android:layout_weight="1"
+                android:text="Save" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

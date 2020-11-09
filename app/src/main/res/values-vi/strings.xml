@@ -6,6 +6,8 @@
     <string name="title_menu">Menu</string>
     <string name="title_toolbar_share">Mượn xe</string>
     <string name="title_toolbar_notification">Thông báo</string>
+    <string name="title_toolbar_feedback">Phản hồi</string>
+    <string name="title_toolbar_feedback_reply_admin">Chi tiết Phản hồi</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_blank">Xin chào!</string>
@@ -33,6 +35,7 @@
     <string name="button_PostStatus">Đăng tin</string>
     <string name="button_ViewFeedback">Xem đơn</string>
     <string name="button_ClickHere">Nhấn vào đây để hủy</string>
+    <string name="button_SendFeedBack">Gửi đơn</string>
     <!--TextView-->
     <string name="txtProfile">Thông tin tài khoản</string>
     <string name="txtHistory">Nhật ký hoạt động</string>
@@ -89,4 +92,15 @@
     <string name="shortcontentsendnotification">Mô tả:</string>
     <string name="contentsendnotification">Nội dung:</string>
     <string name="button_send">Gửi</string>
+    <!--Feedbacks-->
+    <string name="feedback_not_approve">Không phản hồi</string>
+    <string name="feedback_approve">Đã phản hồi</string>
+    <string name="feedback_title">TIÊU ĐỀ</string>
+    <string name="feedback_content">MỤC ĐÍCH</string>
+    <string name="feedback_user_mail">MAIL</string>
+    <string name="feedback_date_time">NGÀY TẠO</string>
+    <string name="feedback_reply">TRẢ LỜI</string>
+    <string name="feedback_status">TRẠNG THÁI</string>
+    <string name="feedback_approve_success">Đã chấp nhận phản hồi</string>
+    <string name="feedback_approve_not_success">Chưa phản hồi</string>
 </resources>

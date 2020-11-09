@@ -65,18 +65,18 @@ public class SearchActivity extends AppCompatActivity {
                             }
                             for (User uDb : listUserDb
                             ) {
-                                if(inputSearch.getText().toString().equals(uDb.getEmail())){
+                                if (inputSearch.getText().toString().equals(uDb.getEmail())) {
                                     isExist = true;
-                                    uDb.saveUser(prefs,uDb);
-                                    Intent intent =new Intent(getApplicationContext(), ProfileActivity.class);
-                                    intent.putExtra(constant.INTENT_CASE,1);
+                                    Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
+                                    intent.putExtra(constant.INTENT_CASE, 1);
+                                    intent.putExtra(constant.INTENT_USER, uDb);
                                     startActivity(intent);
                                     break;
                                 }
                             }
 
                         }
-                        if(!isExist){
+                        if (!isExist) {
 
                         }
                     }

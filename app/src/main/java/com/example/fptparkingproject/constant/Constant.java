@@ -20,7 +20,10 @@ public class Constant {
     public final String INTENT_NOTIFICATION_DETAIL_NOTIFICATION = "notification";
     public final String INTENT_NEWFEED_DETAIL_NEWFEED = "newfeed";
     public final String INTENT_HISTORY_DETAIL_HISTORY = "history";
+    public final String INTENT_DETAIL_FEEDBACK = "feedback";
     public final String INTENT_CASE = "case";
+    public final String INTENT_USER = "user";
+    public final String INTENT_VEHICLE = "vehicle";
     //Qrcode
     public final int QRCODE_WIDTH = 350;
     //SharedPreferences
@@ -80,6 +83,7 @@ public class Constant {
     public final String TABLE_SHARES_TEMP = "Share_temp";
     public final String TABLE_SHARES_TEMP_CHILD_STATUS = "status";
     public final String TABLE_SHARES_STATUS = "status";
+    public final String TABLE_FEEDBACKS = "Feedbacks";
     //phone number
     public  final String PHONENUMBER = "02473081313";
 }

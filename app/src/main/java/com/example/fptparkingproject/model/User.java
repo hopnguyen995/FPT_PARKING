@@ -16,7 +16,6 @@ public class User implements Serializable {
     private String email;
     private String token;
     private Boolean role;
-    Constant constant = new Constant();
 
     public User(String userid, String username, String email, String token, Boolean role, Constant constant) {
         this.userid = userid;
@@ -74,14 +73,14 @@ public class User implements Serializable {
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(user);
-        editor.putString(constant.KEY_USER, json);
+        editor.putString(new Constant().KEY_USER, json);
         editor.commit();
     }
 
     //get user from sharedpreference
     public User getUser(SharedPreferences prefs) {
         Gson gson = new Gson();
-        String json = prefs.getString(constant.KEY_USER, null);
+        String json = prefs.getString(new Constant().KEY_USER, null);
         return gson.fromJson(json, User.class);
     }
 
@@ -90,7 +89,7 @@ public class User implements Serializable {
 
     public ArrayList<User> getListUser(SharedPreferences prefs) {
         Gson gson = new Gson();
-        String json = prefs.getString(constant.KEY_USER, null);
+        String json = prefs.getString(new Constant().KEY_USER, null);
         Type listType = new TypeToken<ArrayList<Newfeed>>() {
         }.getType();
         return gson.fromJson(json, listType);
@@ -100,7 +99,7 @@ public class User implements Serializable {
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
         String json = gson.toJson(listArray);
-        editor.putString(constant.KEY_USER, json);
+        editor.putString(new Constant().KEY_USER, json);
         editor.commit();
     }
 

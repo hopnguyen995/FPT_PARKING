@@ -42,7 +42,6 @@ public class ProfileActivity extends AppCompatActivity {
     private ArrayList<Vehicle> listVehicles;
     User user;
     Constant constant = new Constant();
-    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,20 +57,15 @@ public class ProfileActivity extends AppCompatActivity {
         TextView txtEmail = findViewById(R.id.txt_email);
         txtDanhsach = findViewById(R.id.txtDanhSach);
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        user = new User().getUser(prefs);
-        mAuth = FirebaseAuth.getInstance();
+
         if(getIntent().getIntExtra(constant.INTENT_CASE,0) == 1){
             fab.setVisibility(View.VISIBLE);
-            FirebaseUser fuser = mAuth.getCurrentUser();
-            User user = new User();
-            user.setUserid(fuser.getUid());
-            user.setUsername(fuser.getDisplayName());
-            user.setEmail(fuser.getEmail());
-            user.setRole(true);
-            user.saveUser(prefs, user);
+            user = (User) getIntent().getSerializableExtra(constant.INTENT_USER);
         }else{
             fab.setVisibility(View.INVISIBLE);
+            user = new User().getUser(prefs);
         }
+
         txtDanhsach.setVisibility(View.INVISIBLE);
         linearLayout = findViewById(R.id.linearLayoutvehicle);
         linearLayout.setVisibility(View.INVISIBLE);
@@ -109,6 +103,20 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), EditProfileActivity.class);
+                intent.putExtra(constant.INTENT_USER, user);
+                for (Vehicle vehicle:listVehicles
+                     ) {
+                    if(vehicle.getStatus()){
+                        intent.putExtra(constant.INTENT_VEHICLE, vehicle);
+                    }
+                }
+                startActivity(intent);
             }
         });
     }
