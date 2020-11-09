@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.example.fptparkingproject.customadapter.ViewFeedbackUserAdapter;
 import com.example.fptparkingproject.model.Feedback;
 import com.example.fptparkingproject.model.Parking;
 import com.example.fptparkingproject.model.User;
+import com.example.fptparkingproject.ui.profile.ProfileActivity;
 import com.example.fptparkingproject.untils.Until;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,6 +37,7 @@ public class ViewFeedbackActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ViewFeedbackUserAdapter feedbackUserAdapter;
     ArrayList<Feedback> feedbackArrayListDb = new ArrayList<>();
+    ArrayList<Feedback> feedbackArrayList = new ArrayList<>();
     User user;
     Constant constant = new Constant();
 
@@ -51,25 +54,28 @@ public class ViewFeedbackActivity extends AppCompatActivity {
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         ref = new Until().connectDatabase();
         user = new User().getUser(prefs);
-        ref.child(constant.TABLE_FEEDBACKS).equalTo("userMail", user.getEmail()).addValueEventListener(new ValueEventListener() {
+        ref.child(constant.TABLE_FEEDBACKS).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         boolean isDuplicate = false;
                         Feedback feedback = ds.getValue(Feedback.class);
-                        for (Feedback fb: feedbackArrayListDb) {
-                            if(feedback.getFeedbackId().equals(fb.getFeedbackId())){
-                                isDuplicate = true;
-                                break;
-                            }
-                        }
-                        if(!isDuplicate){
                             feedbackArrayListDb.add(feedback);
                         }
+                    Boolean isExist = false;
+                    for (Feedback fb: feedbackArrayListDb) {
+                        if(user.getEmail().equals(fb.getUserMail())){
+                            isExist = true;
+                            feedbackArrayList.add(fb);
+                        }
                     }
-                    Collections.sort(feedbackArrayListDb, Collections.<Feedback>reverseOrder());
-                    showListView();
+                    if(isExist){
+                        Collections.sort(feedbackArrayList, Collections.<Feedback>reverseOrder());
+                        showListView();
+                    }else {
+
+                    }
                 }
 
             }
@@ -82,8 +88,8 @@ public class ViewFeedbackActivity extends AppCompatActivity {
     }
 
     public void showListView() {
-        if (!feedbackArrayListDb.isEmpty()) {
-            feedbackUserAdapter = new ViewFeedbackUserAdapter(getApplicationContext(), feedbackArrayListDb);
+        if (!feedbackArrayList.isEmpty()) {
+            feedbackUserAdapter = new ViewFeedbackUserAdapter(getApplicationContext(), feedbackArrayList);
             recyclerView.setAdapter(feedbackUserAdapter);
         }
     }

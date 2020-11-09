@@ -31,7 +31,7 @@ public class ListFeedbackAdminActivity extends AppCompatActivity {
     private SharedPreferences prefs;
     RecyclerView recyclerView;
     ViewFeedBackAdminAdapter feedbackUserAdapter;
-    ArrayList<Feedback> feedbackArrayListDb = new ArrayList<>();
+    ArrayList<Feedback> feedbackArrayListDb;
     User user;
     Constant constant = new Constant();
 
@@ -52,18 +52,10 @@ public class ListFeedbackAdminActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
+                    feedbackArrayListDb = new ArrayList<>();
                     for (DataSnapshot ds : snapshot.getChildren()) {
-                        boolean isDuplicate = false;
                         Feedback feedback = ds.getValue(Feedback.class);
-                        for (Feedback fb: feedbackArrayListDb) {
-                            if(feedback.getFeedbackId().equals(fb.getFeedbackId())){
-                                isDuplicate = true;
-                                break;
-                            }
-                        }
-                        if(!isDuplicate){
-                            feedbackArrayListDb.add(feedback);
-                        }
+                        feedbackArrayListDb.add(feedback);
                     }
                     Collections.sort(feedbackArrayListDb, Collections.<Feedback>reverseOrder());
                     showListView();

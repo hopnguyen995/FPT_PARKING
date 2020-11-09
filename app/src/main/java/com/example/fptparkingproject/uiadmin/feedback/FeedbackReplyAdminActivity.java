@@ -45,7 +45,7 @@ public class FeedbackReplyAdminActivity extends AppCompatActivity {
         Drawable drawable = getResources().getDrawable(R.drawable.ic_baseline_arrow_back_24);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorToolbar)));
-        textViewTitle = findViewById(R.id.txtContentAdmin);
+        textViewTitle = findViewById(R.id.txtTitleAdmin);
         textViewDateTime = findViewById(R.id.txtDateTimeAdmin);
         textViewContent = findViewById(R.id.etContentAdmin);
         textViewUserMail = findViewById(R.id.txtUserMailAdmin);

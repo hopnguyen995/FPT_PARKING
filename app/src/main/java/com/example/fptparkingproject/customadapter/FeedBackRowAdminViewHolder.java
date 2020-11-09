@@ -18,10 +18,11 @@ public class FeedBackRowAdminViewHolder extends RecyclerView.ViewHolder implemen
 
     public FeedBackRowAdminViewHolder(@NonNull View itemView) {
         super(itemView);
-        txtTitle = itemView.findViewById(R.id.txtFeedBackTitleAdmin);
+        txtTitle = itemView.findViewById(R.id.txtTitle);
         txtDatetime = itemView.findViewById(R.id.txtFeedBackDatetimeAdmin);
-        txtStatus = itemView.findViewById(R.id.txtFeedBackStatusAdmin);
-        txtContent = itemView.findViewById(R.id.txtContentAdmin);
+        txtStatus = itemView.findViewById(R.id.txtStatus);
+        txtContent = itemView.findViewById(R.id.txtFeedBackContentAdmin);
+        itemView.setOnClickListener(this);
     }
 
     public void setItemClickListener(ItemClickListener itemClickListener)

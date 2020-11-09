@@ -16,9 +16,9 @@ public class FeedBackRowViewHolder extends RecyclerView.ViewHolder {
 
     public FeedBackRowViewHolder(@NonNull View itemView) {
         super(itemView);
-        txtTitle = itemView.findViewById(R.id.txtFeedBackTitleAdmin);
+        txtTitle = itemView.findViewById(R.id.txtTitle);
         txtDatetime = itemView.findViewById(R.id.txtFeedBackDatetimeAdmin);
         txtContent = itemView.findViewById(R.id.txtContent);
-        txtStatus = itemView.findViewById(R.id.txtFeedBackStatusAdmin);
+        txtStatus = itemView.findViewById(R.id.txtStatus);
     }
 }

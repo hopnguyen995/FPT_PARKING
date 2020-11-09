@@ -32,7 +32,7 @@ public class ViewFeedBackAdminAdapter extends RecyclerView.Adapter<RecyclerView.
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(context).inflate(R.layout.feedback_list_admin_layout, parent, false);
-        return new FeedBackRowViewHolder(itemView);
+        return new FeedBackRowAdminViewHolder(itemView);
     }
 
     private void setHeaderBg(View view) {
@@ -57,6 +57,7 @@ public class ViewFeedBackAdminAdapter extends RecyclerView.Adapter<RecyclerView.
                 Gson gson = new Gson();
                 Intent intent = new Intent(context, FeedbackReplyAdminActivity.class);
                 intent.putExtra(constant.INTENT_DETAIL_FEEDBACK, gson.toJson(listFeedbacks.get(position)));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 view.getContext().startActivity(intent);
             }
         });
