@@ -24,13 +24,12 @@ import java.util.Date;
 public class NewfeedAdminActivity extends AppCompatActivity {
     private EditText editTextTitle;
     private EditText editTextImage;
-    private EditText editTextContent;
     private EditText editTextShortContent;
     private Button buttonSend;
     private DatabaseReference ref;
     Until until = new Until();
     Constant constant = new Constant();
-
+    String content = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,14 +42,17 @@ public class NewfeedAdminActivity extends AppCompatActivity {
         ref = new Until().connectDatabase();
         editTextTitle = findViewById(R.id.textViewTitle);
         editTextShortContent = findViewById(R.id.textViewShortContent);
-        editTextContent = findViewById(R.id.textViewContent);
         editTextImage = findViewById(R.id.textViewImage);
         buttonSend = findViewById(R.id.buttonSend);
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!editTextTitle.getText().toString().isEmpty() && !editTextShortContent.getText().toString().isEmpty() && !editTextContent.getText().toString().isEmpty()) {
-                    Newfeed newfeed = new Newfeed(until.randomID(),editTextTitle.getText().toString(), editTextImage.getText().toString(),editTextShortContent.getText().toString(),editTextContent.getText().toString(),new Date());
+                if (!editTextTitle.getText().toString().isEmpty() && !editTextShortContent.getText().toString().isEmpty() && !editTextShortContent.getText().toString().isEmpty()) {
+                    Newfeed newfeed = new Newfeed(until.randomID(),editTextTitle.getText().toString(), editTextImage.getText().toString(),editTextShortContent.getText().toString(),new Date());
+                    if(newfeed.getNewfeedShortContent().length() > constant.CHARACTER_LIMIT){
+                        content = newfeed.getNewfeedShortContent().substring(constant.CHARACTER_LIMIT, newfeed.getNewfeedShortContent().length());
+                        newfeed.setNewfeedLongContent(content);
+                    }
                     ref.child(constant.TABLE_NEWFEEDS).child(newfeed.getNewfeedid()).setValue(newfeed);
                     Toast.makeText(NewfeedAdminActivity.this, "Insert success", Toast.LENGTH_SHORT).show();
                     finish();

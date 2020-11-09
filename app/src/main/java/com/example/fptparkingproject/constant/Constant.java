@@ -52,6 +52,7 @@ public class Constant {
     public final int TIMEOUT_SIGNIN = 10000;
     public final int COUNTDOWN = 1000;
     public final int TIMEOUT_PARKING = 5000;
+    public final int CHARACTER_LIMIT = 30;
 
     //notification
     public static final int TYPE_HEADER = 0;
