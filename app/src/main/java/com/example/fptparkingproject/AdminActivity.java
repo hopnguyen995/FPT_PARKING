@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.ui.signin.SignInWithGoogle;
-import com.example.fptparkingproject.uiadmin.feedback.ListFeedbackAdminActivity;
 import com.example.fptparkingproject.uiadmin.newfeed.NewfeedAdminActivity;
 import com.example.fptparkingproject.uiadmin.notification.SendNotificationActivity;
 import com.example.fptparkingproject.uiadmin.search.SearchActivity;
@@ -28,7 +27,6 @@ public class AdminActivity extends AppCompatActivity {
     private Button buttonSignOut;
     private Button buttonNotif;
     private Button buttonNewFeed;
-    private Button buttonFeedBack;
     private Button buttonInfo;
 
     @Override
@@ -67,13 +65,6 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-        buttonFeedBack = findViewById(R.id.buttonViewFeedback);
-        buttonFeedBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), ListFeedbackAdminActivity.class));
-            }
-        });
         buttonInfo = findViewById(R.id.buttonInfo);
         buttonInfo.setOnClickListener(new View.OnClickListener() {
             @Override
