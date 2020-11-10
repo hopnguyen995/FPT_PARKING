@@ -24,6 +24,7 @@ public class Constant {
     public final String INTENT_CASE = "case";
     public final String INTENT_USER = "user";
     public final String INTENT_VEHICLE = "vehicle";
+    public final String INTENT_LISTVEHICLE = "listVehicle";
     //Qrcode
     public final int QRCODE_WIDTH = 350;
     //SharedPreferences
@@ -52,7 +53,7 @@ public class Constant {
     public final int TIMEOUT_SIGNIN = 10000;
     public final int COUNTDOWN = 1000;
     public final int TIMEOUT_PARKING = 5000;
-    public final int CHARACTER_LIMIT = 30;
+    public final int CHARACTER_LIMIT = 200;
 
     //notification
     public static final int TYPE_HEADER = 0;

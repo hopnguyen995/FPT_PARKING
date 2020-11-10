@@ -79,6 +79,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 txtDanhsach.setVisibility(View.VISIBLE);
                 if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
+                    listVehicles.clear();
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         Vehicle vehicle = ds.getValue(Vehicle.class);
                         int position = -1;
@@ -110,10 +111,13 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), EditProfileActivity.class);
                 intent.putExtra(constant.INTENT_USER, user);
-                for (Vehicle vehicle:listVehicles
-                     ) {
-                    if(vehicle.getStatus()){
-                        intent.putExtra(constant.INTENT_VEHICLE, vehicle);
+                if(listVehicles != null){
+                    for (Vehicle vehicle:listVehicles
+                    ) {
+                        if(vehicle.getStatus()){
+                            intent.putExtra(constant.INTENT_VEHICLE, vehicle);
+                            intent.putExtra(constant.INTENT_LISTVEHICLE,listVehicles);
+                        }
                     }
                 }
                 startActivity(intent);
