@@ -7,62 +7,60 @@
     tools:context=".uiadmin.feedback.ListFeedbackAdminActivity">
 
     <!-- Table View-->
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/txtTitle"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="@drawable/table_header_cell_bg"
-            android:text="@string/feedback_title"
-            android:textAlignment="center"
-            android:textColor="#ffffff"
-            android:textSize="13sp" />
-
-
-        <TextView
-            android:id="@+id/txtFeedBackDatetimeAdmin"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="@drawable/table_header_cell_bg"
-            android:text="@string/txtHistoryDatetime"
-            android:textAlignment="center"
-            android:textColor="#ffffff"
-            android:textSize="13sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtContentAdmin"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="@drawable/table_header_cell_bg"
-            android:text="@string/feedback_content"
-            android:textAlignment="center"
-            android:textColor="#ffffff"
-            android:textSize="13sp" />
-
-        <TextView
-            android:id="@+id/txtStatus"
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="@drawable/table_header_cell_bg"
-            android:text="@string/feedback_status"
-            android:textColor="#ffffff"
-            android:textSize="13sp" />
-    </LinearLayout>
+            android:layout_marginTop="70dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="@drawable/table_header_cell_bg"
+                android:text="@string/feedback_title"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="13sp" />
+
+
+            <TextView
+                android:id="@+id/txtFeedBackDatetimeAdmin"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="@drawable/table_header_cell_bg"
+                android:text="@string/txtHistoryDatetime"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/txtContentAdmin"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="@drawable/table_header_cell_bg"
+                android:text="@string/feedback_content"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/txtStatus"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="@drawable/table_header_cell_bg"
+                android:text="@string/feedback_status"
+                android:textColor="#ffffff"
+                android:textSize="13sp" />
+        </LinearLayout>
 
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView"
