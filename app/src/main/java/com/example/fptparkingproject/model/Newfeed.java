@@ -47,6 +47,13 @@ public class Newfeed implements Comparable<Newfeed>{
         this.newfeedLongContent = newfeedLongContent;
         this.newfeedDateTime = newfeedDateTime;
     }
+    public Newfeed(String newfeedid, String newfeedTitle, String newfeedImage, String newfeedShortContent, Date newfeedDateTime) {
+        this.newfeedid = newfeedid;
+        this.newfeedTitle = newfeedTitle;
+        this.newfeedImage = newfeedImage;
+        this.newfeedShortContent = newfeedShortContent;
+        this.newfeedDateTime = newfeedDateTime;
+    }
 
     public String getNewfeedid() {
         return newfeedid;
