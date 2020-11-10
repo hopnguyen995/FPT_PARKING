@@ -57,7 +57,7 @@ public class SendFeedbackActivity extends AppCompatActivity {
                 if (!editTextTitle.getText().toString().isEmpty() &&  !editTextContent.getText().toString().isEmpty()) {
                     Feedback feedback = new Feedback(until.randomID(), editTextTitle.getText().toString(), editTextContent.getText().toString(), new Date(), user.getEmail() , "1");
                     ref.child(constant.TABLE_FEEDBACKS).child(feedback.getFeedbackId()).setValue(feedback);
-                    Toast.makeText(SendFeedbackActivity.this, "Send success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SendFeedbackActivity.this, R.string.sendapplicationsuccess, Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }

@@ -74,6 +74,9 @@
     <string name="licenseerror">Error license!</string>
     <string name="licensesuccess">License success!</string>
     <string name="emailnotexist">Email is not exist!</string>
+    <string name="sendapplicationsuccess">Send application success!</string>
+    <string name="sendnotificationsuccess">Send notification success!</string>
+    <string name="sendnewfeedsuccess">Post new feed success!</string>
     <!--Notification-->
     <string name="title_confirm">Confirm</string>
     <string name="title_notificaton">Notice ℹ️</string>

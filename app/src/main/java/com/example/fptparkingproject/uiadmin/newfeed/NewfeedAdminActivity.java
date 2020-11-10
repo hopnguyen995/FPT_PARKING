@@ -54,7 +54,7 @@ public class NewfeedAdminActivity extends AppCompatActivity {
                         newfeed.setNewfeedShortContent(content);
                     }
                     ref.child(constant.TABLE_NEWFEEDS).child(newfeed.getNewfeedid()).setValue(newfeed);
-                    Toast.makeText(NewfeedAdminActivity.this, "Insert success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewfeedAdminActivity.this, R.string.sendnewfeedsuccess, Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }
