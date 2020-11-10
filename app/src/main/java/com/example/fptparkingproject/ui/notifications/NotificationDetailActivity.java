@@ -33,7 +33,7 @@ public class NotificationDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notification_detail);
         textViewTitle = findViewById(R.id.textViewTitle);
         textViewDateTime = findViewById(R.id.textViewDateTime);
-        textViewContent = findViewById(R.id.textViewShortContent);
+        textViewContent = findViewById(R.id.textViewLongContent);
         Gson gson = new Gson();
         Intent intent = getIntent();
         Notification notification = gson.fromJson(intent.getStringExtra(constant.INTENT_NOTIFICATION_DETAIL_NOTIFICATION),Notification.class);

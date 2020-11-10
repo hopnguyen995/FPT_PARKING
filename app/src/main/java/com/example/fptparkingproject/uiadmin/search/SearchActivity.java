@@ -20,6 +20,7 @@ import android.widget.ListView;
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.User;
+import com.example.fptparkingproject.ui.profile.EditProfileActivity;
 import com.example.fptparkingproject.ui.profile.ProfileActivity;
 import com.example.fptparkingproject.untils.Until;
 import com.google.firebase.database.DataSnapshot;
@@ -42,7 +43,7 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-        actionBar.setTitle(R.string.button_history);
+        actionBar.setTitle(R.string.button_CheckInfo);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorToolbar)));
         setContentView(R.layout.activity_search);
@@ -77,7 +78,7 @@ public class SearchActivity extends AppCompatActivity {
 
                         }
                         if (!isExist) {
-
+                            new Until().showAlertDialog(R.string.title_notificaton,R.string.emailnotexist, SearchActivity.this);
                         }
                     }
 

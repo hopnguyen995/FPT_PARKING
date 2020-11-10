@@ -89,14 +89,14 @@
                 android:text="@string/contentsendnotification"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/textViewShortContent"
+                app:layout_constraintBottom_toTopOf="@+id/textViewLongContent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewShortContent" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewLongContent" />
 
             <EditText
 
-                android:id="@+id/textViewShortContent"
+                android:id="@+id/textViewLongContent"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginLeft="20dp"
