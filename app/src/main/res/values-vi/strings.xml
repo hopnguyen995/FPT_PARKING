@@ -107,4 +107,5 @@
     <string name="feedback_status">TRẠNG THÁI</string>
     <string name="feedback_approve_success">Đã chấp nhận phản hồi</string>
     <string name="feedback_approve_not_success">Chưa phản hồi</string>
+    <string name="feedback_approved">Đã phản hồi, không thể chỉnh sửa!</string>
 </resources>

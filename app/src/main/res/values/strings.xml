@@ -116,5 +116,6 @@
     <string name="feedback_status">STATUS</string>
     <string name="feedback_approve_success">Approved success</string>
     <string name="feedback_approve_not_success">Not Approve</string>
+    <string name="feedback_approved">Approved, can not edit!</string>
     <!---->
 </resources>
