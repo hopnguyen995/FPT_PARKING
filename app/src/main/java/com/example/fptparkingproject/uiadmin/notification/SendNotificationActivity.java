@@ -42,8 +42,8 @@ public class SendNotificationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_send_notification);
         ref = new Until().connectDatabase();
         editTextTitle = findViewById(R.id.textViewTitle);
-        editTextShortContent = findViewById(R.id.textViewShortContent);
-        editTextContent = findViewById(R.id.textViewContent);
+        editTextShortContent = findViewById(R.id.textViewLongContent);
+        editTextContent = findViewById(R.id.textViewLongContent);
         editTextImage = findViewById(R.id.textViewImage);
         buttonSend = findViewById(R.id.buttonSend);
         buttonSend.setOnClickListener(new View.OnClickListener() {

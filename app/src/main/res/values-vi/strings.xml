@@ -38,6 +38,7 @@
     <string name="button_SendFeedBack">Gửi đơn</string>
     <!--TextView-->
     <string name="txtProfile">Thông tin tài khoản</string>
+    <string name="txtLicense">Đăng ký</string>
     <string name="txtHistory">Nhật ký hoạt động</string>
     <string name="txtHelp">Trợ giúp</string>
     <string name="txtNotif">Bạn đã cho mượn xe.</string>
@@ -70,6 +71,9 @@
     <string name="parkingoutfailed">Có lỗi xảy ra khi lấy xe!</string>
     <string name="shareSuccess">Mượn xe</string>
     <string name="cannotshare">Không thể chia sẻ xe của bạn!</string>
+    <string name="licenseerror">Lỗi đăng ký!</string>
+    <string name="licensesuccess">Đăng ký thành công!</string>
+    <string name="emailnotexist">Tài khoản mail không tồn tại!</string>
     <!--Notification-->
     <string name="title_confirm">Xác nhận</string>
     <string name="title_notificaton">Thông báo ℹ️</string>

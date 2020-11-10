@@ -38,6 +38,7 @@
     <string name="button_SendFeedBack">Send Application</string>
     <!--TextView-->
     <string name="txtProfile">Profile</string>
+    <string name="txtLicense">License</string>
     <string name="txtHistory">History</string>
     <string name="txtHelp">Help</string>
     <string name="txtNotif">You have shared your vehicle.</string>
@@ -70,6 +71,9 @@
     <string name="parkingoutfailed">Parking out failed!</string>
     <string name="shareSuccess">Share vehicle!</string>
     <string name="cannotshare">Can not share own vehicle!</string>
+    <string name="licenseerror">Error license!</string>
+    <string name="licensesuccess">License success!</string>
+    <string name="emailnotexist">Email is not exist!</string>
     <!--Notification-->
     <string name="title_confirm">Confirm</string>
     <string name="title_notificaton">Notice ℹ️</string>

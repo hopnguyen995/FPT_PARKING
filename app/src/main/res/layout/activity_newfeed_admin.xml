@@ -7,10 +7,13 @@
     tools:context="com.example.fptparkingproject.uiadmin.notification.SendNotificationActivity">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,12 +40,12 @@
                 android:id="@+id/textViewTitle"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:background="@drawable/edittext_border"
                 android:paddingLeft="5dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 app:layout_constraintBottom_toTopOf="@+id/imgSendNotification"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -67,45 +70,14 @@
                 android:id="@+id/textViewImage"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@drawable/edittext_border"
-                android:paddingLeft="5dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:background="@drawable/edittext_border"
+                android:paddingLeft="5dp"
                 app:layout_constraintBottom_toTopOf="@+id/shortContent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imgSendNotification" />
-
-            <TextView
-                android:id="@+id/shortContent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                android:paddingLeft="10dp"
-                android:text="@string/shortcontentsendnotification"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/textViewShortContent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewImage" />
-
-            <EditText
-                android:id="@+id/textViewShortContent"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:background="@drawable/edittext_border"
-                android:ems="10"
-                android:gravity="start|top"
-                android:inputType="textMultiLine"
-                android:paddingLeft="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                app:layout_constraintBottom_toTopOf="@+id/contentNotification"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/shortContent" />
 
             <TextView
                 android:id="@+id/contentNotification"
@@ -117,27 +89,28 @@
                 android:text="@string/contentsendnotification"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/textViewContent"
+                app:layout_constraintBottom_toTopOf="@+id/textViewLongContent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewShortContent" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewLongContent" />
 
             <EditText
 
-                android:id="@+id/textViewContent"
+                android:id="@+id/textViewLongContent"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:background="@drawable/edittext_border"
                 android:ems="10"
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
                 android:paddingLeft="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/contentNotification" />
+
             <Button
                 android:id="@+id/buttonSend"
                 android:layout_width="wrap_content"
