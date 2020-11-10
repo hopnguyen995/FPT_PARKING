@@ -117,5 +117,9 @@
     <string name="feedback_approve_success">Approved success</string>
     <string name="feedback_approve_not_success">Not Approve</string>
     <string name="feedback_approved">Approved, can not edit!</string>
+    <string name="button_Search">Search</string>
+    <string name="button_SaveEdit">Save</string>
+    <string name="txtPlateNumber">Plate number</string>
+    <string name="txtLicenseInformation">License Information</string>
     <!---->
 </resources>

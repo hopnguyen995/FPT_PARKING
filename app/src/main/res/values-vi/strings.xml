@@ -36,6 +36,9 @@
     <string name="button_ViewFeedback">Xem đơn</string>
     <string name="button_ClickHere">Nhấn vào đây để hủy</string>
     <string name="button_SendFeedBack">Gửi đơn</string>
+    <string name="button_Search">Tìm kiếm</string>
+    <string name="button_SaveEdit">Lưu</string>
+
     <!--TextView-->
     <string name="txtProfile">Thông tin tài khoản</string>
     <string name="txtLicense">Đăng ký</string>
@@ -58,6 +61,8 @@
     <string name="txtname">Họ Tên:</string>
     <string name="txtEmail">Email:</string>
     <string name="txtlistVehicle">Danh sách xe:</string>
+    <string name="txtPlateNumber">Biển số xe</string>
+    <string name="txtLicenseInformation">Thông tin giấy phép</string>
     <!--QRCode-->
     <string name="not_support">Mã QR không hỗ trợ</string>
     <!--Title-->

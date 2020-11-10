@@ -71,7 +71,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="Plate number"
+                android:text="@string/txtPlateNumber"
                 android:textSize="18dp" />
 
             <EditText
@@ -96,7 +96,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
-                android:text="License information"
+                android:text="@string/txtLicenseInformation"
                 android:textSize="18dp" />
         </LinearLayout>
 
@@ -133,10 +133,10 @@
                 android:id="@+id/buttonSave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_border"
                 android:layout_weight="1"
-                android:text="Save"
-                android:textColor="#ffffff"/>
+                android:background="@drawable/button_border"
+                android:text="@string/button_SaveEdit"
+                android:textColor="#ffffff" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
