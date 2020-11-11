@@ -1,4 +1,9 @@
-package com.example.fptparkingproject.ui.profile;
+package com.example.fptparkingproject.uiadmin.profile;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,17 +15,12 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
+import com.example.fptparkingproject.customadapter.VehicleAdminViewAdapter;
 import com.example.fptparkingproject.customadapter.VehicleViewAdapter;
 import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.model.Vehicle;
-import com.example.fptparkingproject.uiadmin.profile.EditProfileActivity;
 import com.example.fptparkingproject.untils.Until;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -30,13 +30,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileAdminActivity extends AppCompatActivity {
     private DatabaseReference ref;
     private SharedPreferences prefs;
     private TextView txtDanhsach;
     private RecyclerView recyclerView;
-    private VehicleViewAdapter vehicleViewAdapter;
+    private VehicleAdminViewAdapter vehicleAdminViewAdapter;
     private LinearLayout linearLayout;
     private ArrayList<Vehicle> listVehicles;
     User user;
@@ -50,14 +49,15 @@ public class ProfileActivity extends AppCompatActivity {
         actionBar.setTitle(R.string.txtProfile);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorToolbar)));
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_profile_admin);
         FloatingActionButton fab = findViewById(R.id.fab_edit);
         TextView txtUsername = findViewById(R.id.txt_userName);
         TextView txtEmail = findViewById(R.id.txt_email);
         txtDanhsach = findViewById(R.id.txtDanhSach);
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-            fab.setVisibility(View.INVISIBLE);
-            user = new User().getUser(prefs);
+
+            fab.setVisibility(View.VISIBLE);
+            user = (User) getIntent().getSerializableExtra(constant.INTENT_USER);
 
         txtDanhsach.setVisibility(View.INVISIBLE);
         linearLayout = findViewById(R.id.linearLayoutvehicle);
@@ -122,8 +122,8 @@ public class ProfileActivity extends AppCompatActivity {
         if (!listVehicles.isEmpty()) {
             txtDanhsach.setText(R.string.txtlistVehicle);
             linearLayout.setVisibility(View.VISIBLE);
-            vehicleViewAdapter = new VehicleViewAdapter(getApplicationContext(), listVehicles);
-            recyclerView.setAdapter(vehicleViewAdapter);
+            vehicleAdminViewAdapter = new VehicleAdminViewAdapter(getApplicationContext(), listVehicles);
+            recyclerView.setAdapter(vehicleAdminViewAdapter);
         }
     }
 
@@ -139,5 +139,3 @@ public class ProfileActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
-
-

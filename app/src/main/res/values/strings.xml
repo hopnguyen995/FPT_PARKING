@@ -23,7 +23,7 @@
     <!-- Button -->
     <string name="button_qr">QR Scan</string>
     <string name="button_feedback">Application</string>
-    <string name="button_share">Share</string>
+    <string name="button_share">Share vehicle</string>
     <string name="button_history">History</string>
     <string name="signin">Sign in</string>
     <string name="signout">Sign out</string>
@@ -58,7 +58,7 @@
     <string name="txtname">Name:</string>
     <string name="txtEmail">Email:</string>
     <string name="txtlistVehicle">List vehicle(s):</string>
-    <string name="txthintsearch">Search by email...</string>
+    <string name="txthintsearch">Enter email...</string>
     <!--QRCode-->
     <string name="not_support">The QR Code is not support</string>
     <!--Title-->
@@ -100,15 +100,6 @@
     <string name="shortcontentsendnotification">Description:</string>
     <string name="contentsendnotification">Content:</string>
     <string name="button_send">Send</string>
-    <string name="title_activity_main2">MainActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <!--Feedbacks-->
     <string name="feedback_not_approve">Not Approve</string>
     <string name="feedback_approve">Approved</string>
@@ -125,5 +116,4 @@
     <string name="button_SaveEdit">Save</string>
     <string name="txtPlateNumber">Plate number</string>
     <string name="txtLicenseInformation">License Information</string>
-    <!---->
 </resources>

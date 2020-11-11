@@ -38,7 +38,7 @@
     <string name="button_SendFeedBack">Gửi đơn</string>
     <string name="button_Search">Tìm kiếm</string>
     <string name="button_SaveEdit">Lưu</string>
-    <string name="txthintsearch">Tìm kiếm bằng tài khoản mail...</string>
+    <string name="txthintsearch">Nhập tài khoản mail...</string>
     <!--TextView-->
     <string name="txtProfile">Thông tin tài khoản</string>
     <string name="txtLicense">Đăng ký</string>
