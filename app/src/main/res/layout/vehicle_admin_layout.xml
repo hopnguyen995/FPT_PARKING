@@ -18,21 +18,19 @@
 
     <TextView
         android:id="@+id/txtPlate"
-        android:layout_width="275dp"
+        android:layout_width="190dp"
         android:layout_height="50dp"
         android:layout_gravity="top"
         android:textColor="#676767"
         android:background="@drawable/table_content_cell_bg"
         android:textSize="16sp" />
 
-    <Switch
-        android:id="@+id/switch1"
-        android:trackTint="@color/switch_track_selector"
-        android:thumbTint="@color/switch_thumb_selector"
-        android:switchMinWidth="55dp"
-        android:layout_width="75dp"
+    <TextView
+        android:id="@+id/txtStatus"
+        android:layout_width="160dp"
         android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="top"
+        android:textColor="#33CC33"
         android:background="@drawable/table_content_cell_bg"
-        android:layout_weight="1"/>
+        android:textSize="16sp" />
 </LinearLayout>

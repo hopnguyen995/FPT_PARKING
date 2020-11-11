@@ -11,6 +11,18 @@ public class Vehicle implements Serializable {
     private String plate;
     private Boolean status;
 
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "vehicleid='" + vehicleid + '\'' +
+                ", userid='" + userid + '\'' +
+                ", username='" + username + '\'' +
+                ", license='" + license + '\'' +
+                ", plate='" + plate + '\'' +
+                ", status=" + status +
+                '}';
+    }
+
     public Vehicle() {
     }
 

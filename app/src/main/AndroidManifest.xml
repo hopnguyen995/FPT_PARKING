@@ -39,7 +39,8 @@
             android:value="@integer/google_play_services_version" />
 
         <activity android:name=".ui.profile.ProfileActivity" />
-        <activity android:name=".ui.profile.EditProfileActivity" />
+        <activity android:name=".uiadmin.profile.ProfileAdminActivity" />
+        <activity android:name=".uiadmin.profile.EditProfileActivity" />
         <activity android:name=".uiadmin.notification.SendNotificationActivity" />
         <activity android:name=".uiadmin.feedback.ListFeedbackAdminActivity" />
         <activity android:name=".AdminActivity" />

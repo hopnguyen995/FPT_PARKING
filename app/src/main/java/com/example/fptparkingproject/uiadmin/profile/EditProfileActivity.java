@@ -1,4 +1,4 @@
-package com.example.fptparkingproject.ui.profile;
+package com.example.fptparkingproject.uiadmin.profile;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
