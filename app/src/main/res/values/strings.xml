@@ -58,6 +58,7 @@
     <string name="txtname">Name:</string>
     <string name="txtEmail">Email:</string>
     <string name="txtlistVehicle">List vehicle(s):</string>
+    <string name="txthintsearch">Search by email...</string>
     <!--QRCode-->
     <string name="not_support">The QR Code is not support</string>
     <!--Title-->
