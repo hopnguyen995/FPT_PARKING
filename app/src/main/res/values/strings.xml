@@ -45,8 +45,8 @@
     <string name="txtNotifNotHaveVehicle">You have not registered vehicle information.</string>
     <string name="txtHistoryName">NAME</string>
     <string name="txtHistoryDatetime">TIME</string>
-    <string name="txtHistoryParkingIn">Parking in</string>
-    <string name="txtHistoryParkingOut">Parking out</string>
+    <string name="txtHistoryParkingIn">Check in</string>
+    <string name="txtHistoryParkingOut">Check out</string>
     <string name="txtNewFeedSeeMore">See More</string>
     <string name="txtNewFeedNew">News</string>
     <string name="txtStatusActive">Active</string>

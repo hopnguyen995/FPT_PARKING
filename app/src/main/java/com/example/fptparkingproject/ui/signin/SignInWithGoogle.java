@@ -228,6 +228,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                                                 }
                                                 Toast.makeText(SignInWithGoogle.this, R.string.signinsuccess,
                                                         Toast.LENGTH_SHORT).show();
+                                                getVehicleIDByUserID(fuser);
                                             } else {
                                                 SendNotif sendNotif = new SendNotif();
                                                 sendNotif.sendMessage("", "" + until.dateTimeToString(new Date()) + ".","", fuser.getToken(), newUser.getToken(), constant.KEY_SIGNOUT, until.dateTimeToString(new Date()));
@@ -284,5 +285,36 @@ public class SignInWithGoogle extends AppCompatActivity {
                 return;
             }
         }
+    }
+
+    private void getVehicleIDByUserID(final User user) {
+        ref.child(constant.TABLE_VEHICLES).child(user.getUserid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    List<Vehicle> vehicleList = new ArrayList<>();
+                    for (DataSnapshot dataSnapshot:snapshot.getChildren()
+                         ) {
+                        vehicleList.add(dataSnapshot.getValue(Vehicle.class));
+                    }
+                    SharedPreferences prefRemember = getSharedPreferences(constant.KEY_VEHICLEPLATE, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefRemember.edit();
+                    editor.putString(constant.KEY_VEHICLEPLATE, "");
+                    for (Vehicle vehicle:vehicleList
+                         ) {
+                        if(vehicle.getStatus()){
+                            editor.putString(constant.KEY_VEHICLEPLATE, vehicle.getPlate());
+                            break;
+                        }
+                    }
+                    editor.commit();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
