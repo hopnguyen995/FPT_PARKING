@@ -1,9 +1,11 @@
 package com.example.fptparkingproject.uiadmin.profile;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +19,7 @@ import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.model.Vehicle;
+import com.example.fptparkingproject.textdetection.TextDetectionActivity;
 import com.example.fptparkingproject.untils.Until;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -102,16 +105,43 @@ public class EditProfileActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
                             if (error != null) {
-                                Toast.makeText(EditProfileActivity.this, "Error license", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProfileActivity.this, R.string.licenseerror, Toast.LENGTH_SHORT).show();
 
                             } else {
-                                Toast.makeText(EditProfileActivity.this, "License success", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProfileActivity.this, R.string.licenseerror, Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
                 }
             }
         });
+        findViewById(R.id.buttonCapture).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TextDetectionActivity.class);
+                intent.putExtra(constant.INTENT_CASE, true);
+                startActivityForResult(intent, constant.CAMERA_REQUEST_CODE);
+            }
+        });
+        findViewById(R.id.buttonCaptureLicense).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TextDetectionActivity.class);
+                startActivityForResult(intent, constant.CAMERA_REQUEST_CODE);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null) {
+            if (requestCode == constant.CAMERA_REQUEST_CODE && resultCode == constant.CAMERA_RESPONSE_CODE) {
+                editTextPlateNumber.setText(data.getStringExtra(constant.INTENT_RESULT).replace("\n", "").toUpperCase().replaceAll("([^a-zA-Z0-9]*)", ""));
+            } else {
+                editTextLicense.setText(data.getStringExtra(constant.INTENT_RESULT));
+            }
+        }
     }
 
     @Override
