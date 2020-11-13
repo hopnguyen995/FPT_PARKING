@@ -6,8 +6,8 @@
     <string name="title_menu">Menu</string>
     <string name="title_toolbar_share">Mượn xe</string>
     <string name="title_toolbar_notification">Thông báo</string>
-    <string name="title_toolbar_feedback">Phản hồi</string>
-    <string name="title_toolbar_feedback_reply_admin">Chi tiết Phản hồi</string>
+    <string name="title_toolbar_feedback">Đơn từ</string>
+    <string name="title_toolbar_feedback_reply_admin">Chi tiết đơn nhận</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_blank">Xin chào!</string>
@@ -105,15 +105,16 @@
     <string name="contentsendnotification">Nội dung:</string>
     <string name="button_send">Gửi</string>
     <!--Feedbacks-->
-    <string name="feedback_not_approve">Không phản hồi</string>
+    <string name="feedback_not_approve">Chưa phản hồi</string>
     <string name="feedback_approve">Đã phản hồi</string>
     <string name="feedback_title">TIÊU ĐỀ</string>
+    <string name="feedback_title1">TIÊU ĐỀ:</string>
     <string name="feedback_content">NỘI DUNG</string>
-    <string name="feedback_user_mail">MAIL</string>
-    <string name="feedback_date_time">NGÀY TẠO</string>
+    <string name="feedback_user_mail">EMAIL:</string>
+    <string name="feedback_date_time">NGÀY TẠO:</string>
     <string name="feedback_reply">TRẢ LỜI</string>
     <string name="feedback_status">TRẠNG THÁI</string>
-    <string name="feedback_approve_success">Đã chấp nhận phản hồi</string>
-    <string name="feedback_approve_not_success">Chưa phản hồi</string>
-    <string name="feedback_approved">Đã phản hồi, không thể chỉnh sửa!</string>
+    <string name="feedback_approve_success">Đồng ý</string>
+    <string name="feedback_approve_not_success">Không đồng ý</string>
+    <string name="feedback_approved">Đã trả lời, không thể chỉnh sửa!</string>
 </resources>

@@ -6,8 +6,8 @@
     <string name="title_menu">Menu</string>
     <string name="title_toolbar_share">Share</string>
     <string name="title_toolbar_notification">Notification</string>
-    <string name="title_toolbar_feedback">FeedBacks</string>
-    <string name="title_toolbar_feedback_reply_admin">Feedback Detail</string>
+    <string name="title_toolbar_feedback">Application</string>
+    <string name="title_toolbar_feedback_reply_admin">Application Detail</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_blank">Hello!</string>
@@ -101,17 +101,18 @@
     <string name="contentsendnotification">Content:</string>
     <string name="button_send">Send</string>
     <!--Feedbacks-->
-    <string name="feedback_not_approve">Not Approve</string>
-    <string name="feedback_approve">Approved</string>
+    <string name="feedback_not_approve">Not Reply</string>
+    <string name="feedback_approve">Replied</string>
     <string name="feedback_title">TITLE</string>
+    <string name="feedback_title1">TITLE:</string>
     <string name="feedback_content">PURPOSE</string>
-    <string name="feedback_user_mail">USER MAIL</string>
-    <string name="feedback_date_time">DATE TIME</string>
+    <string name="feedback_user_mail">EMAIL:</string>
+    <string name="feedback_date_time">DATE:</string>
     <string name="feedback_reply">REPLY</string>
     <string name="feedback_status">STATUS</string>
     <string name="feedback_approve_success">Approved success</string>
     <string name="feedback_approve_not_success">Not Approve</string>
-    <string name="feedback_approved">Approved, can not edit!</string>
+    <string name="feedback_approved">Replied, can not edit!</string>
     <string name="button_Search">Search</string>
     <string name="button_SaveEdit">Save</string>
     <string name="txtPlateNumber">Plate number</string>
