@@ -42,7 +42,7 @@ public class SendFeedbackActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_feedback);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(R.string.button_ViewFeedback);
+        actionBar.setTitle(R.string.button_SendFeedBack);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorToolbar)));
         ref = new Until().connectDatabase();

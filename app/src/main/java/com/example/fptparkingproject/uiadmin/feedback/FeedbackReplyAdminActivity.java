@@ -32,7 +32,6 @@ public class FeedbackReplyAdminActivity extends AppCompatActivity {
     private TextView textViewUserMail;
     private EditText txtReply;
     private Button btnApprove;
-    private Button btnNotApprove;
     Constant constant = new Constant();
     private DatabaseReference ref;
 
@@ -51,7 +50,6 @@ public class FeedbackReplyAdminActivity extends AppCompatActivity {
         textViewUserMail = findViewById(R.id.txtUserMailAdmin);
         txtReply = findViewById(R.id.etReply);
         btnApprove = findViewById(R.id.btnApprove);
-        btnNotApprove = findViewById(R.id.btnNotApprove);
         Gson gson = new Gson();
         Intent intent = getIntent();
         final Feedback feedback = gson.fromJson(intent.getStringExtra(constant.INTENT_DETAIL_FEEDBACK), Feedback.class);
@@ -70,16 +68,6 @@ public class FeedbackReplyAdminActivity extends AppCompatActivity {
                     Toast.makeText(FeedbackReplyAdminActivity.this, R.string.feedback_approve_success, Toast.LENGTH_SHORT).show();
                     finish();
                 }
-            }
-        });
-        btnNotApprove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                feedback.setFeedback(txtReply.getText().toString());
-                feedback.setFeedbackStatus("1");
-                ref.child(constant.TABLE_FEEDBACKS).child(feedback.getFeedbackId()).setValue(feedback);
-                Toast.makeText(FeedbackReplyAdminActivity.this, R.string.feedback_approve_not_success, Toast.LENGTH_SHORT).show();
-                finish();
             }
         });
     }
