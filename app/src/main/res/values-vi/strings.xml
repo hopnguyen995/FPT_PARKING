@@ -20,6 +20,7 @@
     <string name="signinfailed">Lỗi đăng nhập</string>
     <string name="signinsuccess">Đăng nhập thành công!</string>
     <string name="signoutsuccess">Đăng xuất!</string>
+    <string name="abc">abc</string>
     <!-- Button -->
     <string name="button_qr">Quét QR</string>
     <string name="button_feedback">Đơn từ</string>

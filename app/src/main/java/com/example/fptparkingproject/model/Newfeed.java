@@ -47,11 +47,11 @@ public class Newfeed implements Comparable<Newfeed>{
         this.newfeedLongContent = newfeedLongContent;
         this.newfeedDateTime = newfeedDateTime;
     }
-    public Newfeed(String newfeedid, String newfeedTitle, String newfeedImage, String newfeedShortContent, Date newfeedDateTime) {
+    public Newfeed(String newfeedid, String newfeedTitle, String newfeedImage, String newfeedLongContent, Date newfeedDateTime) {
         this.newfeedid = newfeedid;
         this.newfeedTitle = newfeedTitle;
         this.newfeedImage = newfeedImage;
-        this.newfeedShortContent = newfeedShortContent;
+        this.newfeedLongContent = newfeedLongContent;
         this.newfeedDateTime = newfeedDateTime;
     }
 
@@ -83,7 +83,7 @@ public class Newfeed implements Comparable<Newfeed>{
         return newfeedShortContent;
     }
 
-    public void setNewShortContent(String newfeedShortContent) {
+    public void setNewfeedShortContent(String newfeedShortContent) {
         this.newfeedShortContent = newfeedShortContent;
     }
 
