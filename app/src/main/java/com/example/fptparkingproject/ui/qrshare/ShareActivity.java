@@ -23,6 +23,7 @@ import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.Share;
 import com.example.fptparkingproject.model.ShareTemp;
 import com.example.fptparkingproject.model.User;
+import com.example.fptparkingproject.model.Vehicle;
 import com.example.fptparkingproject.notification.SendNotif;
 import com.example.fptparkingproject.untils.Until;
 import com.google.firebase.database.DataSnapshot;
@@ -35,7 +36,9 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ShareActivity extends AppCompatActivity {
     private ImageView imageView;
@@ -73,64 +76,91 @@ public class ShareActivity extends AppCompatActivity {
         txtShareInfo.setVisibility(View.INVISIBLE);
         txtShareNotif.setVisibility(View.INVISIBLE);
         buttonClickHere.setVisibility(View.INVISIBLE);
-        SharedPreferences sharedPreferences = getSharedPreferences(constant.KEY_VEHICLEPLATE, Context.MODE_PRIVATE);
-        String plate = sharedPreferences.getString(constant.KEY_VEHICLEPLATE, "");
-        if (!plate.isEmpty()) {
-            buttonClickHere.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ref.child(constant.TABLE_SHARES_TEMP).child(user.getUserid()).child(constant.TABLE_SHARES_TEMP_CHILD_STATUS).setValue(false);
-                    ref.child(constant.TABLE_SHARES).child(shareTemp.getUserborrowid()).child(constant.TABLE_SHARES_TEMP_CHILD_STATUS).setValue(false);
-                    new SendNotif().sendMessage("", shareTemp.getUsername(), "", shareTemp.getSendtoken(), shareTemp.getToken(), new Constant().KEY_CONFIRM_SHARE_FAILED, new Until().dateTimeToString(new Date()));
-                }
-            });
-            ref.child(constant.TABLE_SHARES_TEMP).child(user.getUserid()).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    progressBar.setVisibility(View.INVISIBLE);
-                    if (snapshot.exists()) {
-                        shareTemp = snapshot.getValue(ShareTemp.class);
-                        if (shareTemp.getStatus()) {
-                            imageView.setVisibility(View.INVISIBLE);
-                            txtShareInfo.setVisibility(View.INVISIBLE);
-                            txtShareNotif.setVisibility(View.VISIBLE);
-                            buttonClickHere.setVisibility(View.VISIBLE);
-                        } else {
-                            txtShareNotif.setVisibility(View.INVISIBLE);
-                            buttonClickHere.setVisibility(View.INVISIBLE);
-                            imageView.setVisibility(View.VISIBLE);
-                            txtShareInfo.setVisibility(View.VISIBLE);
-                        }
-                    }else {
-                        txtShareNotif.setVisibility(View.INVISIBLE);
-                        buttonClickHere.setVisibility(View.INVISIBLE);
-                        imageView.setVisibility(View.VISIBLE);
-                        txtShareInfo.setVisibility(View.VISIBLE);
-                    }
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+        ref.child(constant.TABLE_VEHICLES).child(user.getUserid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    List<Vehicle> vehicleList = new ArrayList<>();
+                    Boolean isActive = false;
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()
+                    ) {
+                        vehicleList.add(dataSnapshot.getValue(Vehicle.class));
+                    }
+                    for (Vehicle vehicle : vehicleList
+                    ) {
+                        if (vehicle.getStatus()) {
+                            isActive = true;
+                            buttonClickHere.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    ref.child(constant.TABLE_SHARES_TEMP).child(user.getUserid()).child(constant.TABLE_SHARES_TEMP_CHILD_STATUS).setValue(false);
+                                    ref.child(constant.TABLE_SHARES).child(shareTemp.getUserborrowid()).child(constant.TABLE_SHARES_TEMP_CHILD_STATUS).setValue(false);
+                                    new SendNotif().sendMessage("", shareTemp.getUsername(), "", shareTemp.getSendtoken(), shareTemp.getToken(), new Constant().KEY_CONFIRM_SHARE_FAILED, new Until().dateTimeToString(new Date()));
+                                }
+                            });
+                            ref.child(constant.TABLE_SHARES_TEMP).child(user.getUserid()).addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    progressBar.setVisibility(View.INVISIBLE);
+                                    if (snapshot.exists()) {
+                                        shareTemp = snapshot.getValue(ShareTemp.class);
+                                        if (shareTemp.getStatus()) {
+                                            imageView.setVisibility(View.INVISIBLE);
+                                            txtShareInfo.setVisibility(View.INVISIBLE);
+                                            txtShareNotif.setVisibility(View.VISIBLE);
+                                            buttonClickHere.setVisibility(View.VISIBLE);
+                                        } else {
+                                            txtShareNotif.setVisibility(View.INVISIBLE);
+                                            buttonClickHere.setVisibility(View.INVISIBLE);
+                                            imageView.setVisibility(View.VISIBLE);
+                                            txtShareInfo.setVisibility(View.VISIBLE);
+                                        }
+                                    } else {
+                                        txtShareNotif.setVisibility(View.INVISIBLE);
+                                        buttonClickHere.setVisibility(View.INVISIBLE);
+                                        imageView.setVisibility(View.VISIBLE);
+                                        txtShareInfo.setVisibility(View.VISIBLE);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    progressBar.setVisibility(View.INVISIBLE);
+                                }
+                            });
+                            try {
+                                Share share = new Share();
+                                share.setShare_vehicle(user.getUserid());
+                                share.setToken(user.getToken());
+                                Gson gson = new Gson();
+                                qrcodeshare = "{\"" + constant.SHARE_VEHICLE + "\":\"" + user.getUserid() + "\",\"" + constant.TOKEN + "\":\"" + user.getToken() + "\"}";
+                                bitmap = TextToImageEncode(gson.toJson(share));
+                                imageView.setImageBitmap(bitmap);
+                                txtShareInfo.setText(R.string.share_info);
+                            } catch (Exception ex) {
+
+                            }
+                            break;
+                        }
+                    }
+                    if (!isActive) {
+                        progressBar.setVisibility(View.INVISIBLE);
+                        txtShareNotif.setVisibility(View.VISIBLE);
+                        txtShareNotif.setText(R.string.txtNotifNotHaveVehicle);
+                    }
+                } else {
                     progressBar.setVisibility(View.INVISIBLE);
+                    txtShareNotif.setVisibility(View.VISIBLE);
+                    txtShareNotif.setText(R.string.txtNotifNotHaveVehicle);
                 }
-            });
-            try {
-                Share share = new Share();
-                share.setShare_vehicle(user.getUserid());
-                share.setToken(user.getToken());
-                Gson gson = new Gson();
-                qrcodeshare = "{\"" + constant.SHARE_VEHICLE + "\":\"" + user.getUserid() + "\",\"" + constant.TOKEN + "\":\"" + user.getToken() + "\"}";
-                bitmap = TextToImageEncode(gson.toJson(share));
-                imageView.setImageBitmap(bitmap);
-                txtShareInfo.setText(R.string.share_info);
-            } catch (Exception ex) {
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        } else {
-            progressBar.setVisibility(View.INVISIBLE);
-            txtShareNotif.setVisibility(View.VISIBLE);
-            txtShareNotif.setText(R.string.txtNotifNotHaveVehicle);
-        }
+        });
     }
 
     @Override

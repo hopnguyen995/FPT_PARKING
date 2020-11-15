@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
-public class Newfeed implements Comparable<Newfeed>{
+public class Newfeed implements Comparable<Newfeed> {
     private String newfeedid;
     private String newfeedTitle;
     private String newfeedImage;
@@ -47,6 +47,7 @@ public class Newfeed implements Comparable<Newfeed>{
         this.newfeedLongContent = newfeedLongContent;
         this.newfeedDateTime = newfeedDateTime;
     }
+
     public Newfeed(String newfeedid, String newfeedTitle, String newfeedImage, String newfeedLongContent, Date newfeedDateTime) {
         this.newfeedid = newfeedid;
         this.newfeedTitle = newfeedTitle;

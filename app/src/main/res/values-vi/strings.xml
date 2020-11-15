@@ -6,8 +6,8 @@
     <string name="title_menu">Menu</string>
     <string name="title_toolbar_share">Mượn xe</string>
     <string name="title_toolbar_notification">Thông báo</string>
-    <string name="title_toolbar_feedback">Phản hồi</string>
-    <string name="title_toolbar_feedback_reply_admin">Chi tiết Phản hồi</string>
+    <string name="title_toolbar_feedback">Đơn từ</string>
+    <string name="title_toolbar_feedback_reply_admin">Chi tiết đơn nhận</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_blank">Xin chào!</string>
@@ -37,8 +37,12 @@
     <string name="button_ViewFeedback">Xem đơn</string>
     <string name="button_ClickHere">Nhấn vào đây để hủy</string>
     <string name="button_SendFeedBack">Gửi đơn</string>
+    <string name="button_Search">Tìm kiếm</string>
+    <string name="button_SaveEdit">Lưu</string>
+    <string name="txthintsearch">Nhập tài khoản mail...</string>
     <!--TextView-->
     <string name="txtProfile">Thông tin tài khoản</string>
+    <string name="txtLicense">Đăng ký</string>
     <string name="txtHistory">Nhật ký hoạt động</string>
     <string name="txtHelp">Trợ giúp</string>
     <string name="txtNotif">Bạn đã cho mượn xe.</string>
@@ -58,6 +62,8 @@
     <string name="txtname">Họ Tên:</string>
     <string name="txtEmail">Email:</string>
     <string name="txtlistVehicle">Danh sách xe:</string>
+    <string name="txtPlateNumber">Biển số xe</string>
+    <string name="txtLicenseInformation">Thông tin giấy phép</string>
     <!--QRCode-->
     <string name="not_support">Mã QR không hỗ trợ</string>
     <!--Title-->
@@ -71,6 +77,12 @@
     <string name="parkingoutfailed">Có lỗi xảy ra khi lấy xe!</string>
     <string name="shareSuccess">Mượn xe</string>
     <string name="cannotshare">Không thể chia sẻ xe của bạn!</string>
+    <string name="licenseerror">Lỗi đăng ký!</string>
+    <string name="licensesuccess">Đăng ký thành công!</string>
+    <string name="emailnotexist">Tài khoản mail không tồn tại!</string>
+    <string name="sendapplicationsuccess">Gửi đơn thành công!</string>
+    <string name="sendnotificationsuccess">Gửi thông báo thành công!</string>
+    <string name="sendnewfeedsuccess">Đăng bài thành công!</string>
     <!--Notification-->
     <string name="title_confirm">Xác nhận</string>
     <string name="title_notificaton">Thông báo ℹ️</string>
@@ -94,14 +106,16 @@
     <string name="contentsendnotification">Nội dung:</string>
     <string name="button_send">Gửi</string>
     <!--Feedbacks-->
-    <string name="feedback_not_approve">Không phản hồi</string>
+    <string name="feedback_not_approve">Chưa phản hồi</string>
     <string name="feedback_approve">Đã phản hồi</string>
     <string name="feedback_title">TIÊU ĐỀ</string>
-    <string name="feedback_content">MỤC ĐÍCH</string>
-    <string name="feedback_user_mail">MAIL</string>
-    <string name="feedback_date_time">NGÀY TẠO</string>
+    <string name="feedback_title1">TIÊU ĐỀ:</string>
+    <string name="feedback_content">NỘI DUNG</string>
+    <string name="feedback_user_mail">EMAIL:</string>
+    <string name="feedback_date_time">NGÀY TẠO:</string>
     <string name="feedback_reply">TRẢ LỜI</string>
     <string name="feedback_status">TRẠNG THÁI</string>
-    <string name="feedback_approve_success">Đã chấp nhận phản hồi</string>
-    <string name="feedback_approve_not_success">Chưa phản hồi</string>
+    <string name="feedback_approve_success">Đồng ý</string>
+    <string name="feedback_approve_not_success">Không đồng ý</string>
+    <string name="feedback_approved">Đã trả lời, không thể chỉnh sửa!</string>
 </resources>

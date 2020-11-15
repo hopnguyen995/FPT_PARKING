@@ -13,6 +13,7 @@ public class FeedBackRowViewHolder extends RecyclerView.ViewHolder {
     public TextView txtContent;
     public TextView txtStatus;
     public TextView txtDatetime;
+    public TextView txtReply;
 
     public FeedBackRowViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -20,5 +21,6 @@ public class FeedBackRowViewHolder extends RecyclerView.ViewHolder {
         txtDatetime = itemView.findViewById(R.id.txtFeedBackDatetimeAdmin);
         txtContent = itemView.findViewById(R.id.txtContent);
         txtStatus = itemView.findViewById(R.id.txtStatus);
+        txtReply = itemView.findViewById(R.id.txtReply);
     }
 }

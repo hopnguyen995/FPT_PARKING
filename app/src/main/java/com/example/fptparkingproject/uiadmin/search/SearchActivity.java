@@ -11,16 +11,14 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.ui.profile.ProfileActivity;
+import com.example.fptparkingproject.uiadmin.profile.ProfileAdminActivity;
 import com.example.fptparkingproject.untils.Until;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,7 +40,7 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-        actionBar.setTitle(R.string.button_history);
+        actionBar.setTitle(R.string.button_CheckInfo);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorToolbar)));
         setContentView(R.layout.activity_search);
@@ -67,8 +65,7 @@ public class SearchActivity extends AppCompatActivity {
                             ) {
                                 if (inputSearch.getText().toString().equals(uDb.getEmail())) {
                                     isExist = true;
-                                    Intent intent = new Intent(getApplicationContext(), ProfileActivity.class);
-                                    intent.putExtra(constant.INTENT_CASE, 1);
+                                    Intent intent = new Intent(getApplicationContext(), ProfileAdminActivity.class);
                                     intent.putExtra(constant.INTENT_USER, uDb);
                                     startActivity(intent);
                                     break;
@@ -77,7 +74,7 @@ public class SearchActivity extends AppCompatActivity {
 
                         }
                         if (!isExist) {
-
+                            new Until().showAlertDialog(R.string.title_notificaton,R.string.emailnotexist, SearchActivity.this);
                         }
                     }
 

@@ -215,7 +215,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                                         }
                                         //get user exist
                                         if (mAuth.getCurrentUser() != null) {
-                                            fuser.saveUser(prefs,fuser);
+                                            fuser.saveUser(prefs, fuser);
                                             if (fuser.getToken().equals("")) {
                                                 ref.child(constant.TABLE_USERS).child(mAuth.getUid()).child(constant.TABLE_USERS_CHILD_TOKEN).setValue(newUser.getToken());
                                             } else if (fuser.getToken().equals(newUser.getToken())) {
@@ -231,7 +231,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                                                 getVehicleIDByUserID(fuser);
                                             } else {
                                                 SendNotif sendNotif = new SendNotif();
-                                                sendNotif.sendMessage("", "" + until.dateTimeToString(new Date()) + ".","", fuser.getToken(), newUser.getToken(), constant.KEY_SIGNOUT, until.dateTimeToString(new Date()));
+                                                sendNotif.sendMessage("", "" + until.dateTimeToString(new Date()) + ".", "", fuser.getToken(), newUser.getToken(), constant.KEY_SIGNOUT, until.dateTimeToString(new Date()));
                                                 Timer = new CountDownTimer(new Constant().TIMEOUT_SIGNIN, new Constant().COUNTDOWN) {
                                                     public void onTick(long millisUntilFinished) {
                                                         timerStarted = true;
@@ -288,21 +288,21 @@ public class SignInWithGoogle extends AppCompatActivity {
     }
 
     private void getVehicleIDByUserID(final User user) {
-        final List<Vehicle> vehicleList = new ArrayList<>();
         ref.child(constant.TABLE_VEHICLES).child(user.getUserid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    for (DataSnapshot dataSnapshot:snapshot.getChildren()
-                         ) {
+                    List<Vehicle> vehicleList = new ArrayList<>();
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()
+                    ) {
                         vehicleList.add(dataSnapshot.getValue(Vehicle.class));
                     }
                     SharedPreferences prefRemember = getSharedPreferences(constant.KEY_VEHICLEPLATE, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefRemember.edit();
                     editor.putString(constant.KEY_VEHICLEPLATE, "");
-                    for (Vehicle vehicle:vehicleList
-                         ) {
-                        if(vehicle.getStatus()){
+                    for (Vehicle vehicle : vehicleList
+                    ) {
+                        if (vehicle.getStatus()) {
                             editor.putString(constant.KEY_VEHICLEPLATE, vehicle.getPlate());
                             break;
                         }

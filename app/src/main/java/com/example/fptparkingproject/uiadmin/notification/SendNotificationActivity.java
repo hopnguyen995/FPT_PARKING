@@ -53,7 +53,7 @@ public class SendNotificationActivity extends AppCompatActivity {
                     Notification notification = new Notification(until.randomID(),editTextTitle.getText().toString(), editTextImage.getText().toString(),editTextShortContent.getText().toString(),editTextContent.getText().toString(),new Date());
                     new SendNotif().sendMessage(notification.getNotificationTitle(), notification.getNotificationShortContent(), notification.getNotificationImage(), "/topics/all", "", "", until.nomalizeDateTime(notification.getNotificationDateTime()));
                     ref.child(constant.TABLE_NOTIFICATIONS).child(notification.getNotificationId()).setValue(notification);
-                    Toast.makeText(SendNotificationActivity.this, "Send success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SendNotificationActivity.this, R.string.sendnotificationsuccess, Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }

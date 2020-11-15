@@ -2,8 +2,9 @@ package com.example.fptparkingproject.constant;
 
 public class Constant {
     //intent
-    public final int SIGNIN_REQUEST_CODE = 100;
-    public final int SIGNIN_RESPONSE_CODE = 200;
+    public final int CAMERA_REQUEST_CODE = 100;
+    public final int CAMERA_RESPONSE_CODE = 200;
+    public final int CAMERA_RESPONSE_CODE_LICENSE = 201;
     public final int QRSCAN_REQUEST_CODE = 300;
     public final int QRSCAN_RESPONSE_CODE = 400;
     public final int PERMISSION_GRANTED_REQUEST_CODE = 500;
@@ -22,8 +23,11 @@ public class Constant {
     public final String INTENT_HISTORY_DETAIL_HISTORY = "history";
     public final String INTENT_DETAIL_FEEDBACK = "feedback";
     public final String INTENT_CASE = "case";
+    public final String INTENT_RESULT = "result";
     public final String INTENT_USER = "user";
     public final String INTENT_VEHICLE = "vehicle";
+    public final String INTENT_LISTVEHICLE = "listVehicle";
+    public final int RequestCameraPermissionID = 1001;
     //Qrcode
     public final int QRCODE_WIDTH = 350;
     //SharedPreferences
@@ -52,7 +56,7 @@ public class Constant {
     public final int TIMEOUT_SIGNIN = 10000;
     public final int COUNTDOWN = 1000;
     public final int TIMEOUT_PARKING = 5000;
-    public final int CHARACTER_LIMIT = 30;
+    public final int CHARACTER_LIMIT = 200;
 
     //notification
     public static final int TYPE_HEADER = 0;

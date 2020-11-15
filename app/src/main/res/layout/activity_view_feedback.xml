@@ -1,72 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#ffffff"
-    tools:context=".ui.feedbacks.ViewFeedbackActivity">
-
-    <!-- Table View-->
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/txtTitle"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="@drawable/table_header_cell_bg"
-            android:text="@string/feedback_title"
-            android:textAlignment="center"
-            android:textColor="#ffffff"
-            android:textSize="13sp" />
-
-
-        <TextView
-            android:id="@+id/txtFeedBackDatetimeAdmin"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="@drawable/table_header_cell_bg"
-            android:text="@string/txtHistoryDatetime"
-            android:textAlignment="center"
-            android:textColor="#ffffff"
-            android:textSize="13sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtContent"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="@drawable/table_header_cell_bg"
-            android:text="@string/feedback_content"
-            android:textAlignment="center"
-            android:textColor="#ffffff"
-            android:textSize="13sp" />
-
-        <TextView
-            android:id="@+id/txtStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="@drawable/table_header_cell_bg"
-            android:text="@string/feedback_status"
-            android:textColor="#ffffff"
-            android:textSize="13sp" />
-    </LinearLayout>
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
     <HorizontalScrollView
-        android:id="@+id/horizontalScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
@@ -74,13 +17,84 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewFeedbackList"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/view_feedback_layout" />
-    </HorizontalScrollView>
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:orientation="vertical"
+            tools:context=".ui.feedbacks.ViewFeedbackActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- Table View-->
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:background="@drawable/table_header_cell_bg"
+                    android:text="@string/feedback_title"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    android:textSize="13sp" />
+
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:background="@drawable/table_header_cell_bg"
+                    android:text="@string/txtHistoryDatetime"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:background="@drawable/table_header_cell_bg"
+                    android:text="@string/feedback_content"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:background="@drawable/table_header_cell_bg"
+                    android:text="@string/feedback_reply"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    android:textSize="13sp" />
+
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:background="@drawable/table_header_cell_bg"
+                    android:text="@string/feedback_status"
+                    android:textAlignment="center"
+                    android:textColor="#ffffff"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewFeedbackList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/view_feedback_layout" />
+        </LinearLayout>
+    </HorizontalScrollView>
+</ScrollView>

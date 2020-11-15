@@ -68,10 +68,10 @@
             android:weightSum="10">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:text="Plate number"
+                android:layout_weight="1"
+                android:text="@string/txtPlateNumber"
                 android:textSize="18dp" />
 
             <EditText
@@ -79,8 +79,16 @@
                 android:background="@drawable/edittext_border"
                 android:id="@+id/txt_plateNumber"
                 android:layout_width="0dp"
-                android:layout_weight="7"
+                android:paddingLeft="5dp"
+                android:layout_weight="9"
                 android:textSize="18dp" />
+
+            <Button
+                android:id="@+id/buttonCapture"
+                android:layout_width="30dp"
+                android:layout_marginLeft="5dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_camera"/>
         </LinearLayout>
 
 
@@ -88,15 +96,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingVertical="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingVertical="5dp"
             android:weightSum="10">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:text="License information"
+                android:layout_weight="10"
+                android:text="@string/txtLicenseInformation"
                 android:textSize="18dp" />
+            <Button
+                android:id="@+id/buttonCaptureLicense"
+                android:layout_width="30dp"
+                android:layout_marginLeft="5dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_camera"/>
         </LinearLayout>
 
         <LinearLayout
@@ -109,11 +124,15 @@
 
             <EditText
                 android:id="@+id/txt_license"
-                android:layout_width="221dp"
-                android:layout_height="204dp"
-                android:layout_weight="5"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
                 android:background="@drawable/edittext_border"
+                android:ems="10"
+                android:gravity="start|top"
                 android:inputType="textMultiLine"
+                android:paddingLeft="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:textSize="18dp" />
         </LinearLayout>
         <LinearLayout
@@ -128,9 +147,10 @@
                 android:id="@+id/buttonSave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_border"
                 android:layout_weight="1"
-                android:text="Save" />
+                android:background="@drawable/button_border"
+                android:text="@string/button_SaveEdit"
+                android:textColor="#ffffff" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
