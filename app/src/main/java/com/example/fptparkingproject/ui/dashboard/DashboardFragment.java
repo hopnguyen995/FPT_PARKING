@@ -46,7 +46,7 @@ public class DashboardFragment extends Fragment {
         newfeedAdapter = new NewfeedAdapter(getContext(), listNewfeed);
         recyclerView.setAdapter(newfeedAdapter);
         ref = new Until().connectDatabase();
-        ref.child(constant.TABLE_NEWFEEDS).addValueEventListener(new ValueEventListener() {
+        ref.child(constant.TABLE_NEWFEEDS).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists() && snapshot.getChildrenCount() > 0) {

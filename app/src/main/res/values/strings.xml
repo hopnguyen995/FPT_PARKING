@@ -66,10 +66,10 @@
     <string name="information">Information</string>
     <!--Message-->
     <string name="failConnect">Failed to connect to network</string>
-    <string name="parkinginsuccess">Parking in success!</string>
-    <string name="parkinginfailed">Parking in failed!</string>
-    <string name="parkingoutsuccess">Parking out success!</string>
-    <string name="parkingoutfailed">Parking out failed!</string>
+    <string name="parkinginsuccess">Check in success!</string>
+    <string name="parkinginfailed">Check in failed!</string>
+    <string name="parkingoutsuccess">Check out success!</string>
+    <string name="parkingoutfailed">Check out failed!</string>
     <string name="shareSuccess">Share vehicle!</string>
     <string name="cannotshare">Can not share own vehicle!</string>
     <string name="licenseerror">Error license!</string>

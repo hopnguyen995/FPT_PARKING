@@ -212,9 +212,7 @@ public class SignInWithGoogle extends AppCompatActivity {
                                             newUser.setUsername(uAuth.getDisplayName());
                                             newUser.setRole(false);
                                             ref.child("Users").child(uAuth.getUid()).setValue(newUser);
-                                        }
-                                        //get user exist
-                                        if (mAuth.getCurrentUser() != null) {
+                                        }else if (mAuth.getCurrentUser() != null) {
                                             fuser.saveUser(prefs, fuser);
                                             if (fuser.getToken().equals("")) {
                                                 ref.child(constant.TABLE_USERS).child(mAuth.getUid()).child(constant.TABLE_USERS_CHILD_TOKEN).setValue(newUser.getToken());
