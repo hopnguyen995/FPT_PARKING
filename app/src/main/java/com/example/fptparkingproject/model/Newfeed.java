@@ -29,29 +29,11 @@ public class Newfeed implements Comparable<Newfeed> {
         this.newfeedid = newfeedid;
     }
 
-    public Newfeed(String newfeedid, String newfeedTitle, String newfeedImage, String newfeedShortContent, String newfeedLongContent, Date newfeedDateTime, boolean expanded) {
-        this.newfeedid = newfeedid;
-        this.newfeedTitle = newfeedTitle;
-        this.newfeedImage = newfeedImage;
-        this.newfeedShortContent = newfeedShortContent;
-        this.newfeedLongContent = newfeedLongContent;
-        this.newfeedDateTime = newfeedDateTime;
-        this.expanded = expanded;
-    }
-
     public Newfeed(String newfeedid, String newfeedTitle, String newfeedImage, String newfeedShortContent, String newfeedLongContent, Date newfeedDateTime) {
         this.newfeedid = newfeedid;
         this.newfeedTitle = newfeedTitle;
         this.newfeedImage = newfeedImage;
         this.newfeedShortContent = newfeedShortContent;
-        this.newfeedLongContent = newfeedLongContent;
-        this.newfeedDateTime = newfeedDateTime;
-    }
-
-    public Newfeed(String newfeedid, String newfeedTitle, String newfeedImage, String newfeedLongContent, Date newfeedDateTime) {
-        this.newfeedid = newfeedid;
-        this.newfeedTitle = newfeedTitle;
-        this.newfeedImage = newfeedImage;
         this.newfeedLongContent = newfeedLongContent;
         this.newfeedDateTime = newfeedDateTime;
     }

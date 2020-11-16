@@ -48,9 +48,9 @@ public class NewfeedAdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!editTextTitle.getText().toString().isEmpty() && !editTextLongContent.getText().toString().isEmpty()) {
-                    Newfeed newfeed = new Newfeed(until.randomID(),editTextTitle.getText().toString(), editTextImage.getText().toString(),editTextLongContent.getText().toString(),new Date());
+                    Newfeed newfeed = new Newfeed(until.randomID(),editTextTitle.getText().toString(), editTextImage.getText().toString(),"",editTextLongContent.getText().toString(),new Date());
                     if(newfeed.getNewfeedLongContent().length() > constant.CHARACTER_LIMIT){
-                        content = newfeed.getNewfeedLongContent().substring(0, constant.CHARACTER_LIMIT);
+                        content = newfeed.getNewfeedLongContent().substring(0, constant.CHARACTER_LIMIT) + constant.TOBECONTINUE;
                         newfeed.setNewfeedShortContent(content);
                     }
                     ref.child(constant.TABLE_NEWFEEDS).child(newfeed.getNewfeedid()).setValue(newfeed);
