@@ -25,6 +25,7 @@ public class Constant {
     public final String INTENT_USER = "user";
     public final String INTENT_VEHICLE = "vehicle";
     public final String INTENT_LISTVEHICLE = "listVehicle";
+    public final String INTENT_LISTALLVEHICLE = "listAllVehicle";
     public final int RequestCameraPermissionID = 1001;
     //Qrcode
     public final int QRCODE_WIDTH = 350;
