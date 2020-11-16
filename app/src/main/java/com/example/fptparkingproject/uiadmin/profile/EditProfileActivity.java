@@ -5,10 +5,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +28,7 @@ public class EditProfileActivity extends AppCompatActivity {
     User user = new User();
     Vehicle vehicle = new Vehicle();
     ArrayList<Vehicle> listVehicle = new ArrayList<>();
+    ArrayList<Vehicle> listAllVehicle = new ArrayList<>();
     Constant constant = new Constant();
     Until until = new Until();
     private TextView textViewUsername;
@@ -50,6 +49,7 @@ public class EditProfileActivity extends AppCompatActivity {
         user = (User) getIntent().getSerializableExtra(constant.INTENT_USER);
         vehicle = (Vehicle) getIntent().getSerializableExtra(constant.INTENT_VEHICLE);
         listVehicle = (ArrayList<Vehicle>) getIntent().getSerializableExtra(constant.INTENT_LISTVEHICLE);
+        listAllVehicle = (ArrayList<Vehicle>) getIntent().getSerializableExtra(constant.INTENT_LISTALLVEHICLE);
         textViewUsername = findViewById(R.id.txt_userName);
         textViewEmail = findViewById(R.id.txt_email);
         editTextPlateNumber = findViewById(R.id.txt_plateNumber);
@@ -64,54 +64,70 @@ public class EditProfileActivity extends AppCompatActivity {
         findViewById(R.id.buttonSave).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (listVehicle != null) {
-                    for (final Vehicle vehicle : listVehicle
+                boolean isExist = false;
+                if (listAllVehicle != null) {
+                    for (final Vehicle vehicle : listAllVehicle
                     ) {
-                        if (vehicle.getStatus()) {
-                            if (vehicle.getPlate().compareToIgnoreCase(editTextPlateNumber.getText().toString()) != 0) {
-                                Vehicle newVehicle = new Vehicle();
-                                newVehicle.setVehicleid(until.randomID());
-                                newVehicle.setUserid(user.getUserid());
-                                newVehicle.setLicense(editTextLicense.getText().toString().trim());
-                                newVehicle.setPlate(editTextPlateNumber.getText().toString().trim().toUpperCase());
-                                newVehicle.setStatus(true);
-                                newVehicle.setUsername(user.getUsername());
-                                ref.child(constant.TABLE_VEHICLES).child(user.getUserid()).child(newVehicle.getVehicleid()).setValue(newVehicle, new DatabaseReference.CompletionListener() {
-                                    @Override
-                                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                                        if (error != null) {
-                                            until.showAlertDialog(R.string.title_warning, R.string.licenseerror, EditProfileActivity.this);
-                                        } else {
-                                            vehicle.setStatus(false);
-                                            ref.getParent().child(vehicle.getVehicleid()).setValue(vehicle);
-                                            until.showAlertDialog(R.string.title_notificaton, R.string.licensesuccess, EditProfileActivity.this);
-                                        }
-                                    }
-                                });
-                            } else {
-                                until.showAlertDialog(R.string.title_warning, R.string.licenseerror, EditProfileActivity.this);
-                            }
+                        if (vehicle.getPlate().compareToIgnoreCase(editTextPlateNumber.getText().toString()) == 0) {
+                            isExist = true;
+                            break;
                         }
                     }
-                } else {
-                    Vehicle newVehicle = new Vehicle();
-                    newVehicle.setVehicleid(new Until().randomID());
-                    newVehicle.setUserid(user.getUserid());
-                    newVehicle.setLicense(editTextLicense.getText().toString().trim());
-                    newVehicle.setPlate(editTextPlateNumber.getText().toString().trim());
-                    newVehicle.setStatus(true);
-                    newVehicle.setUsername(user.getUsername());
-                    ref.child(constant.TABLE_VEHICLES).child(user.getUserid()).child(newVehicle.getVehicleid()).setValue(newVehicle, new DatabaseReference.CompletionListener() {
-                        @Override
-                        public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                            if (error != null) {
-                                Toast.makeText(EditProfileActivity.this, R.string.licenseerror, Toast.LENGTH_SHORT).show();
-
-                            } else {
-                                Toast.makeText(EditProfileActivity.this, R.string.licenseerror, Toast.LENGTH_SHORT).show();
+                }
+                if (!isExist) {
+                    if (listVehicle != null) {
+                        for (final Vehicle vehicle : listVehicle
+                        ) {
+                            if (vehicle.getStatus()) {
+                                if (vehicle.getPlate().compareToIgnoreCase(editTextPlateNumber.getText().toString()) != 0) {
+                                    Vehicle newVehicle = new Vehicle();
+                                    newVehicle.setVehicleid(until.randomID());
+                                    newVehicle.setUserid(user.getUserid());
+                                    newVehicle.setLicense(editTextLicense.getText().toString().trim());
+                                    newVehicle.setPlate(editTextPlateNumber.getText().toString().trim().toUpperCase());
+                                    newVehicle.setStatus(true);
+                                    newVehicle.setUsername(user.getUsername());
+                                    ref.child(constant.TABLE_VEHICLES).child(user.getUserid()).child(newVehicle.getVehicleid()).setValue(newVehicle, new DatabaseReference.CompletionListener() {
+                                        @Override
+                                        public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                            if (error != null) {
+                                                until.showAlertDialog(R.string.title_warning, R.string.licenseerror, EditProfileActivity.this);
+                                            } else {
+                                                vehicle.setStatus(false);
+                                                ref.getParent().child(vehicle.getVehicleid()).setValue(vehicle);
+                                                until.showAlertDialog(R.string.title_notificaton, R.string.licensesuccess, EditProfileActivity.this);
+                                                listVehicle.add(vehicle);
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    until.showAlertDialog(R.string.title_warning, R.string.licenseerror, EditProfileActivity.this);
+                                }
                             }
                         }
-                    });
+                    } else {
+                        final Vehicle newVehicle = new Vehicle();
+                        newVehicle.setVehicleid(new Until().randomID());
+                        newVehicle.setUserid(user.getUserid());
+                        newVehicle.setLicense(editTextLicense.getText().toString().trim());
+                        newVehicle.setPlate(editTextPlateNumber.getText().toString().trim());
+                        newVehicle.setStatus(true);
+                        newVehicle.setUsername(user.getUsername());
+                        ref.child(constant.TABLE_VEHICLES).child(user.getUserid()).child(newVehicle.getVehicleid()).setValue(newVehicle, new DatabaseReference.CompletionListener() {
+                            @Override
+                            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                if (error != null) {
+                                    until.showAlertDialog(R.string.title_warning, R.string.licenseerror, EditProfileActivity.this);
+                                } else {
+                                    until.showAlertDialog(R.string.title_notificaton, R.string.licensesuccess, EditProfileActivity.this);
+                                    listVehicle= new ArrayList<>();
+                                    listVehicle.add(newVehicle);
+                                }
+                            }
+                        });
+                    }
+                } else {
+                    until.showAlertDialog(R.string.title_warning, R.string.licenseerror, EditProfileActivity.this);
                 }
             }
         });

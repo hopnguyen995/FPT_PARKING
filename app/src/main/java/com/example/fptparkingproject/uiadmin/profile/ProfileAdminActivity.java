@@ -18,7 +18,6 @@ import android.widget.TextView;
 import com.example.fptparkingproject.R;
 import com.example.fptparkingproject.constant.Constant;
 import com.example.fptparkingproject.customadapter.VehicleAdminViewAdapter;
-import com.example.fptparkingproject.customadapter.VehicleViewAdapter;
 import com.example.fptparkingproject.model.User;
 import com.example.fptparkingproject.model.Vehicle;
 import com.example.fptparkingproject.untils.Until;
@@ -38,6 +37,7 @@ public class ProfileAdminActivity extends AppCompatActivity {
     private VehicleAdminViewAdapter vehicleAdminViewAdapter;
     private LinearLayout linearLayout;
     private ArrayList<Vehicle> listVehicles;
+    private ArrayList<Vehicle> listAllVehicles;
     User user;
     Constant constant = new Constant();
 
@@ -56,8 +56,8 @@ public class ProfileAdminActivity extends AppCompatActivity {
         txtDanhsach = findViewById(R.id.txtDanhSach);
         prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-            fab.setVisibility(View.VISIBLE);
-            user = (User) getIntent().getSerializableExtra(constant.INTENT_USER);
+        fab.setVisibility(View.VISIBLE);
+        user = (User) getIntent().getSerializableExtra(constant.INTENT_USER);
 
         txtDanhsach.setVisibility(View.INVISIBLE);
         linearLayout = findViewById(R.id.linearLayoutvehicle);
@@ -65,6 +65,7 @@ public class ProfileAdminActivity extends AppCompatActivity {
         txtUsername.setText(user.getUsername());
         txtEmail.setText(user.getEmail());
         listVehicles = new ArrayList<>();
+        listAllVehicles = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerViewVehicleList);
         ref = new Until().connectDatabase();
         ref.child(constant.TABLE_VEHICLES).child(user.getUserid()).addValueEventListener(new ValueEventListener() {
@@ -99,17 +100,39 @@ public class ProfileAdminActivity extends AppCompatActivity {
 
             }
         });
+        ref.child(constant.TABLE_VEHICLES).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        for (DataSnapshot dsc : ds.getChildren()) {
+                            Vehicle vehicle = dsc.getValue(Vehicle.class);
+                            listAllVehicles.add(vehicle);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), EditProfileActivity.class);
                 intent.putExtra(constant.INTENT_USER, user);
-                if(listVehicles != null){
-                    for (Vehicle vehicle:listVehicles
+                if (listAllVehicles != null) {
+                    intent.putExtra(constant.INTENT_LISTALLVEHICLE, listAllVehicles);
+                }
+                if (listVehicles != null) {
+                    for (Vehicle vehicle : listVehicles
                     ) {
-                        if(vehicle.getStatus()){
+                        if (vehicle.getStatus()) {
                             intent.putExtra(constant.INTENT_VEHICLE, vehicle);
-                            intent.putExtra(constant.INTENT_LISTVEHICLE,listVehicles);
+                            intent.putExtra(constant.INTENT_LISTVEHICLE, listVehicles);
                         }
                     }
                 }
