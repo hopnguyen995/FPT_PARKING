@@ -49,7 +49,7 @@ public class NotificationsFragment extends Fragment {
         notificationAdapter = new NotificationAdapter(getContext(), listNotification);
         recyclerView.setAdapter(notificationAdapter);
         ref = new Until().connectDatabase();
-        ref.child(constant.TABLE_NOTIFICATIONS).addValueEventListener(new ValueEventListener() {
+        ref.child(constant.TABLE_NOTIFICATIONS).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
